@@ -1,7 +1,15 @@
-import "./App.css";
+import { RoutesMain } from "./routes";
+import { GlobalStyle } from "./styles/global";
 
-function App() {
-  return <></>;
-}
+const App = () => {
+    return (
+        <>
+            <>
+                <GlobalStyle />
+                <RoutesMain />
+            </>
+        </>
+    );
+};
 
-export default App;
+export { App };
