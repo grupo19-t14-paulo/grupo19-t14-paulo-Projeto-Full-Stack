@@ -41,6 +41,7 @@ const updateAnnouncementService = async (
     id: announcementUp?.id,
     brand: announcementUp?.brand,
     model: announcementUp?.model,
+    year: announcement?.year,
     fuel: announcementUp?.fuel,
     mileage: announcementUp?.mileage,
     color: announcementUp?.color,

@@ -25,6 +25,7 @@ const retriveAnnouncementService = async (
     id: announcement?.id,
     brand: announcement?.brand,
     model: announcement?.model,
+    year: announcement?.year,
     fuel: announcement?.fuel,
     mileage: announcement?.mileage,
     color: announcement?.color,

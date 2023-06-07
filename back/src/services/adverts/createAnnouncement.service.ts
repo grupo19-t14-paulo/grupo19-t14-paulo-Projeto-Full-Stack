@@ -1,6 +1,7 @@
 import { AppDataSource } from "../../data-source";
 import Adverts from "../../entities/adverts.entity";
 import Images from "../../entities/images.entity";
+import AppError from "../../errors/AppError";
 import {
   IAnnouncement,
   IAnnouncementRequest,
@@ -14,9 +15,22 @@ const createAnnouncementService = async (
   const imageRepository = AppDataSource.getRepository(Images);
   const imagesData = data?.images;
 
+  const thereIsAd = await advertsRepository.findOne({
+    where: {
+      brand: data.brand,
+      model: data.model,
+      color: data.color,
+    },
+  });
+
+  if (thereIsAd) {
+    throw new AppError("Ad already exists, check if it's active", 409);
+  }
+
   const announcementData = {
     brand: data.brand,
     model: data.model,
+    year: data.year,
     fuel: data.fuel,
     mileage: data.mileage,
     value: data.value,
@@ -44,6 +58,7 @@ const createAnnouncementService = async (
   const response = {
     id: announcement?.id,
     brand: announcement?.brand,
+    year: announcement?.year,
     model: announcement?.model,
     fuel: announcement?.fuel,
     mileage: announcement?.mileage,
