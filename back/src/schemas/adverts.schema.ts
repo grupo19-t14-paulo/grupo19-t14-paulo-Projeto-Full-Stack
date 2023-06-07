@@ -1,19 +1,12 @@
 import { z } from "zod";
 import { FuelCar } from "../entities/adverts.entity";
-
-const imageSchema = z.object({
-  id: z.string(),
-  image: z.string(),
-});
-
-const imageSchemaRequest = imageSchema.omit({
-  id: true,
-});
+import { imageSchemaRequest } from "./images.schema";
 
 const announcementSchema = z.object({
   id: z.string(),
   brand: z.string(),
   model: z.string(),
+  year: z.string(),
   fuel: z.nativeEnum(FuelCar),
   mileage: z.string(),
   color: z.string(),

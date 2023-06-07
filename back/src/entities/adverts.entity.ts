@@ -18,6 +18,9 @@ class Adverts {
   @Column({ length: 127 })
   model: string;
 
+  @Column({ length: 4 })
+  year: string;
+
   @Column({
     type: "enum",
     enum: FuelCar,
