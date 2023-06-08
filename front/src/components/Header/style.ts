@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { Link } from 'react-router-dom';
+import { Link } from "react-router-dom";
 
 const ConteinerHeader = styled.header`
     width: 100vw;
@@ -12,6 +12,10 @@ const ConteinerHeader = styled.header`
     border-bottom: solid 1px var(--color--grey-6);
 
     padding: 0 20px;
+
+    > div {
+        cursor: pointer;
+    }
 `;
 
 const ConteinerButtonHeader = styled.div`
@@ -19,12 +23,12 @@ const ConteinerButtonHeader = styled.div`
     gap: 20px;
     align-items: center;
 
-    @media(max-width: 649px) {
+    @media (max-width: 649px) {
         display: none;
         button {
             display: none;
-        };
-    };
+        }
+    }
 `;
 
 const LinkNoMargin = styled(Link)`
@@ -53,22 +57,23 @@ const LinkRegister = styled(Link)`
 `;
 
 const Container = styled.div`
-    width: 200px; 
+    width: 200px;
     position: relative;
-    @media (max-width: 650px){
+    @media (max-width: 650px) {
         display: flex;
         justify-content: flex-end;
-    };`;
+    }
+`;
 
 const ButtonsContainer = styled.div`
     width: 100px;
-    height:60px;
+    height: 60px;
     display: flex;
     flex-direction: column;
 
     position: absolute;
     bottom: -30px;
-    right: 0; 
+    right: 0;
 
     padding: 10px;
     border: solid 1px var(--color--grey-7);
@@ -76,10 +81,9 @@ const ButtonsContainer = styled.div`
 
     background-color: var(--color--grey-10);
 
-    @media(min-width: 650px){
+    @media (min-width: 650px) {
         display: none;
-    };
-
+    }
 `;
 
 const StyledLink = styled(Link)`
@@ -102,7 +106,6 @@ const CloseButton = styled.button`
 
     background-color: transparent;
     border: none;
-
 `;
 
 const MenuImage = styled.img`
@@ -111,10 +114,9 @@ const MenuImage = styled.img`
     padding-right: 2vw;
     cursor: pointer;
 
-    @media(min-width: 650px){
+    @media (min-width: 650px) {
         display: none;
-    };
-
+    }
 `;
 
 export {
@@ -123,8 +125,8 @@ export {
     LinkNoMargin,
     LinkRegister,
     Container,
-    ButtonsContainer,     
+    ButtonsContainer,
     StyledLink,
     CloseButton,
-    MenuImage
-}
+    MenuImage,
+};

@@ -1,3 +1,5 @@
+import { Header } from "../../components/Header";
+
 import {
     Container,
     MediaContainer,
@@ -9,7 +11,6 @@ import {
     StyledCommentSection,
     StyledFooter,
     StyledGaleryCard,
-    StyledHeader,
     StyledMainImage,
     StyledSellerCardAdvert,
     StyledSpaceContainer,
@@ -60,24 +61,21 @@ const ProductPage = () => {
 
     const comments: IComments[] = commentsData;
 
+    const ScrollToTopButton = () => {
+        window.scrollTo({
+            behavior: "smooth",
+            top: 0,
+        });
+    };
+
     return (
         <>
-            <StyledHeader>
-                <div id="logoImageDiv">
-                    <img
-                        src="./src/images/motorsShopLogo.svg"
-                        alt="motorsShopLogo.svg"
-                    />
-                </div>
-                <div id="userMenu">
-                    <div>
-                        <div>
-                            <h3>SL</h3>
-                        </div>
-                        <h3>{user.name}</h3>
-                    </div>
-                </div>
-            </StyledHeader>
+            <Header
+                button1="Fazer Login"
+                button2="Cadastrar"
+                page1="/login"
+                page2="/register"
+            />
             <Container>
                 <StyledSpaceContainer></StyledSpaceContainer>
                 <StyledAdvertContainer>
@@ -96,7 +94,12 @@ const ProductPage = () => {
                                         <p>{advert.mileage} KM</p>
                                     </div>
                                 </div>
-                                <h3>R$ {advert.price}</h3>
+                                <h3>
+                                    {Number(advert.price).toLocaleString(
+                                        "pt-br",
+                                        { style: "currency", currency: "BRL" }
+                                    )}
+                                </h3>
                             </div>
                             <button>Comprar</button>
                         </StyledAdvertCard>
@@ -236,7 +239,7 @@ const ProductPage = () => {
                             <div>
                                 <h3>SL</h3>
                             </div>
-                            <h3>Samuel Leão</h3>
+                            <h3>{user.name}</h3>
                         </div>
                         <div id="userCommentField">
                             <textarea
@@ -268,8 +271,8 @@ const ProductPage = () => {
                         alt="motorsShopLogoWhite"
                     />
                 </figure>
-                <p>@ 2022 - Todos os direitos reservador.</p>
-                <button>^</button>
+                <p>© 2022 - Todos os direitos reservador.</p>
+                <button onClick={ScrollToTopButton}>^</button>
             </StyledFooter>
         </>
     );

@@ -1,53 +1,5 @@
 import styled from "styled-components";
 
-const StyledHeader = styled.header`
-    height: 8rem;
-    width: 100%;
-    max-width: 37.5rem;
-    background-color: var(--color--grey-10);
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    @media (min-width: 37.6rem) {
-        width: 100%;
-        max-width: 76.8rem;
-    }
-
-    @media (min-width: 76.9rem) {
-        width: 100%;
-        max-width: 160rem;
-    }
-
-    #logoImageDiv {
-        margin-left: 2rem;
-
-        @media (min-width: 37.6rem) {
-            margin-left: 6rem;
-        }
-    }
-
-    #userMenu {
-        > div {
-            width: 15rem;
-            display: flex;
-            align-items: center;
-            gap: 0.8rem;
-
-            > div {
-                background-color: var(--color--brand2);
-                width: 3.2rem;
-                height: 3.2rem;
-                border-radius: 100%;
-
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-        }
-    }
-`;
-
 const Container = styled.div`
     height: fit-content;
     width: 100vw;
@@ -125,6 +77,11 @@ const StyledMainImage = styled.figure`
 
     img {
         max-width: 100%;
+
+        :hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
     }
 
     @media (min-width: 37.6rem) {
@@ -199,7 +156,8 @@ const StyledAdvertCard = styled.div`
         margin-top: 2.4rem;
 
         :hover {
-            background-color: var(--color--brand2);
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
         }
     }
 
@@ -289,6 +247,11 @@ const StyledGaleryCard = styled.div`
             height: 9rem;
             background-color: var(--color--grey-7);
             border-radius: 0.4rem;
+
+            :hover {
+                transform: scale(1.1);
+                transition: transform 0.3s ease;
+            }
 
             figure {
                 width: 100%;
@@ -381,6 +344,11 @@ const StyledSellerCardAdvert = styled.div`
             color: var(--color--whiteFixed);
 
             margin-top: 2.8rem;
+
+            :hover {
+                transform: scale(0.9);
+                transition: transform 0.3s ease;
+            }
         }
     }
 
@@ -546,7 +514,8 @@ const StyledUserCommentField = styled.div`
             margin-top: 2.4rem;
 
             :hover {
-                background-color: var(--color--brand2);
+                transform: scale(0.9);
+                transition: transform 0.3s ease;
             }
         }
     }
@@ -570,6 +539,7 @@ const StyledUserCommentField = styled.div`
 
             :hover {
                 background-color: var(--color--grey-6);
+                transition: 0.3s ease;
             }
         }
     }
@@ -640,7 +610,6 @@ const StyledFooter = styled.footer`
 `;
 
 export {
-    StyledHeader,
     Container,
     MediaContainer,
     StyledSpaceContainer,
