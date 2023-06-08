@@ -66,7 +66,7 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  ul {
+  ul,ol,li {
     list-style: none;
   }
 `;
