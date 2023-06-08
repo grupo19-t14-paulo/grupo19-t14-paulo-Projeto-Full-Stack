@@ -6,51 +6,6 @@ const StyledHome = styled.div`
     flex-direction: column;
 `;
 
-const Header = styled.header`
-    width: 100vw;
-    height: 90px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-
-    padding: 0 20px;
-`;
-
-const ConteinerButtonHeader = styled.div`
-    display: flex;
-    gap: 20px;
-
-    @media(max-width: 649px) {
-        display: none;
-        button {
-            display: none;
-        };
-    };
-`;
-
-const ButtonNoMargin = styled.button`
-    font-size: 14px;
-    font-family: var(--font--inter);
-
-    border: none;
-    color: var(--color--grey-2);
-    background-color: transparent;
-`;
-
-const ButtonRegister = styled.button`
-    width: 100px;
-    height: 35px;
-
-    font-size: 14px;
-    font-family: var(--font--inter);
-
-    border: solid 1px var(--color--grey-6);
-    border-radius: 5px;
-
-    color: var(--color--grey-0);
-    background-color: transparent;
-`;
-
 const ContainerImgCar = styled.div`
     width: 100%;
     height: 60vh;
@@ -402,10 +357,6 @@ const ShowFiltersBtn = styled.button`
 `;
 
 export {
-    Header,
-    ButtonNoMargin,
-    ConteinerButtonHeader,
-    ButtonRegister,
     ContainerImgCar,
     Containerbackground,
     ContainerTitle,
