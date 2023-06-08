@@ -10,23 +10,31 @@ const ContainerImgCar = styled.div`
     width: 100%;
     height: 60vh;
     overflow: hidden;
-    
+
     display: flex;
     justify-content: center;
 
-    background: linear-gradient(360deg, var(--color--grey-0) 0%, var(--color--whiteFixed) 100%);
-        
+    background: linear-gradient(
+        360deg,
+        var(--color--grey-0) 0%,
+        var(--color--whiteFixed) 100%
+    );
+
     img {
         height: 100%;
         transform: scale(1);
         transition: transform 0.3 ease;
-    };
-    @media(max-width: 630px){
+    }
+    @media (max-width: 630px) {
         img {
-           transform:  scale(0.7);
-        };
-        background: linear-gradient(360deg, var(--color--grey-0) 25%, var(--color--whiteFixed) 100%);
-    };
+            transform: scale(0.7);
+        }
+        background: linear-gradient(
+            360deg,
+            var(--color--grey-0) 25%,
+            var(--color--whiteFixed) 100%
+        );
+    }
 `;
 
 const Containerbackground = styled.div`
@@ -35,7 +43,11 @@ const Containerbackground = styled.div`
     position: absolute;
     top: 90px;
 
-    background: linear-gradient(360deg, var(--color--grey-0) 0%, var(--color--grey-0) 100%);
+    background: linear-gradient(
+        360deg,
+        var(--color--grey-0) 0%,
+        var(--color--grey-0) 100%
+    );
     opacity: 0.7;
 `;
 
@@ -52,7 +64,7 @@ const ContainerTitle = styled.div`
         color: var(--color--grey-10);
 
         margin-bottom: 20px;
-    };
+    }
 
     h2 {
         text-align: center;
@@ -60,38 +72,38 @@ const ContainerTitle = styled.div`
         font-size: 20px;
 
         color: var(--color--grey-10);
-    };
+    }
 
-    @media(max-width: 630px){
+    @media (max-width: 630px) {
         top: 25%;
         h1 {
             font-size: 20px;
-        };
+        }
 
         h2 {
             font-size: 12px;
-        };
-    };
+        }
+    }
 `;
 
-
 const Container = styled.div`
-    width: 200px; 
+    width: 200px;
     position: relative;
-    @media (max-width: 650px){
+    @media (max-width: 650px) {
         display: flex;
         justify-content: flex-end;
-    };`;
+    }
+`;
 
 const ButtonsContainer = styled.div`
     width: 100px;
-    height:60px;
+    height: 60px;
     display: flex;
     flex-direction: column;
 
     position: absolute;
     bottom: -30px;
-    right: 0; 
+    right: 0;
 
     padding: 10px;
     border: solid 1px var(--color--grey-7);
@@ -99,10 +111,9 @@ const ButtonsContainer = styled.div`
 
     background-color: var(--color--grey-10);
 
-    @media(min-width: 650px){
+    @media (min-width: 650px) {
         display: none;
-    };
-
+    }
 `;
 
 const Button = styled.button`
@@ -126,7 +137,6 @@ const CloseButton = styled.button`
 
     background-color: transparent;
     border: none;
-
 `;
 
 const MenuImage = styled.img`
@@ -135,10 +145,9 @@ const MenuImage = styled.img`
     padding-right: 2vw;
     cursor: pointer;
 
-    @media(min-width: 650px){
+    @media (min-width: 650px) {
         display: none;
-    };
-
+    }
 `;
 
 const HomeMain = styled.main`
@@ -150,7 +159,7 @@ const HomeMain = styled.main`
     justify-content: space-between;
     @media (max-width: 650px) {
         justify-content: center;
-    };
+    }
 `;
 
 const ProductFilters = styled.section`
@@ -161,8 +170,7 @@ const ProductFilters = styled.section`
     align-items: center;
     @media (max-width: 650px) {
         display: none;
-
-    };
+    }
 `;
 
 const ProductFiltersMobile = styled.section`
@@ -177,11 +185,11 @@ const ProductFiltersMobile = styled.section`
     z-index: 1;
     h2 {
         padding-left: 3vw;
-    };
+    }
     a {
         padding-left: 4vw;
-    };
-    @media(min-width: 650px){
+    }
+    @media (min-width: 650px) {
         display: none;
     }
 `;
@@ -194,7 +202,7 @@ const CloseFiltersHeader = styled.div`
     width: 100%;
     padding: 5px 7vw;
 
-    h3{
+    h3 {
         font-size: 2em;
     }
     button {
@@ -215,7 +223,6 @@ const FilterSession = styled.div`
 const FilterName = styled.h2`
     font-size: 2.7em;
     margin-bottom: 15px;
-
 `;
 
 const Filter = styled.a`
@@ -232,7 +239,7 @@ const FilterInput = styled.input`
     border: none;
     display: flex;
     text-align: center;
-    @media(max-width: 840px){
+    @media (max-width: 840px) {
         width: 90%;
     }
 `;
@@ -240,7 +247,7 @@ const FilterInput = styled.input`
 const FilterInputWrapper = styled.div`
     display: flex;
     gap: 12px;
-    @media(max-width: 840px){
+    @media (max-width: 840px) {
         flex-direction: column;
     }
 `;
@@ -250,7 +257,7 @@ const FilterInputWrapperMobile = styled.div`
     justify-content: space-evenly;
     gap: 12px;
     padding: 0 6vw;
-    input{
+    input {
         width: 40vw;
         max-width: 220px;
     }
@@ -270,7 +277,7 @@ const ProductFeed = styled.div`
         flex-wrap: nowrap;
         overflow-x: scroll;
         flex-direction: row;
-    };
+    }
 `;
 
 const ProductPage = styled.section`
@@ -280,8 +287,8 @@ const ProductPage = styled.section`
     align-items: center;
     justify-content: space-between;
     flex-direction: column;
-    @media(min-width: 650px){
-    min-height: 1485px;
+    @media (min-width: 650px) {
+        min-height: 1485px;
     }
 `;
 
@@ -305,10 +312,10 @@ const Footer = styled.footer`
     justify-content: space-between;
     align-items: center;
     padding: 10px 3vw;
-    img {
+    /* img {
         filter: invert(80%);
-    }
-    @media(max-width:650px){
+    } */
+    @media (max-width: 650px) {
         flex-direction: column;
         gap: 20px;
         height: fit-content;
@@ -320,7 +327,7 @@ const AuthoralRights = styled.p`
     color: var(--color--whiteFixed);
     position: relative;
     right: 5.5vw;
-    @media(max-width: 650px){
+    @media (max-width: 650px) {
         right: 0;
     }
 `;
@@ -330,7 +337,7 @@ const BackToTopBtn = styled.button`
     height: 45px;
     background-color: var(--color--grey-1);
     border: none;
-    border-radius: .5em;
+    border-radius: 0.5em;
     color: var(--color--whiteFixed);
 `;
 
@@ -351,7 +358,7 @@ const ShowFiltersBtn = styled.button`
     border: none;
     margin: 15px 0;
     cursor: pointer;
-    @media(min-width: 650px){
+    @media (min-width: 650px) {
         display: none;
     }
 `;
@@ -383,5 +390,5 @@ export {
     ShowFiltersBtn,
     ProductFiltersMobile,
     CloseFiltersHeader,
-    FilterInputWrapperMobile
+    FilterInputWrapperMobile,
 };
