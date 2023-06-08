@@ -25,7 +25,12 @@ export const StyledProductCard = styled.li`
     border: 2px solid var(--color--grey-7);
 
     img {
-      height: 100%;
+      width: 100%;
+      transform: scale(.8);
+      
+    }
+    .product-img-wrapper {
+      padding: 10px;
     }
     > button {
       position: absolute;

@@ -31,7 +31,7 @@ const ProductCard = ({
 
   return (
     <StyledProductCard>
-      <div>
+      <div className="product-img-wrapper">
         {active ? (
           <StyledButton
             buttonStyle={active ? "brand1-medium" : "negative-medium"}

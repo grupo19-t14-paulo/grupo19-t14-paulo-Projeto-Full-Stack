@@ -1,5 +1,6 @@
 import Logo from "../../assets/LogoMotorsShop.png";
 import Car from "../../assets/Photo.png";
+import sampleCar from "../../images/carroExample.png" 
 import { Header } from "../../components/Header";
 import {
     ContainerImgCar,
@@ -166,7 +167,7 @@ const HomePage = () => {
                                 title={car.title}
                                 advertiser={car.advertiser}
                                 description={car.description}
-                                img={car.img}
+                                img={sampleCar}
                                 km={car.km}
                                 fipePrice={car.fipePrice}
                                 price={car.price}
@@ -176,7 +177,7 @@ const HomePage = () => {
                         ))}
                     </ProductFeed>
                     <ShowFiltersBtn onClick={toggleShowFilterBtns}>Mostrar Filtros</ShowFiltersBtn>
-                    <PageSelector>Seguinte {">"} </PageSelector>
+                    <PageSelector>Seguinte {">"}</PageSelector>
                 </ProductPage>
             </HomeMain>
             <Footer>
