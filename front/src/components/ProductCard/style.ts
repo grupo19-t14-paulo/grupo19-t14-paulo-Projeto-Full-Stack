@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const StyledProductCard = styled.li`
-  width: 312px;
+  width: 260px;
 
   cursor: pointer;
 
