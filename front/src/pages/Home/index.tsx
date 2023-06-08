@@ -30,7 +30,10 @@ import {
     AuthoralRights,
     BackToTopBtn,
     ClearFiltersBtn,
-    ShowFiltersBtn
+    ShowFiltersBtn,
+    ProductFiltersMobile,
+    CloseFiltersHeader,
+    FilterInputWrapperMobile
 } from "./style";
 import { useState } from "react";
 
@@ -146,6 +149,59 @@ const HomePage = () => {
                     </FilterSession>
                     <ClearFiltersBtn>Limpar Filtros</ClearFiltersBtn>
                 </ProductFilters>
+                {showFilters && (
+                    <ProductFiltersMobile>
+                        <CloseFiltersHeader>
+                            <h3>Filtros</h3>
+                            <button onClick={toggleShowFilterBtns}>X</button>
+                        </CloseFiltersHeader>
+                        <FilterSession>
+                        <FilterName>Marca</FilterName>
+                        {mockFilters.marca.map((filter) => (
+                            <Filter>{filter}</Filter>
+                        ))}
+                    </FilterSession>
+                    <FilterSession>
+                        <FilterName>Modelo</FilterName>
+                        {mockFilters.modelo.map((filter) => (
+                            <Filter>{filter}</Filter>
+                        ))}
+                    </FilterSession>
+                    <FilterSession>
+                        <FilterName>Cor</FilterName>
+                        {mockFilters.cor.map((filter) => (
+                            <Filter>{filter}</Filter>
+                        ))}
+                    </FilterSession>
+                    <FilterSession>
+                        <FilterName>Ano</FilterName>
+                        {mockFilters.ano.map((filter) => (
+                            <Filter>{filter}</Filter>
+                        ))}
+                    </FilterSession>
+                    <FilterSession>
+                        <FilterName>Combustível</FilterName>
+                        {mockFilters.combustivel.map((filter) => (
+                            <Filter>{filter}</Filter>
+                        ))}
+                    </FilterSession>
+                    <FilterSession>
+                        <FilterName>Km</FilterName>
+                        <FilterInputWrapperMobile>
+                            <FilterInput placeholder="Mínima" />
+                            <FilterInput placeholder="Máxima" />
+                        </FilterInputWrapperMobile>
+                    </FilterSession>
+                    <FilterSession>
+                        <FilterName>Preço</FilterName>
+                        <FilterInputWrapperMobile>
+                            <FilterInput placeholder="Mínimo" />
+                            <FilterInput placeholder="Máximo" />
+                        </FilterInputWrapperMobile>
+                    </FilterSession>
+                    <ClearFiltersBtn>Limpar Filtros</ClearFiltersBtn>
+                    </ProductFiltersMobile>
+                )}
                 <ProductPage>
                     <ProductFeed>
                         {mockCarros.map((car) => (

@@ -206,8 +206,48 @@ const ProductFilters = styled.section`
     align-items: center;
     @media (max-width: 650px) {
         display: none;
-        flex-direction: column-reverse;
+
     };
+`;
+
+const ProductFiltersMobile = styled.section`
+    width: 100vw;
+    height: fit-content;
+    position: absolute;
+    top: 90px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--color--whiteFixed);
+    z-index: 1;
+    h2 {
+        padding-left: 3vw;
+    };
+    a {
+        padding-left: 4vw;
+    };
+    @media(min-width: 650px){
+        display: none;
+    }
+`;
+
+const CloseFiltersHeader = styled.div`
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 50px;
+    width: 100%;
+    padding: 5px 7vw;
+
+    h3{
+        font-size: 2em;
+    }
+    button {
+        width: 30px;
+        border: none;
+        font-size: 2em;
+        background-color: var(--color--whiteFixed);
+    }
 `;
 
 const FilterSession = styled.div`
@@ -244,6 +284,17 @@ const FilterInputWrapper = styled.div`
     gap: 12px;
     @media(max-width: 840px){
         flex-direction: column;
+    }
+`;
+
+const FilterInputWrapperMobile = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+    gap: 12px;
+    padding: 0 6vw;
+    input{
+        width: 40vw;
+        max-width: 220px;
     }
 `;
 
@@ -326,8 +377,8 @@ const BackToTopBtn = styled.button`
 `;
 
 const ClearFiltersBtn = styled.button`
-    width: 300px;
-    max-width: 100%;
+    width: 240px;
+    max-width: 90%;
     height: 40px;
     background-color: var(--color--brand2);
     color: var(--color--whiteFixed);
@@ -375,5 +426,8 @@ export {
     BackToTopBtn,
     Footer,
     ClearFiltersBtn,
-    ShowFiltersBtn
+    ShowFiltersBtn,
+    ProductFiltersMobile,
+    CloseFiltersHeader,
+    FilterInputWrapperMobile
 };
