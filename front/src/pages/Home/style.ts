@@ -277,6 +277,9 @@ const FilterInput = styled.input`
     border: none;
     display: flex;
     text-align: center;
+    @media(max-width: 840px){
+        width: 90%;
+    }
 `;
 
 const FilterInputWrapper = styled.div`
