@@ -1,21 +1,11 @@
-import { useNavigate } from "react-router-dom";
 import Logo from "../../assets/LogoMotorsShop.png";
 import Car from "../../assets/Photo.png";
-import MenuImg from "../../assets/Menu.png";
 import sampleCar from "../../images/carroExample.png" 
+import { Header } from "../../components/Header";
 import {
-    Header,
-    ButtonNoMargin,
-    ConteinerButtonHeader,
-    ButtonRegister,
     ContainerImgCar,
     Containerbackground,
     ContainerTitle,
-    Container,
-    ButtonsContainer,
-    Button,
-    CloseButton,
-    MenuImage,
     ProductFeed,
     HomeMain,
     ProductFilters,
@@ -42,22 +32,9 @@ import { mockCarros, mockFilters } from "./mock";
 import ProductCard from "../../components/ProductCard";
 
 const HomePage = () => {
-    const navigate = useNavigate()
-
-    const PageLogin = () => {
-        navigate("/login");
-    };
-
-    const PageRegister = () => {
-        navigate("/register");
-    };
-
-    const [showButtons, setShowButtons] = useState(false);
+    
     const [showFilters, setShowFilters] = useState(false)
 
-    const toggleButtons = () => {
-        setShowButtons(!showButtons);
-    };
     const toggleShowFilterBtns = () => {
         setShowFilters(!showFilters)
     }
@@ -71,28 +48,7 @@ const HomePage = () => {
 
     return (
         <StyledHome>
-            <Header>
-
-                <div>
-                    <img src={Logo} alt="Logo" />
-                </div>
-                <Container>
-                    {showButtons ? (
-                        <ButtonsContainer>
-                            <Button onClick={() => PageLogin()}>Login</Button>
-                            <Button onClick={() => { PageRegister() }}>Cadastrar</Button>
-                            <CloseButton onClick={toggleButtons}>X</CloseButton>
-                        </ButtonsContainer>
-                    ) : (
-                        <MenuImage onClick={toggleButtons} src={MenuImg} alt="Menu" />
-                    )}
-                </Container>
-                <ConteinerButtonHeader>
-                    <ButtonNoMargin onClick={() => PageLogin()}>Fazer Login</ButtonNoMargin>
-                    <ButtonRegister onClick={() => { PageRegister() }}>Cadastrar</ButtonRegister>
-                </ConteinerButtonHeader>
-            </Header>
-
+            <Header button1="Fazer Login" button2="Cadastrar" page1="/login" page2="/register" />
             <ContainerImgCar>
                 <img src={Car} alt="Car" />
             </ContainerImgCar>
