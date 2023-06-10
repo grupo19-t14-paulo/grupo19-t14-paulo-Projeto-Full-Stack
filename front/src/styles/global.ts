@@ -69,5 +69,32 @@ const GlobalStyle = createGlobalStyle`
   ul,ol,li {
     list-style: none;
   }
+
+  ::-webkit-scrollbar {
+    background-color: var(--color--grey-8);
+   
+    height: 10px;
+    width: 10px;
+   
+    border: solid 1px var(--color--grey-2);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color--brand1);
+   
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color--brand2);
+   
+    border-radius: 4px;
+  }
+
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
 `;
 export { GlobalStyle };
