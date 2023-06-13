@@ -94,6 +94,7 @@ const GlobalStyle = createGlobalStyle`
   body {
     overflow-y: auto;
     overflow-x: hidden;
+    background-color: var(--color--grey-8);
   }
 
 `;
