@@ -4,7 +4,7 @@ import { AppDataSource } from "../data-source";
 import { User } from "../entities/users.entity";
 import AppError from "../errors/AppError";
 
-const ensureIdExistsMiddleware = async (
+const ensureUserExistsMiddleware = async (
     req: Request,
     res: Response,
     next: NextFunction
@@ -13,7 +13,7 @@ const ensureIdExistsMiddleware = async (
 
     const findUser = await userRepository.findOne({
         where: {
-            id: req.params.id,
+            email: req.body.email,
         },
     });
 
@@ -24,4 +24,4 @@ const ensureIdExistsMiddleware = async (
     return next();
 };
 
-export { ensureIdExistsMiddleware };
+export { ensureUserExistsMiddleware };

@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle } from "styled-components";
 
 const GlobalStyle = createGlobalStyle`
 
@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: "Inter";
+    font-family: "Inter", sans-serif;
   }
 
   :root {
@@ -66,8 +66,35 @@ const GlobalStyle = createGlobalStyle`
     cursor: pointer;
   }
 
-  ul {
+  ul,ol,li {
     list-style: none;
   }
-`
-export {GlobalStyle}
+
+  ::-webkit-scrollbar {
+    background-color: var(--color--grey-8);
+   
+    height: 10px;
+    width: 10px;
+   
+    border: solid 1px var(--color--grey-2);
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background-color: var(--color--brand1);
+   
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: var(--color--brand2);
+   
+    border-radius: 4px;
+  }
+
+  body {
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+`;
+export { GlobalStyle };
