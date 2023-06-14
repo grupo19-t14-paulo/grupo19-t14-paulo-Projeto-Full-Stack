@@ -10,6 +10,8 @@ const ConteinerHeader = styled.header`
   align-items: center;
 
   border-bottom: solid 1px var(--color--grey-6);
+  box-shadow: 1px 1px var(--color--grey-6);
+  background-color: var(--color--grey-10);
 
   padding: 0 20px;
 
