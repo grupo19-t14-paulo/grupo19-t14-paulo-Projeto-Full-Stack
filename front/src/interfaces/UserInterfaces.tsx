@@ -1,3 +1,5 @@
+import { IRegisterFormData } from "./RegisterInterfaces";
+
 export interface IUserProviderProps {
     children: React.ReactNode;
 }
@@ -8,7 +10,12 @@ export interface IUser {
     phone: string;
     id: number;
     cpf: string;
-    birthDate: Date;
+    birthDate: string;
     description: string;
-    type: string;
+    type: "Cliente" | "Vendedor";
+}
+
+export interface IUserContextRegister {
+    userRegister: (formData: IRegisterFormData) => Promise<void>;
+    loading: boolean;
 }

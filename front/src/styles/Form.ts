@@ -3,10 +3,6 @@ import styled from "styled-components";
 const ContainerForm = styled.div`
   width: 30%;
 
-  position: relative;
-  left: 35%;
-  bottom: -30px;
-
   border-radius: 10px;
   background-color: var(--color--grey-10);
 
@@ -191,6 +187,13 @@ const RadioText = styled.span`
   text-align: center;
 `;
 
+const ContainerLogin = styled.div`
+  min-height: 90vh;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`
 
 export {
   ContainerForm,
@@ -202,5 +205,6 @@ export {
   RadioLabel,
   RadioText,
   RadioWrapper,
-  RadioInput
+  RadioInput,
+  ContainerLogin
 };

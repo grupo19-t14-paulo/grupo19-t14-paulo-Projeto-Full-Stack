@@ -38,5 +38,5 @@ const LinkRegister = styled(Link)`
 
 
 export {
-    LinkRegister
+  LinkRegister
 };

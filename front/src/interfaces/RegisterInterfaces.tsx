@@ -3,13 +3,13 @@ import { IUser } from "./UserInterfaces";
 export interface IRegisterFormData {
     name: string;
     email: string;
-    phone: string;
     cpf: string;
-    birthDate: Date;
+    phone: string;
+    birthDate: string;
     description: string;
     password: string;
     confirm: string;
-    type: string;
+    type: "Vendedor" | "Cliente";
 }
 
 export interface IUserRegisterResponse{

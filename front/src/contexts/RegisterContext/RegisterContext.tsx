@@ -1,32 +1,35 @@
-import { createContext } from "react"
-import { useNavigate } from "react-router-dom"
-import { useState } from "react"
-import { api } from "../../services/api"
-import { toast } from "react-toastify"
+import { createContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { api } from "../../services/api";
+import { toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.min.css";
+import { IUserContextRegister, IUserProviderProps } from "../../interfaces/UserInterfaces";
+import { IRegisterFormData } from "../../interfaces/RegisterInterfaces";
 
-const ContextRegister = createContext( {} );
+const ContextRegister = createContext( {} as IUserContextRegister );
 
-const AuthRegisterProvider = ({children}: ) => {
+const AuthRegisterProvider = ({children}: IUserProviderProps) => {
 
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
     
-    const userRegister = async (formData: ) => {
-      
-        try {
-          setLoading(true);
-          await api.post("/users ", formData);
+    const userRegister = async (formData: IRegisterFormData) => {
 
-          toast.success("Cadastro realizado com sucesso!");
-          navigate("/");
+      try {
+        setLoading(true);
+        await api.post("/users", formData);
 
-        } catch (error) {
-          console.log(error);
-          toast.error("Ops! Algo deu errado");
-          
-        } finally {
-          setLoading(false);
-        }
+        toast.success("Cadastro realizado com sucesso!");
+        navigate("/login");
+
+      } catch (error) {
+        console.log(error);
+        toast.error("Ops! Algo deu errado");
+        
+      } finally {
+        setLoading(false);
+      }
     };
     return (
         <ContextRegister.Provider value={{userRegister, loading}}>
