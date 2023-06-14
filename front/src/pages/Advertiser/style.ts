@@ -39,7 +39,7 @@ const ContainerDivBlue = styled.div`
     div {
       display: flex;
       flex-direction: row;
-      gap: 5px;
+      gap: 8px;
 
       h3 {
         font-size: 1.25rem;
@@ -81,6 +81,23 @@ const ContainerDivBlue = styled.div`
         color: var(--color--grey-2);
         font-weight: 400;
       }
+    }
+    .button {
+      padding: 10px;
+
+      color: var(--color--brand1);
+      background-color: var(--color--grey-10);
+
+      border-radius: 4px;
+      border: 1px solid var(--color--brand1);
+
+      font-weight: 600;
+
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      text-decoration: underline;
     }
 
     @media (min-width: 650px) {
@@ -211,8 +228,11 @@ const ContainerAdverts = styled.section`
           }
         }
 
-        @media (min-width: 650px) {
-        }
+        transition: 0.3s ease-in;
+      }
+
+      .card:hover {
+        border: 1px solid var(--color--brand2);
       }
     }
     @media (min-width: 650px) {

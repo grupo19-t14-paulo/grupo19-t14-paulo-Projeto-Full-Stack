@@ -42,6 +42,10 @@ const AdvertiserPage = () => {
           </div>
 
           <p className="paragraph">{user.description}</p>
+
+          <button className="button" type="button">
+            Criar Anúncio
+          </button>
         </section>
       </ContainerDivBlue>
       <ContainerAdverts>
