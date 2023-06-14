@@ -25,6 +25,7 @@ const ContainerDivBlue = styled.div`
     max-height: 350px;
 
     padding: 30px;
+    padding-bottom: 45px;
 
     display: flex;
     flex-direction: column;
@@ -38,7 +39,7 @@ const ContainerDivBlue = styled.div`
     div {
       display: flex;
       flex-direction: row;
-      gap: 5px;
+      gap: 8px;
 
       h3 {
         font-size: 1.25rem;
@@ -81,6 +82,23 @@ const ContainerDivBlue = styled.div`
         font-weight: 400;
       }
     }
+    .button {
+      padding: 10px;
+
+      color: var(--color--brand1);
+      background-color: var(--color--grey-10);
+
+      border-radius: 4px;
+      border: 1px solid var(--color--brand1);
+
+      font-weight: 600;
+
+      transition: 0.3s;
+    }
+
+    .button:hover {
+      text-decoration: underline;
+    }
 
     @media (min-width: 650px) {
       width: 85%;
@@ -90,7 +108,7 @@ const ContainerDivBlue = styled.div`
 
 const ContainerAdverts = styled.section`
   margin-top: -80px;
-  margin-bottom: 250px;
+  margin-bottom: 235px;
 
   width: 100%;
 
@@ -116,6 +134,8 @@ const ContainerAdverts = styled.section`
         display: flex;
         flex-direction: column;
         gap: 16px;
+
+        margin-bottom: 35px;
 
         border-radius: 4px;
 
@@ -208,8 +228,11 @@ const ContainerAdverts = styled.section`
           }
         }
 
-        @media (min-width: 650px) {
-        }
+        transition: 0.3s ease-in;
+      }
+
+      .card:hover {
+        border: 1px solid var(--color--brand2);
       }
     }
     @media (min-width: 650px) {
