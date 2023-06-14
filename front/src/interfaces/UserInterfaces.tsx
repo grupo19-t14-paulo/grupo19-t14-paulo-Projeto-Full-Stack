@@ -1,3 +1,4 @@
+import { ILoginFormData } from "./LoginInterfaces";
 import { IRegisterFormData } from "./RegisterInterfaces";
 
 export interface IUserProviderProps {
@@ -18,4 +19,8 @@ export interface IUser {
 export interface IUserContextRegister {
     userRegister: (formData: IRegisterFormData) => Promise<void>;
     loading: boolean;
+}
+
+export interface IUserContextLogin {
+    userLogin: (data: ILoginFormData) => Promise<void>
 }

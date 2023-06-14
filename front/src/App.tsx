@@ -1,3 +1,4 @@
+import { AuthLoginProvider } from "./contexts/LoginContext/LoginContex";
 import { AuthRegisterProvider } from "./contexts/RegisterContext/RegisterContext";
 import { RoutesMain } from "./routes";
 import { GlobalStyle } from "./styles/global";
@@ -21,7 +22,9 @@ const App = () => {
             />
             <GlobalStyle />
             <AuthRegisterProvider>
-                <RoutesMain />
+                <AuthLoginProvider>
+                    <RoutesMain />
+                </AuthLoginProvider>
             </AuthRegisterProvider>
         </>
     );

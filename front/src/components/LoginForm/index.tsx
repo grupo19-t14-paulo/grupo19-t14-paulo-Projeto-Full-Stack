@@ -6,8 +6,12 @@ import { Form,
 import { Input } from "../Input";
 import { TFormPropsLogin, loginFormSchema } from "./loginFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useContext } from "react";
+import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 
 export const LoginForm = () => {
+
+  const { userLogin } = useContext(ContextLogin)
   const {
     register,
     handleSubmit,
@@ -17,7 +21,7 @@ export const LoginForm = () => {
   });
 
   const submit: SubmitHandler<TFormPropsLogin> = (formData) => {
-    console.log(formData);
+    userLogin(formData);
   };
 
   return (
