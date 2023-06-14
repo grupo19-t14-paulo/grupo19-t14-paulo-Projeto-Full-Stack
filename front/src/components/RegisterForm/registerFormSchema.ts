@@ -14,17 +14,15 @@ const registerFormSchema = z.object({
 
     description: z.string(),
 
-    type: z.enum( ["Seller", "client"]),
+    type: z.enum( ["Vendedor", "Cliente"]),
 
     password: z.string().min(4, "Obrigatório e precisa conter pelo menos 4 caracteres.").max(127),
 
-    confirm: z.string().nonempty("É obrigatório confirmar a senha"),   
-   job: z.string().nonempty(),
+    confirm: z.string().nonempty("É obrigatório confirmar a senha"),
     }).refine(({password, confirm}) => password === confirm, {
     message: "A confirmação de senha precisa corresponder com a senha.",
     path: ["confirm"]
 });
-
 
 
 export type TFormProps = z.infer<typeof registerFormSchema>

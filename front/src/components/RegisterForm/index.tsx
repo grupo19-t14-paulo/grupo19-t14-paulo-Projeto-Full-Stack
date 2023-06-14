@@ -13,8 +13,12 @@ import { Input } from "../Input";
 import { TFormProps, registerFormSchema } from "./registerFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { useContext } from "react";
+import { ContextRegister } from "../../contexts/RegisterContext/RegisterContext";
 
 const RegisterForm = () => {
+
+  const { userRegister } = useContext(ContextRegister)
   const {
     register,
     handleSubmit,
@@ -23,10 +27,10 @@ const RegisterForm = () => {
     resolver: zodResolver(registerFormSchema),
   });
 
-  const [accountType, setAccountType] = useState("clint");
+  const [accountType, setAccountType] = useState("Cliente");
 
   const submit: SubmitHandler<TFormProps> = (formData) => {
-    console.log(formData);
+    userRegister(formData);
   };
 
   return (
@@ -86,7 +90,7 @@ const RegisterForm = () => {
         {...register("description")}
       />
 
-      <h4>Infomações de endereço</h4>
+      {/* <h4>Infomações de endereço</h4>
 
       <Input label="CEP" placeholder="00000.000" />
 
@@ -100,7 +104,7 @@ const RegisterForm = () => {
       <DivInput>
         <Input label="Número" placeholder="Digitar número" />
         <Input label="Complemento" placeholder="Ex: apart 307" />
-      </DivInput>
+      </DivInput> */}
 
       <h4>Tipo de conta</h4>
 
@@ -108,13 +112,13 @@ const RegisterForm = () => {
         <RadioWrapper>
           <RadioInput
             type="radio"
-            id="clint"
-            value="clint"
+            id="Cliente"
+            value="Cliente"
             {...register("type")}
-            checked={accountType === "clint"}
-            onChange={() => setAccountType("clint")}
+            checked={accountType === "Cliente"}
+            onChange={() => setAccountType("Cliente")}
           />
-          <RadioLabel htmlFor="clint">
+          <RadioLabel htmlFor="Cliente">
             <RadioText>Comprador</RadioText>
           </RadioLabel>
         </RadioWrapper>
@@ -122,13 +126,13 @@ const RegisterForm = () => {
         <RadioWrapper>
           <RadioInput
             type="radio"
-            id="seller"
-            value="seller"
+            id="Vendedor"
+            value="Vendedor"
             {...register("type")}
-            checked={accountType === "seller"}
-            onChange={() => setAccountType("seller")}
+            checked={accountType === "Vendedor"}
+            onChange={() => setAccountType("Vendedor")}
           />
-          <RadioLabel htmlFor="seller">
+          <RadioLabel htmlFor="Vendedor">
             <RadioText>Anunciante</RadioText>
           </RadioLabel>
         </RadioWrapper>
