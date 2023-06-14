@@ -10,6 +10,7 @@ import { ensureEmailIsUniqueMiddleware } from "../middlewares/ensureEmailIsUniqu
 import { createUserSchema, updateUserSchema } from "../schemas/users.schema";
 import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.middleware";
 import { ensureIdExistsMiddleware } from "../middlewares/ensureIdExists.middleware";
+import { tokenVerifyMiddleware } from "../middlewares/ensureTokenValid.middleware";
 
 const usersRoutes = Router();
 
@@ -19,6 +20,8 @@ usersRoutes.post(
     ensureEmailIsUniqueMiddleware,
     createUserController
 );
+
+usersRoutes.use(tokenVerifyMiddleware)
 
 usersRoutes.get("/:id", ensureIdExistsMiddleware, retrieveUserController);
 
