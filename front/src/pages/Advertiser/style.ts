@@ -25,6 +25,7 @@ const ContainerDivBlue = styled.div`
     max-height: 350px;
 
     padding: 30px;
+    padding-bottom: 45px;
 
     display: flex;
     flex-direction: column;
@@ -90,7 +91,7 @@ const ContainerDivBlue = styled.div`
 
 const ContainerAdverts = styled.section`
   margin-top: -80px;
-  margin-bottom: 250px;
+  margin-bottom: 235px;
 
   width: 100%;
 
@@ -116,6 +117,8 @@ const ContainerAdverts = styled.section`
         display: flex;
         flex-direction: column;
         gap: 16px;
+
+        margin-bottom: 35px;
 
         border-radius: 4px;
 
