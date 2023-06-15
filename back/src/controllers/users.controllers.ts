@@ -20,7 +20,7 @@ const retrieveUserController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const userId = req.params.id;
+    const userId = res.locals.userId;
 
     const user = await retrieveUsersService(userId);
 
@@ -31,7 +31,7 @@ const updateUserController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const userId = req.params.id;
+    const userId = res.locals.userId;
 
     const newUserData = await updateUserService(req.body, userId);
 
@@ -42,7 +42,7 @@ const deleteUserController = async (
     req: Request,
     res: Response
 ): Promise<Response> => {
-    const userId = req.params.id;
+    const userId = res.locals.userId;
 
     await deleteUserService(userId);
 
