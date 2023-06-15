@@ -19,6 +19,8 @@ export interface IUser {
 export interface IUserContextRegister {
     userRegister: (formData: IRegisterFormData) => Promise<void>;
     loading: boolean;
+    seller: "Cliente" | "Vendedor" | undefined;
+    setSeller: React.Dispatch<React.SetStateAction<"Cliente" | "Vendedor" | undefined>>;
 }
 
 export interface IUserContextLogin {

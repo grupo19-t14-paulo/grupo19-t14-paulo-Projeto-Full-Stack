@@ -1,13 +1,12 @@
 import styled from "styled-components";
-
 const ContainerForm = styled.div`
-  width: 30%;
+  max-width: 411px;
+  left: 15%;
+  margin: 20px 0;
 
   border-radius: 10px;
   background-color: var(--color--grey-10);
-
   padding: 20px 20px 40px 20px;
-  margin-bottom: 70px;
 
   h2 {
     font-family: var(--font--lexend);
@@ -15,7 +14,6 @@ const ContainerForm = styled.div`
     font-size: 24px;
 
     color: var(--color--grey-0);
-
     padding-bottom: 15px;
   };
 
@@ -24,36 +22,25 @@ const ContainerForm = styled.div`
     font-size: 13px;
 
     color: var(--color--grey-2);
-
     margin-bottom: 20px;
   };
 
   h3 {
     text-align: center;
-
     color: var(--color--grey-2);
-
     margin: 20px 0 35px 0;
   };
 
   p {
     color: var(--color--alert1);
-
     margin-bottom: 10px;
   };
 
-
-  @media(max-width: 740px){
-    width: 70%;
-    left: 15%;
-  };
-
-  @media(max-width: 440px){
+  @media(max-width: 370px){
     width: 90%;
     left: 5%;
   };
 `
-
 const Form = styled.form`
   display: flex;
   flex-direction: column;
@@ -61,7 +48,6 @@ const Form = styled.form`
   label {
     font-weight: 600;
     font-size: 10.5px;
-
     color: var(--color--grey-1);
   };
 
@@ -70,12 +56,10 @@ const Form = styled.form`
     height: 48px;
     font-size: 11.3px;
 
-    border: 1.7px solid var(--color--grey-6); 
+    border: 1.7px solid var(--color--grey-6);
     border-radius: 4px;
-
     padding-left: 25px;
     margin: 5px 0 10px 0;
-    
   };
 
   input:focus {
@@ -87,9 +71,8 @@ const Form = styled.form`
     height: 60px;
     font-size: 11.3px;
 
-    border: 1.7px solid var(--color--grey-6); 
+    border: 1.7px solid var(--color--grey-6);
     border-radius: 4px;
-
     padding: 20px;
     margin: 5px 0 10px 0;
   };
@@ -101,19 +84,16 @@ const Form = styled.form`
   button {
     width: 100%;
     height: 48px;
-
     font-weight: 600;
     font-size: 13.5px;
 
     border-radius: 5px;
     margin-top: 25px;
   };
-  
 `;
 
 const ButtonColorBrand1 = styled.button`
   border: transparent;
-
   color: var(--color--grey-10);
   background-color: var(--color--brand1);
 `;
@@ -122,9 +102,7 @@ const SpanTextIforgotMyPassword = styled.span`
   text-align: right;
   font-weight: 600;
   font-size: 12px;
-
   color: var(--color--grey-2);
-
   padding-right: 5px ;
 `;
 
@@ -135,20 +113,17 @@ const DivInput = styled.div`
 `;
 
 const DivRadio = styled.div`
-  width: 75%;
-
+  width: 100%;
+  height: 48px;
   display: flex;
   justify-content: space-between;
+  gap: 8px;
 
   margin-bottom: 20px;
 
-  @media(max-width: 397px) {
-    width: 82%;
-  };
-
-  @media(max-width: 321px) {
-    width: 90%;
-  };
+  @media (max-width: 440px) {
+    gap: none;
+  }
 `;
 
 const RadioInput = styled.input`
@@ -161,24 +136,26 @@ const RadioInput = styled.input`
 `;
 
 const RadioLabel = styled.label`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
   border: 1.7px solid var(--color--grey-6);
   border-radius: 4px;
-
-  padding: 20% 52%;
   cursor: pointer;
-
-  @media(max-width: 397px) {
-    padding: 20% 30%;
-  };
-
-  @media(max-width: 321px) {
-    padding: 15% 15%;
-  };
 `;
 
 const RadioWrapper = styled.div`
+  width: 45%;
   display: flex;
+  justify-content: center;
   align-items: center;
+
+  @media (max-width: 380px) {
+    width: 115px;
+  }
 `;
 
 const RadioText = styled.span`
@@ -187,13 +164,12 @@ const RadioText = styled.span`
   text-align: center;
 `;
 
-const ContainerLogin = styled.div`
+const Container = styled.div`
   min-height: 90vh;
-
   display: flex;
   align-items: center;
   justify-content: center;
-`
+`;
 
 export {
   ContainerForm,
@@ -206,5 +182,5 @@ export {
   RadioText,
   RadioWrapper,
   RadioInput,
-  ContainerLogin
+  Container
 };
