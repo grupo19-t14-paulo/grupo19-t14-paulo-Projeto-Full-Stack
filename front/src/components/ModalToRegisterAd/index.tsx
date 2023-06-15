@@ -1,34 +1,27 @@
 import { ContainerModal } from "./styled";
-import { useForm } from "react-hook-form";
+import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
 import { toast, ToastContainer } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createPortal } from "react-dom";
 import useOutClick from "../../hook/useOutClick";
-import { useState } from "react";
 import { api } from "../../services/api";
+import { useContext } from "react";
+import {
+  AnnouncementContext,
+  IAdvertiser,
+} from "../../contexts/AnnouncementContext/AnnouncementContext";
 
-interface IAdvertiser {
-  id?: string;
-  brand: string;
-  model: string;
-  year: string;
-  fuel: string;
-  mileage: string;
-  color: string;
-  value: number;
-  price: number;
-  description: string;
-  image?: [];
-  active?: boolean;
-}
 const ModalRegisterAd = () => {
-  const [modal, setModal] = useState(false);
-  const [ad, setAd] = useState<IAdvertiser[] | undefined>([]);
+  const { setModal, setAd } = useContext(AnnouncementContext);
 
   const refModal = useOutClick(() => {
     setModal(false);
   });
+
+  const closeModal = () => {
+    setModal(false);
+  };
 
   const schema = z.object({
     brand: z.string().nonempty("Marca é obrigatório"),
@@ -40,20 +33,29 @@ const ModalRegisterAd = () => {
     value: z.string().nonempty("Valor da tabela Fipe é obrigatório"),
     price: z.string().nonempty("Preço de venda é obrigatório"),
     description: z.string(),
-    image: z.string().nonempty("Ao menos uma imagem é obrigatória"),
+    images: z.array(
+      z.object({
+        image: z.string(),
+      })
+    ),
   });
 
   const {
     register,
+    control,
     handleSubmit,
     formState: { errors },
   } = useForm<IAdvertiser>({
+    defaultValues: {
+      images: [{ image: "" }],
+    },
     resolver: zodResolver(schema),
   });
 
-  const closeModal = () => {
-    setModal(false);
-  };
+  const { fields, append } = useFieldArray({
+    name: "images",
+    control,
+  });
 
   const submitAddAnnouncement = async (data: IAdvertiser): Promise<void> => {
     try {
@@ -70,7 +72,7 @@ const ModalRegisterAd = () => {
       });
       setAd(res.data);
     } catch (err) {
-      toast.error(`${err}`, {
+      toast.error("Ops algo de errado, revise os campo!", {
         position: "top-right",
         autoClose: 2000,
         hideProgressBar: false,
@@ -135,7 +137,7 @@ const ModalRegisterAd = () => {
                   placeholder="2018"
                   {...register("year")}
                 />
-                <p>{errors.year?.message}</p>
+                <p className="errorDubleInput">{errors.year?.message}</p>
               </div>
               <div className="secInput">
                 <label className="textLabel" htmlFor="fuel">
@@ -148,7 +150,7 @@ const ModalRegisterAd = () => {
                   placeholder="Gasolina / Etanol"
                   {...register("fuel")}
                 />
-                <p>{errors.fuel?.message}</p>
+                <p className="errorDubleInput">{errors.fuel?.message}</p>
               </div>
             </section>
 
@@ -163,7 +165,7 @@ const ModalRegisterAd = () => {
                   placeholder="30.000"
                   {...register("mileage")}
                 />
-                <p>{errors.mileage?.message}</p>
+                <p className="errorDubleInput">{errors.mileage?.message}</p>
               </div>
               <div className="secInput">
                 <label className="textLabel" htmlFor="color">
@@ -176,7 +178,7 @@ const ModalRegisterAd = () => {
                   placeholder="Branco"
                   {...register("color")}
                 />
-                <p>{errors.color?.message}</p>
+                <p className="errorDubleInput">{errors.color?.message}</p>
               </div>
             </section>
             <section>
@@ -190,7 +192,7 @@ const ModalRegisterAd = () => {
                   placeholder="R$ 48.000,00"
                   {...register("value")}
                 />
-                <p>{errors.value?.message}</p>
+                <p className="errorDubleInput">{errors.value?.message}</p>
               </div>
               <div className="secInput">
                 <label className="textLabel" htmlFor="price">
@@ -203,7 +205,7 @@ const ModalRegisterAd = () => {
                   placeholder="R$ 50.000,00"
                   {...register("price")}
                 />
-                <p>{errors.price?.message}</p>
+                <p className="errorDubleInput">{errors.price?.message}</p>
               </div>
             </section>
 
@@ -219,45 +221,46 @@ const ModalRegisterAd = () => {
             />
             <p>{errors.description?.message}</p>
 
-            <label className="textLabel" htmlFor="image">
-              Imagem da Capa
-            </label>
-            <input
-              type="text"
-              id="image"
-              placeholder="https://image.com"
-              {...register("image")}
-            />
-            <p>{errors.image?.message}</p>
+            {fields.map((_, index) => {
+              return (
+                <>
+                  <label className="textLabel" htmlFor="images">
+                    {index == 0
+                      ? "Imagem de Capa"
+                      : `${index}º imagem da galeria`}
+                  </label>
+                  <input
+                    type="text"
+                    id="images"
+                    placeholder="https://image.com"
+                    {...register(`images.${index}.image`)}
+                  />
+                  <p>{errors.images?.message}</p>
+                </>
+              );
+            })}
 
-            <label className="textLabel" htmlFor="image">
-              1º imagem da galeria
-            </label>
-            <input
-              type="text"
-              id="image"
-              placeholder="https://image.com"
-              {...register("image")}
-            />
-            <p>{errors.image?.message}</p>
-            <label className="textLabel" htmlFor="image">
-              2º imagem da galeria
-            </label>
-            <input
-              type="text"
-              id="image"
-              placeholder="https://image.com"
-              {...register("image")}
-            />
-            <p>{errors.image?.message}</p>
-            <button className="addImage" type="button">
-              Adicionar campo para imagem da galeria
+            <button
+              className="addImage"
+              type="button"
+              onClick={() =>
+                append({
+                  image: "https://image.com",
+                })
+              }
+            >
+              Adicionar mais imagem
             </button>
+
             <div className="divButtons">
-              <button className="btnCancel" type="button">
+              <button
+                className="btnCancel"
+                type="button"
+                onClick={() => closeModal()}
+              >
                 Cancelar
               </button>
-              <button className="btnCreate" type="button">
+              <button className="btnCreate" type="submit">
                 Criar anúncio
               </button>
             </div>

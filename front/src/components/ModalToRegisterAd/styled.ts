@@ -68,7 +68,7 @@ const ContainerModal = styled.div`
   form {
     display: flex;
     flex-direction: column;
-    gap: 1.75rem;
+    gap: 1.5rem;
 
     width: 100%;
 
@@ -123,6 +123,7 @@ const ContainerModal = styled.div`
   form > .inputDescription {
     height: 90px;
     padding: 10px;
+    margin-top: -12px;
   }
 
   p {
@@ -131,8 +132,12 @@ const ContainerModal = styled.div`
     color: var(--gray-scale-4);
   }
 
+  .errorDubleInput {
+    margin-top: 0.2rem;
+  }
+
   .addImage {
-    width: 70%;
+    width: 60%;
 
     background-color: var(--color--brand3);
     color: var(--color--brand1);
@@ -189,12 +194,12 @@ const ContainerModal = styled.div`
   @keyframes showModal {
     0% {
       opacity: 0;
-      top: 0%;
+      top: -25%;
     }
 
     50% {
       opacity: 1;
-      top: 30%;
+      top: -2%;
     }
   }
 `;
