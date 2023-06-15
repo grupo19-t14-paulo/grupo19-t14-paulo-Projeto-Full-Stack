@@ -1,9 +1,17 @@
+import { useState } from "react";
 import FooterBase from "../../components/Footer";
 import { Header } from "../../components/Header";
+import ModalRegisterAd from "../../components/ModalToRegisterAd";
 import { advertData } from "../Product/data";
 import { BackgroundBody, ContainerAdverts, ContainerDivBlue } from "./style";
 
 const AdvertiserPage = () => {
+  const [modal, setModal] = useState(false);
+
+  const openModal = () => {
+    setModal(true);
+  };
+
   const user = {
     name: "Diego Delli Colli Ramos",
     email: "dellicolli@mail.com",
@@ -21,6 +29,7 @@ const AdvertiserPage = () => {
 
   return (
     <BackgroundBody>
+      {modal ? <ModalRegisterAd /> : modal}
       <Header
         button1={userNameHeader2}
         button2="Sair"
@@ -43,7 +52,7 @@ const AdvertiserPage = () => {
 
           <p className="paragraph">{user.description}</p>
 
-          <button className="button" type="button">
+          <button className="button" type="button" onClick={openModal}>
             Criar Anúncio
           </button>
         </section>
@@ -53,7 +62,9 @@ const AdvertiserPage = () => {
           <h2 className="advertiserName">Anúncios</h2>
           <section className="sectionCards">
             <div className="card">
-              <img src={advertData.image} alt="Imagem do veículo" />
+              <figure>
+                <img src={advertData.image} alt="Imagem do veículo" />
+              </figure>
               <div className="infoCard">
                 <h3>
                   {advertData.brand} - {advertData.model}
@@ -68,137 +79,21 @@ const AdvertiserPage = () => {
                   </span>
                   <h3>{userNameHeader2}</h3>
                 </div>
+
                 <div className="divKmPriceYear">
                   <div className="divKmYear">
-                    <span className="tagInfo">{advertData.mileage}</span>
+                    <span className="tagInfo">{advertData.mileage} KM</span>
                     <span className="tagInfo">{advertData.year}</span>
+                    <p className="price">R$ {advertData.price}</p>
                   </div>
-                  <p>R$ {advertData.price}</p>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <img src={advertData.image} alt="Imagem do veículo" />
-              <div className="infoCard">
-                <h3>
-                  {advertData.brand} - {advertData.model}
-                </h3>
-                <p>{advertData.description}</p>
-                <div className="divNameUserCard">
-                  <span>
-                    <h2 className="initials">
-                      {userNameHeader1[0][0]}
-                      {userNameHeader1[1][0]}
-                    </h2>
-                  </span>
-                  <h3>{userNameHeader2}</h3>
-                </div>
-                <div className="divKmPriceYear">
-                  <div className="divKmYear">
-                    <span className="tagInfo">{advertData.mileage}</span>
-                    <span className="tagInfo">{advertData.year}</span>
+                  <div className="divButton">
+                    <button className="buttonCard" type="button">
+                      Editar
+                    </button>
+                    <button className="buttonCard" type="button">
+                      Ver detalhes
+                    </button>
                   </div>
-                  <p>R$ {advertData.price}</p>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <img src={advertData.image} alt="Imagem do veículo" />
-              <div className="infoCard">
-                <h3>
-                  {advertData.brand} - {advertData.model}
-                </h3>
-                <p>{advertData.description}</p>
-                <div className="divNameUserCard">
-                  <span>
-                    <h2 className="initials">
-                      {userNameHeader1[0][0]}
-                      {userNameHeader1[1][0]}
-                    </h2>
-                  </span>
-                  <h3>{userNameHeader2}</h3>
-                </div>
-                <div className="divKmPriceYear">
-                  <div className="divKmYear">
-                    <span className="tagInfo">{advertData.mileage}</span>
-                    <span className="tagInfo">{advertData.year}</span>
-                  </div>
-                  <p>R$ {advertData.price}</p>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <img src={advertData.image} alt="Imagem do veículo" />
-              <div className="infoCard">
-                <h3>
-                  {advertData.brand} - {advertData.model}
-                </h3>
-                <p>{advertData.description}</p>
-                <div className="divNameUserCard">
-                  <span>
-                    <h2 className="initials">
-                      {userNameHeader1[0][0]}
-                      {userNameHeader1[1][0]}
-                    </h2>
-                  </span>
-                  <h3>{userNameHeader2}</h3>
-                </div>
-                <div className="divKmPriceYear">
-                  <div className="divKmYear">
-                    <span className="tagInfo">{advertData.mileage}</span>
-                    <span className="tagInfo">{advertData.year}</span>
-                  </div>
-                  <p>R$ {advertData.price}</p>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <img src={advertData.image} alt="Imagem do veículo" />
-              <div className="infoCard">
-                <h3>
-                  {advertData.brand} - {advertData.model}
-                </h3>
-                <p>{advertData.description}</p>
-                <div className="divNameUserCard">
-                  <span>
-                    <h2 className="initials">
-                      {userNameHeader1[0][0]}
-                      {userNameHeader1[1][0]}
-                    </h2>
-                  </span>
-                  <h3>{userNameHeader2}</h3>
-                </div>
-                <div className="divKmPriceYear">
-                  <div className="divKmYear">
-                    <span className="tagInfo">{advertData.mileage}</span>
-                    <span className="tagInfo">{advertData.year}</span>
-                  </div>
-                  <p>R$ {advertData.price}</p>
-                </div>
-              </div>
-            </div>
-            <div className="card">
-              <img src={advertData.image} alt="Imagem do veículo" />
-              <div className="infoCard">
-                <h3>
-                  {advertData.brand} - {advertData.model}
-                </h3>
-                <p>{advertData.description}</p>
-                <div className="divNameUserCard">
-                  <span>
-                    <h2 className="initials">
-                      {userNameHeader1[0][0]}
-                      {userNameHeader1[1][0]}
-                    </h2>
-                  </span>
-                  <h3>{userNameHeader2}</h3>
-                </div>
-                <div className="divKmPriceYear">
-                  <div className="divKmYear">
-                    <span className="tagInfo">{advertData.mileage}</span>
-                    <span className="tagInfo">{advertData.year}</span>
-                  </div>
-                  <p>R$ {advertData.price}</p>
                 </div>
               </div>
             </div>

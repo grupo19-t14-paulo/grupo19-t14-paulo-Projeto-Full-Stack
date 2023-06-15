@@ -127,9 +127,9 @@ const ContainerAdverts = styled.section`
       overflow-x: scroll;
 
       .card {
-        width: 255px;
-        min-width: 255px;
-        height: 320px;
+        width: 266px;
+        min-width: 266px;
+        min-height: 320px;
 
         display: flex;
         flex-direction: column;
@@ -138,17 +138,24 @@ const ContainerAdverts = styled.section`
         margin-bottom: 35px;
 
         border-radius: 4px;
+        border: 1px solid var(--color--grey-8);
 
         background-color: var(--color--grey-10);
 
         margin-right: 16px;
 
-        img {
-          width: 100%;
-          transform: scale(1);
-          background-color: var(--color--grey-7);
-          border-top-left-radius: 4px;
-          border-top-right-radius: 4px;
+        figure {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+
+          img {
+            width: 100%;
+            transform: scale(1);
+            background-color: var(--color--grey-7);
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+          }
         }
 
         .infoCard {
@@ -203,27 +210,59 @@ const ContainerAdverts = styled.section`
 
           .divKmPriceYear {
             display: flex;
-            align-items: center;
-            flex-direction: row;
-            justify-content: space-between;
-          }
+            flex-direction: column;
+            gap: 16px;
 
-          .divKmYear {
-            display: flex;
-            gap: 5px;
-
-            .tagInfo {
-              padding: 3px;
-
+            .divKmYear {
               display: flex;
+              gap: 5px;
+              width: 100%;
 
-              font-size: 0.875rem;
+              .tagInfo {
+                padding: 3px;
 
-              color: var(--color--brand1);
+                display: flex;
+                align-items: center;
 
-              border-radius: 2px;
+                font-size: 0.875rem;
 
-              background-color: var(--color--brand3);
+                color: var(--color--brand1);
+
+                border-radius: 2px;
+
+                background-color: var(--color--brand3);
+              }
+
+              .price {
+                font-weight: 500;
+                line-height: 20px;
+
+                padding-left: 110px;
+
+                color: var(--color--grey-1);
+              }
+            }
+
+            .divButton {
+              display: flex;
+              gap: 10px;
+
+              .buttonCard {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                padding: 4px;
+
+                background-color: transparent;
+                color: var(--color--grey-1);
+
+                border-radius: 4px;
+                border: 1px solid var(--color--grey-1);
+
+                font-size: 13px;
+                font-weight: 600;
+              }
             }
           }
         }
@@ -243,10 +282,6 @@ const ContainerAdverts = styled.section`
         justify-content: flex-start;
         gap: calc(100% / 10);
         overflow: hidden;
-
-        .card {
-          width: 265px;
-        }
       }
     }
   }
