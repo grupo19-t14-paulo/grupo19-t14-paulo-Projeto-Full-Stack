@@ -13,7 +13,7 @@ const ensureIdExistsMiddleware = async (
 
     const findUser = await userRepository.findOne({
         where: {
-            id: req.params.id,
+            id: res.locals.userId,
         },
     });
 

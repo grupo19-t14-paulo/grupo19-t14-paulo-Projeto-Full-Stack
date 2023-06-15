@@ -8,7 +8,6 @@ import {
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 import { ensureEmailIsUniqueMiddleware } from "../middlewares/ensureEmailIsUnique.middleware";
 import { createUserSchema, updateUserSchema } from "../schemas/users.schema";
-import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.middleware";
 import { ensureIdExistsMiddleware } from "../middlewares/ensureIdExists.middleware";
 import { tokenVerifyMiddleware } from "../middlewares/ensureTokenValid.middleware";
 
@@ -21,18 +20,18 @@ usersRoutes.post(
     createUserController
 );
 
-usersRoutes.use(tokenVerifyMiddleware)
+usersRoutes.use(tokenVerifyMiddleware);
 
-usersRoutes.get("/:id", ensureIdExistsMiddleware, retrieveUserController);
+usersRoutes.get("/", ensureIdExistsMiddleware, retrieveUserController);
 
 usersRoutes.patch(
-    "/:id",
+    "/",
     ensureIdExistsMiddleware,
     ensureDataIsValidMiddleware(updateUserSchema),
     ensureEmailIsUniqueMiddleware,
     updateUserController
 );
 
-usersRoutes.delete("/:id", ensureIdExistsMiddleware, deleteUserController);
+usersRoutes.delete("/", ensureIdExistsMiddleware, deleteUserController);
 
 export { usersRoutes };
