@@ -1,4 +1,5 @@
 import { z } from "zod";
+import { announcementSchema } from "./adverts.schema";
 
 const userSchema = z.object({
     id: z.string(),
@@ -22,4 +23,14 @@ const returnUserSchema = userSchema.omit({
     password: true,
 });
 
-export { userSchema, createUserSchema, returnUserSchema, updateUserSchema };
+const returnUserWithAdverts = returnUserSchema.extend({
+    adverts: z.array(announcementSchema),
+});
+
+export {
+    userSchema,
+    createUserSchema,
+    returnUserSchema,
+    updateUserSchema,
+    returnUserWithAdverts,
+};
