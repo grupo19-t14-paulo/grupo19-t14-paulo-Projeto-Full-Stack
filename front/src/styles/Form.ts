@@ -1,6 +1,6 @@
 import styled from "styled-components";
 const ContainerForm = styled.div`
-  max-width: 411px;
+  width: 411px;
   left: 15%;
   margin: 20px 0;
 
