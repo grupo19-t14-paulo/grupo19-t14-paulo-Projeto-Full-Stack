@@ -12,6 +12,7 @@ const ContextRegister = createContext( {} as IUserContextRegister );
 const AuthRegisterProvider = ({children}: IUserProviderProps) => {
 
     const [loading, setLoading] = useState(false);
+    const [seller, setSeller] = useState<"Cliente" | "Vendedor">();
     const navigate = useNavigate();
     
     const userRegister = async (formData: IRegisterFormData) => {
@@ -20,8 +21,15 @@ const AuthRegisterProvider = ({children}: IUserProviderProps) => {
         setLoading(true);
         await api.post("/users", formData);
 
+        if(formData.type === "Vendedor"){
+          setSeller(formData.type);
+        }
+
         toast.success("Cadastro realizado com sucesso!");
-        navigate("/login");
+
+        if(formData.type === "Cliente"){
+          navigate("/login");
+        }
 
       } catch (error) {
         console.log(error);
@@ -32,7 +40,7 @@ const AuthRegisterProvider = ({children}: IUserProviderProps) => {
       }
     };
     return (
-        <ContextRegister.Provider value={{userRegister, loading}}>
+        <ContextRegister.Provider value={{userRegister, loading, seller, setSeller}}>
             {children}
         </ContextRegister.Provider>
     );
