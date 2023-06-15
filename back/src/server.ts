@@ -2,7 +2,7 @@ import app from "./app";
 import { AppDataSource } from "./data-source";
 import "dotenv/config";
 
-const PORT = Number(process.env.PORT) || 3000;
+const PORT = Number(process.env.PORT) || 3001;
 
 AppDataSource.initialize()
   .then(async () => {
