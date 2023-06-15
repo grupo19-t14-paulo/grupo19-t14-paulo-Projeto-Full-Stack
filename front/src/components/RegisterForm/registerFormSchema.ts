@@ -14,7 +14,10 @@ const registerFormSchema = z.object({
 
     description: z.string(),
 
-    type: z.enum( ["Vendedor", "Cliente"]),
+    type: z.union([
+        z.literal("Vendedor"),
+        z.literal("Cliente")
+    ]),
 
     password: z.string().min(4, "Obrigatório e precisa conter pelo menos 4 caracteres.").max(127),
 

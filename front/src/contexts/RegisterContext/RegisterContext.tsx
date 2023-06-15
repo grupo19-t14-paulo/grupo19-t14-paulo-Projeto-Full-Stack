@@ -16,6 +16,7 @@ const AuthRegisterProvider = ({ children }: IUserProviderProps) => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
 
+<<<<<<< HEAD
   const userRegister = async (formData: IRegisterFormData) => {
     try {
       setLoading(true);
@@ -35,6 +36,41 @@ const AuthRegisterProvider = ({ children }: IUserProviderProps) => {
       {children}
     </ContextRegister.Provider>
   );
+=======
+    const [loading, setLoading] = useState(false);
+    const [seller, setSeller] = useState<"Cliente" | "Vendedor">();
+    const navigate = useNavigate();
+    
+    const userRegister = async (formData: IRegisterFormData) => {
+
+      try {
+        setLoading(true);
+        await api.post("/users", formData);
+
+        if(formData.type === "Vendedor"){
+          setSeller(formData.type);
+        }
+
+        toast.success("Cadastro realizado com sucesso!");
+
+        if(formData.type === "Cliente"){
+          navigate("/login");
+        }
+
+      } catch (error) {
+        console.log(error);
+        toast.error("Ops! Algo deu errado");
+        
+      } finally {
+        setLoading(false);
+      }
+    };
+    return (
+        <ContextRegister.Provider value={{userRegister, loading, seller, setSeller}}>
+            {children}
+        </ContextRegister.Provider>
+    );
+>>>>>>> 27d45e230880b566432855c01b3f46da3e2fed4d
 };
 
 export { ContextRegister, AuthRegisterProvider };
