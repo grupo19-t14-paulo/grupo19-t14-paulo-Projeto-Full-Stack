@@ -1,20 +1,31 @@
 import { Router } from "express";
 import {
-  createAnnouncementController,
-  deleteAnnouncementController,
-  listAdvertsController,
-  retriveAnnouncementController,
-  updateAnnouncementController,
+    createAnnouncementController,
+    deleteAnnouncementController,
+    listAdvertsController,
+    listAllAdvertsOfOneSellerController,
+    retriveAnnouncementController,
+    updateAnnouncementController,
 } from "../controllers/adverts.controllers";
 import { tokenVerifyMiddleware } from "../middlewares/ensureTokenValid.middleware";
+import { ensureIsAdvertOwnerMiddleware } from "../middlewares/ensureIsAdvertOwner.middleware";
 
 const adverstsRoutes = Router();
 
 adverstsRoutes.get("", listAdvertsController);
 adverstsRoutes.get("/:id", retriveAnnouncementController);
-adverstsRoutes.use(tokenVerifyMiddleware)
+adverstsRoutes.get("/seller/:id", listAllAdvertsOfOneSellerController);
+adverstsRoutes.use(tokenVerifyMiddleware);
 adverstsRoutes.post("", createAnnouncementController);
-adverstsRoutes.patch("/:id", updateAnnouncementController);
-adverstsRoutes.delete("/:id", deleteAnnouncementController);
+adverstsRoutes.patch(
+    "/:id",
+    ensureIsAdvertOwnerMiddleware,
+    updateAnnouncementController
+);
+adverstsRoutes.delete(
+    "/:id",
+    ensureIsAdvertOwnerMiddleware,
+    deleteAnnouncementController
+);
 
 export default adverstsRoutes;
