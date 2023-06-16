@@ -40,6 +40,24 @@ class User {
     @Column({ length: 127 })
     password: string;
 
+    @Column({ length: 127 })
+    street: string;
+
+    @Column({ length: 20 })
+    number: string;
+
+    @Column({ length: 50, nullable: true })
+    complement: string;
+
+    @Column({ length: 127 })
+    city: string;
+
+    @Column({ length: 127 })
+    state: string;
+
+    @Column({ length: 8 })
+    cep: string;
+
     @Column({
         type: "enum",
         enum: UserType,
