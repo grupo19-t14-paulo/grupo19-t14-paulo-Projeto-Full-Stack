@@ -11,6 +11,12 @@ const userSchema = z.object({
     description: z.string().nullable(),
     password: z.string().min(4).max(127),
     type: z.string(),
+    street: z.string().max(127),
+    number: z.string().max(20),
+    complement: z.string().max(50),
+    city: z.string().max(127),
+    state: z.string().max(127),
+    cep: z.string().max(8),
 });
 
 const createUserSchema = userSchema.omit({
