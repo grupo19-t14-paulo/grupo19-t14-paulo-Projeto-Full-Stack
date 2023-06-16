@@ -24,6 +24,8 @@ interface IAdProviderProps {
 interface IAnnouncementContext {
   modal: boolean;
   setModal: React.Dispatch<React.SetStateAction<boolean>>;
+  loadingAd: boolean;
+  setloadingAd: React.Dispatch<React.SetStateAction<boolean>>;
   ad: IAdvertiser[] | undefined;
   setAd: React.Dispatch<React.SetStateAction<IAdvertiser[] | undefined>>;
   submitAddAnnouncement(data: IAdvertiser): Promise<void>;
@@ -34,11 +36,13 @@ const AnnouncementContext = createContext<IAnnouncementContext>(
 );
 
 const AnnouncementProvider = ({ children }: IAdProviderProps) => {
+  const [loadingAd, setloadingAd] = useState(false);
   const [modal, setModal] = useState(false);
   const [ad, setAd] = useState<IAdvertiser[] | undefined>([]);
 
   const submitAddAnnouncement = async (data: IAdvertiser): Promise<void> => {
     try {
+      setloadingAd(true);
       const res = await api.post("adverts", data);
 
       toast.success("Anúncio adicionado com sucesso!", {
@@ -50,8 +54,11 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
         draggable: true,
         progress: undefined,
       });
-      setAd(res.data);
+
+      const newAd = [...(ad || []), res.data];
+      setAd(newAd);
       setModal(false);
+      setloadingAd(false);
     } catch (err) {
       toast.error("Ops algo de errado, revise os campo!", {
         position: "top-right",
@@ -63,12 +70,22 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
         progress: undefined,
       });
       console.log(err);
+    } finally {
+      setloadingAd(false);
     }
   };
 
   return (
     <AnnouncementContext.Provider
-      value={{ modal, setModal, ad, setAd, submitAddAnnouncement }}
+      value={{
+        modal,
+        setModal,
+        ad,
+        setAd,
+        submitAddAnnouncement,
+        loadingAd,
+        setloadingAd,
+      }}
     >
       {children}
     </AnnouncementContext.Provider>

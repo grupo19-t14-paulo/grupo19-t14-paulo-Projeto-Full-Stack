@@ -128,8 +128,8 @@ const ContainerAdverts = styled.section`
 
       .card {
         width: 266px;
-        min-width: 266px;
-        min-height: 320px;
+        min-width: 285px;
+        max-height: 410px;
 
         display: flex;
         flex-direction: column;
@@ -162,10 +162,13 @@ const ContainerAdverts = styled.section`
           display: flex;
           flex-direction: column;
           justify-content: space-between;
+          gap: 10px;
+
           height: 65%;
+
           padding-left: 5px;
           padding-right: 5px;
-          padding-bottom: 5px;
+          padding-bottom: 10px;
 
           .nameCar {
             font-size: 16px;
@@ -211,7 +214,6 @@ const ContainerAdverts = styled.section`
           .divKmPriceYear {
             display: flex;
             flex-direction: column;
-            gap: 16px;
 
             .divKmYear {
               display: flex;
@@ -246,6 +248,8 @@ const ContainerAdverts = styled.section`
             .divButton {
               display: flex;
               gap: 10px;
+
+              margin-top: 10px;
 
               .buttonCard {
                 display: flex;

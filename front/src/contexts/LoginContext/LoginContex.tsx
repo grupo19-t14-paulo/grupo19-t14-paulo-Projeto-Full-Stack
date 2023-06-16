@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useEffect, useState } from "react";
 import {
   IUser,
   IUserContextLogin,
@@ -15,15 +15,30 @@ import { toast } from "react-toastify";
 const ContextLogin = createContext({} as IUserContextLogin);
 
 const AuthLoginProvider = ({ children }: IUserProviderProps) => {
+  const [loading, setLoading] = useState(false);
   const [user, setUser] = useState<IUser | null>(null);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    const token = localStorage.getItem("@token");
+
+    if (!token) {
+      setLoading(false);
+
+      return;
+    }
+
+    api.defaults.headers.authorization = `Bearer ${token}`;
+    setLoading(true);
+  });
 
   const userLogin = async (data: ILoginFormData) => {
     try {
       const res = await api.post<IUserLoginResponse>("/login", data);
 
-      localStorage.setItem("token", res.data.token);
+      api.defaults.headers.authorization = `Bearer ${res.data.token}`;
+      localStorage.setItem("@token", res.data.token);
 
       navigate("/");
     } catch (error) {
@@ -32,7 +47,9 @@ const AuthLoginProvider = ({ children }: IUserProviderProps) => {
   };
 
   return (
-    <ContextLogin.Provider value={{ userLogin, setUser, user }}>
+    <ContextLogin.Provider
+      value={{ userLogin, setUser, user, loading, setLoading }}
+    >
       {children}
     </ContextLogin.Provider>
   );

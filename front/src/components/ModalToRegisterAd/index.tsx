@@ -192,9 +192,9 @@ const ModalRegisterAd = () => {
             />
             <p>{errors.description?.message}</p>
 
-            {fields.map((_, index) => {
+            {fields.map((fields, index) => {
               return (
-                <>
+                <span key={fields.id}>
                   <label className="textLabel" htmlFor="images">
                     {index == 0
                       ? "Imagem de Capa"
@@ -207,7 +207,7 @@ const ModalRegisterAd = () => {
                     {...register(`images.${index}.image`)}
                   />
                   <p>{errors.images?.message}</p>
-                </>
+                </span>
               );
             })}
 
