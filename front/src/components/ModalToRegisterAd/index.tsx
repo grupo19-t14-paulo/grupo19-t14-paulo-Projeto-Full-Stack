@@ -1,11 +1,10 @@
 import { ContainerModal } from "./styled";
 import { useFieldArray, useForm } from "react-hook-form";
 import { z } from "zod";
-import { toast, ToastContainer } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { createPortal } from "react-dom";
 import useOutClick from "../../hook/useOutClick";
-import { api } from "../../services/api";
 import { useContext } from "react";
 import {
   AnnouncementContext,
@@ -13,7 +12,7 @@ import {
 } from "../../contexts/AnnouncementContext/AnnouncementContext";
 
 const ModalRegisterAd = () => {
-  const { setModal, setAd } = useContext(AnnouncementContext);
+  const { setModal, submitAddAnnouncement } = useContext(AnnouncementContext);
 
   const refModal = useOutClick(() => {
     setModal(false);
@@ -56,34 +55,6 @@ const ModalRegisterAd = () => {
     name: "images",
     control,
   });
-
-  const submitAddAnnouncement = async (data: IAdvertiser): Promise<void> => {
-    try {
-      const res = await api.post("adverts", data);
-
-      toast.success("Anúncio adicionado com sucesso!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      setAd(res.data);
-    } catch (err) {
-      toast.error("Ops algo de errado, revise os campo!", {
-        position: "top-right",
-        autoClose: 2000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      console.log(err);
-    }
-  };
 
   return createPortal(
     <>
@@ -221,9 +192,9 @@ const ModalRegisterAd = () => {
             />
             <p>{errors.description?.message}</p>
 
-            {fields.map((_, index) => {
+            {fields.map((fields, index) => {
               return (
-                <>
+                <span key={fields.id}>
                   <label className="textLabel" htmlFor="images">
                     {index == 0
                       ? "Imagem de Capa"
@@ -236,7 +207,7 @@ const ModalRegisterAd = () => {
                     {...register(`images.${index}.image`)}
                   />
                   <p>{errors.images?.message}</p>
-                </>
+                </span>
               );
             })}
 
