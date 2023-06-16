@@ -18,6 +18,7 @@ const ContainerModal = styled.div`
   .content__modal {
     width: 90%;
     max-width: 370px;
+    max-height: 93vh;
 
     position: fixed;
 
@@ -29,6 +30,8 @@ const ContainerModal = styled.div`
 
     margin-top: 50px;
     margin-bottom: 50px;
+
+    overflow-y: auto;
   }
 
   .headerModal {

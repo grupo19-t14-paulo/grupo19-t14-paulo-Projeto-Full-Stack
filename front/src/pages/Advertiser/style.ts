@@ -82,6 +82,7 @@ const ContainerDivBlue = styled.div`
         font-weight: 400;
       }
     }
+
     .button {
       padding: 10px;
 
@@ -124,7 +125,7 @@ const ContainerAdverts = styled.section`
 
     .sectionCards {
       display: flex;
-      overflow-x: scroll;
+      overflow-x: auto;
 
       .card {
         width: 266px;
