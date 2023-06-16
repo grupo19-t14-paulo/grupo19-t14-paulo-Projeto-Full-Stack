@@ -100,7 +100,7 @@ const ContainerModal = styled.div`
 
   form > section {
     display: flex;
-    margin-bottom: 1.75rem;
+    margin-bottom: 1rem;
   }
 
   form > section > div {
@@ -113,7 +113,6 @@ const ContainerModal = styled.div`
     height: 48px;
 
     padding-left: 0.85rem;
-    margin-top: 2px;
   }
 
   .secInput {
@@ -122,6 +121,7 @@ const ContainerModal = styled.div`
 
   form > .inputDescription {
     height: 90px;
+
     padding: 10px;
     margin-top: -12px;
   }
@@ -134,6 +134,24 @@ const ContainerModal = styled.div`
 
   .errorDubleInput {
     margin-top: 0.2rem;
+  }
+
+  span {
+    display: flex;
+    flex-direction: column;
+    gap: 1.65rem;
+  }
+
+  span > input {
+    height: 48px;
+
+    padding-left: 0.85rem;
+    margin-top: -15px;
+
+    color: var(--color--grey-3);
+
+    border-radius: 4px;
+    border: 1px solid var(--color--grey-3);
   }
 
   .addImage {
