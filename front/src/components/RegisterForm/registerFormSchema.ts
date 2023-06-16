@@ -19,12 +19,25 @@ const registerFormSchema = z.object({
         z.literal("Cliente")
     ]),
 
+    street: z.string().max(127),
+
+    number: z.string().max(20),
+
+    complement: z.string().max(50),
+    
+    city: z.string().max(127),
+
+    state: z.string().max(127),
+
+    cep: z.string().max(8),
+
     password: z.string().min(4, "Obrigatório e precisa conter pelo menos 4 caracteres.").max(127),
 
     confirm: z.string().nonempty("É obrigatório confirmar a senha"),
     }).refine(({password, confirm}) => password === confirm, {
     message: "A confirmação de senha precisa corresponder com a senha.",
     path: ["confirm"]
+
 });
 
 
