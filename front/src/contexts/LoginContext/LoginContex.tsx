@@ -40,6 +40,7 @@ const AuthLoginProvider = ({ children }: IUserProviderProps) => {
       api.defaults.headers.authorization = `Bearer ${res.data.token}`;
       localStorage.setItem("@token", res.data.token);
 
+      toast.success("Login realizado com sucesso!");
       navigate("/");
     } catch (error) {
       toast.error("Ops! Algo deu errado");
