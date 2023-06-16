@@ -10,6 +10,12 @@ export interface IRegisterFormData {
     password: string;
     confirm: string;
     type: "Vendedor" | "Cliente";
+    street: string;
+    number: string; 
+    complement: string;
+    city: string;
+    state: string;
+    cep: string;
 }
 
 export interface IUserRegisterResponse{

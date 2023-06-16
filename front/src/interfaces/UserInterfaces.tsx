@@ -14,6 +14,12 @@ export interface IUser {
     birthDate: string;
     description: string;
     type: "Cliente" | "Vendedor";
+    street: string;
+    number: string; 
+    complement: string;
+    city: string;
+    state: string;
+    cep: string;
 }
 
 export interface IUserContextRegister {

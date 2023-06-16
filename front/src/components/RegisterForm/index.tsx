@@ -34,6 +34,7 @@ const RegisterForm = () => {
   const [accountType, setAccountType] = useState<"Cliente" | "Vendedor">("Cliente");
 
   const submit: SubmitHandler<TFormProps> = (formData) => {
+    console.log(formData)
     formData.type = accountType;
     userRegister(formData);
 
@@ -107,21 +108,53 @@ const RegisterForm = () => {
           {...register("description")}
         />
 
-        {/* <h4>Infomações de endereço</h4>
+        <h4>Infomações de endereço</h4>
 
-        <Input label="CEP" placeholder="00000.000" />
+        <Input label="CEP"
+        placeholder="00000.000"
+        type="text"
+        id="cep"
+        {...register("cep")}
+        error={errors.cep} />
 
         <DivInput>
-          <Input label="Estado" placeholder="Digitar Estado" />
-          <Input label="Cidade" placeholder="Digitar cidade" />
+          <Input label="Estado" 
+          placeholder="Digitar Estado" 
+          type="text"
+          id="state"
+          {...register("state")}
+          error={errors.state}/>
+
+          <Input label="Cidade" 
+          placeholder="Digitar cidade" 
+          type="text"
+          id="city"
+          {...register("city")}
+          error={errors.city} />
         </DivInput>
 
-        <Input label="Rua" placeholder="Ex: Avenida José" />
+        <Input label="Rua" 
+        placeholder="Ex: Avenida José" 
+        type="text"
+        id="street"
+        {...register("street")}
+        error={errors.street}/>
 
         <DivInput>
-          <Input label="Número" placeholder="Digitar número" />
-          <Input label="Complemento" placeholder="Ex: apart 307" />
-        </DivInput> */}
+          <Input label="Número"
+          placeholder="Digitar número"
+          type="text"
+          id="number"
+          {...register("number")}
+          error={errors.number} />
+
+          <Input label="Complemento"
+          placeholder="Ex: apart 307"
+          type="text"
+          id="complement"
+          {...register("complement")}
+          error={errors.complement}/>
+        </DivInput>
 
         <h4>Tipo de conta</h4>
 
