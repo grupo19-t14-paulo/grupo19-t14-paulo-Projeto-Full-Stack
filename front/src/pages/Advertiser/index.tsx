@@ -5,9 +5,12 @@ import ModalRegisterAd from "../../components/ModalToRegisterAd";
 import { advertData } from "../Product/data";
 import { BackgroundBody, ContainerAdverts, ContainerDivBlue } from "./style";
 import { AnnouncementContext } from "../../contexts/AnnouncementContext/AnnouncementContext";
+//import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
+//import { api } from "../../services/api";
 
 const AdvertiserPage = () => {
   const { modal, setModal } = useContext(AnnouncementContext);
+  //const {user, setUser } = useContext(ContextLogin);
 
   const openModal = () => {
     setModal(true);
@@ -24,6 +27,14 @@ const AdvertiserPage = () => {
     password: "123456",
     type: "Anunciante",
   };
+
+  /* useEffect(() => {
+    (async () => {
+      const res = await api.get("/users/");
+
+      setUser(res.data);
+    })();
+  }, []); */
 
   const userNameHeader1 = user.name.split(" ");
   const userNameHeader2 = `${userNameHeader1[0]} ${userNameHeader1[1]}`;
