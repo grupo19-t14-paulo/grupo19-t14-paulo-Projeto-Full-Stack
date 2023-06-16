@@ -19,6 +19,7 @@ const AuthLoginProvider = ({ children }: IUserProviderProps) => {
 
             localStorage.setItem("token", res.data.token);
 
+            toast.success("Login realizado com sucesso!");
             navigate("/");
 
         } catch (error) {

@@ -34,7 +34,7 @@ const RegisterForm = () => {
   const [accountType, setAccountType] = useState<"Cliente" | "Vendedor">("Cliente");
 
   const submit: SubmitHandler<TFormProps> = (formData) => {
-    console.log(formData)
+
     formData.type = accountType;
     userRegister(formData);
 
