@@ -80,6 +80,8 @@ const ContainerModal = styled.div`
     background-color: var(--color--whiteFixed);
 
     border-radius: 4px;
+
+    position: relative;
   }
 
   .textLabel {
@@ -222,6 +224,39 @@ const ContainerModal = styled.div`
       opacity: 1;
       top: -2%;
     }
+  }
+
+  .dataResult {
+    position: absolute;
+    top: 163px;
+    width: 92.5%;
+    height: fit-content;
+    max-height: 150px;
+    background-color: white;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    overflow: hidden;
+    overflow-y: auto;
+    border-radius: 4px;
+  }
+
+  .dataResult::-webkit-scrollbar {
+    display: none;
+  }
+
+  .dataResult .dataItem {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    color: black;
+  }
+
+  .dataItem {
+    margin-left: 10px;
+  }
+
+  .brand {
+    top: 83px;
   }
 `;
 
