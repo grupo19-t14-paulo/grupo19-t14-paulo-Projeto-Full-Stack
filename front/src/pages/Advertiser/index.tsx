@@ -13,6 +13,7 @@ import { api } from "../../services/api";
 const AdvertiserPage = () => {
   const { modal, setModal, ad, setAd } = useContext(AnnouncementContext);
   const { user, setUser } = useContext(ContextLogin);
+  const token = localStorage.getItem("@token");
 
   const openModal = () => {
     setModal(true);
@@ -20,7 +21,9 @@ const AdvertiserPage = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await api.get("/users/");
+      const res = await api.get("/users", {
+        headers: { Authorization: `Bearer ${token}` },
+      });
 
       setUser(res.data);
     })();
@@ -37,6 +40,7 @@ const AdvertiserPage = () => {
   }, []);
 
   const userNameHeader1 = user?.name.split(" ");
+
   const userNameHeader2 = `${userNameHeader1 ? userNameHeader1[0] : ""} ${
     userNameHeader1 ? userNameHeader1[1] : ""
   }`;
