@@ -58,7 +58,10 @@ const AdvertiserPage = () => {
         <ContainerDivBlue>
           <section>
             <span className="initialsName">
-              <h1></h1>
+              <h1>
+                {userNameHeader1 ? userNameHeader1[0][0] : ""}
+                {userNameHeader1 ? userNameHeader1[1][0] : ""}
+              </h1>
             </span>
 
             <div>
