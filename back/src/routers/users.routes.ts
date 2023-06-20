@@ -1,11 +1,11 @@
 import { Router } from "express";
 import {
-  createUserController,
-  deleteUserController,
-  resetPasswordController,
-  retrieveUserController,
-  sendEmailResetPasswordController,
-  updateUserController,
+    createUserController,
+    deleteUserController,
+    resetPasswordController,
+    retrieveUserController,
+    sendEmailResetPasswordController,
+    updateUserController,
 } from "../controllers/users.controllers";
 import { ensureDataIsValidMiddleware } from "../middlewares/ensureDataIsValid.middleware";
 import { ensureEmailIsUniqueMiddleware } from "../middlewares/ensureEmailIsUnique.middleware";
@@ -14,27 +14,28 @@ import { ensureIdExistsMiddleware } from "../middlewares/ensureIdExists.middlewa
 import { tokenVerifyMiddleware } from "../middlewares/ensureTokenValid.middleware";
 import { ensureUserExistsMiddleware } from "../middlewares/ensureUserExists.middleware";
 import { emailSchema, passwordSchema } from "../schemas/sendEmail.schema";
+import { ensureEmailIsUniqueUpdateMiddleware } from "../middlewares/ensureEmailIsUniqueUpdate.middleware";
 
 const usersRoutes = Router();
 
 usersRoutes.post(
-  "",
-  ensureDataIsValidMiddleware(createUserSchema),
-  ensureEmailIsUniqueMiddleware,
-  createUserController
+    "",
+    ensureDataIsValidMiddleware(createUserSchema),
+    ensureEmailIsUniqueMiddleware,
+    createUserController
 );
 
 usersRoutes.post(
-  "/resetpassword",
-  ensureUserExistsMiddleware,
-  ensureDataIsValidMiddleware(emailSchema),
-  sendEmailResetPasswordController
+    "/resetpassword",
+    ensureUserExistsMiddleware,
+    ensureDataIsValidMiddleware(emailSchema),
+    sendEmailResetPasswordController
 );
 
 usersRoutes.patch(
-  "/resetpassword/:token",
-  ensureDataIsValidMiddleware(passwordSchema),
-  resetPasswordController
+    "/resetpassword/:token",
+    ensureDataIsValidMiddleware(passwordSchema),
+    resetPasswordController
 );
 
 usersRoutes.use(tokenVerifyMiddleware);
@@ -42,11 +43,11 @@ usersRoutes.use(tokenVerifyMiddleware);
 usersRoutes.get("/", ensureIdExistsMiddleware, retrieveUserController);
 
 usersRoutes.patch(
-  "/",
-  ensureIdExistsMiddleware,
-  ensureDataIsValidMiddleware(updateUserSchema),
-  ensureEmailIsUniqueMiddleware,
-  updateUserController
+    "/",
+    ensureIdExistsMiddleware,
+    ensureDataIsValidMiddleware(updateUserSchema),
+    ensureEmailIsUniqueUpdateMiddleware,
+    updateUserController
 );
 
 usersRoutes.delete("/", ensureIdExistsMiddleware, deleteUserController);
