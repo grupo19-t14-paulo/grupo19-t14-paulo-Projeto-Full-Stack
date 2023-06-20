@@ -1,11 +1,11 @@
 import { Router } from "express";
 import {
-    createAnnouncementController,
-    deleteAnnouncementController,
-    listAdvertsController,
-    listAllAdvertsOfOneSellerController,
-    retriveAnnouncementController,
-    updateAnnouncementController,
+  createAnnouncementController,
+  deleteAnnouncementController,
+  listAdvertsController,
+  listAllAdvertsOfOneSellerController,
+  retriveAnnouncementController,
+  updateAnnouncementController,
 } from "../controllers/adverts.controllers";
 import { tokenVerifyMiddleware } from "../middlewares/ensureTokenValid.middleware";
 import { ensureIsAdvertOwnerMiddleware } from "../middlewares/ensureIsAdvertOwner.middleware";
@@ -18,14 +18,14 @@ adverstsRoutes.get("/seller/:id", listAllAdvertsOfOneSellerController);
 adverstsRoutes.use(tokenVerifyMiddleware);
 adverstsRoutes.post("", createAnnouncementController);
 adverstsRoutes.patch(
-    "/:id",
-    ensureIsAdvertOwnerMiddleware,
-    updateAnnouncementController
+  "/:id",
+  ensureIsAdvertOwnerMiddleware,
+  updateAnnouncementController
 );
 adverstsRoutes.delete(
-    "/:id",
-    ensureIsAdvertOwnerMiddleware,
-    deleteAnnouncementController
+  "/:id",
+  ensureIsAdvertOwnerMiddleware,
+  deleteAnnouncementController
 );
 
 export default adverstsRoutes;
