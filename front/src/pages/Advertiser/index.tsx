@@ -13,7 +13,6 @@ import { api } from "../../services/api";
 const AdvertiserPage = () => {
   const { modal, setModal, ad, setAd } = useContext(AnnouncementContext);
   const { user, setUser } = useContext(ContextLogin);
-  const token = localStorage.getItem("@token");
 
   const openModal = () => {
     setModal(true);
@@ -21,22 +20,18 @@ const AdvertiserPage = () => {
 
   useEffect(() => {
     (async () => {
-      const res = await api.get("/users", {
-        headers: { Authorization: `Bearer ${token}` },
-      });
+      const resUser = await api.get("/users");
+      setUser(resUser.data);
 
-      setUser(res.data);
+      const id = resUser.data.id;
+
+      const resAds = await api.get<IAdvertiser[]>(`/adverts/seller/${id}`);
+      setAd(resAds.data);
     })();
   }, []);
 
   useEffect(() => {
-    (async () => {
-      const res = await api.get<IAdvertiser[]>(
-        "/adverts/seller/531f1041-bcf6-4b0d-87ed-aa5820fe495c"
-      );
-
-      setAd(res.data);
-    })();
+    (async () => {})();
   }, []);
 
   const userNameHeader1 = user?.name.split(" ");
@@ -99,7 +94,7 @@ const AdvertiserPage = () => {
                     <h3>
                       {ads.brand} - {ads.model}
                     </h3>
-                    <p>{ads.description}</p>
+                    <p className="description">{ads.description}</p>
                     <div className="divNameUserCard">
                       <span>
                         <h2 className="initials">

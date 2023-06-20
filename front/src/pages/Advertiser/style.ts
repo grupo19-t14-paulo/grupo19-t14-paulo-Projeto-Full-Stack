@@ -179,8 +179,14 @@ const ContainerAdverts = styled.section`
 
           .description {
             color: var(--color--grey-2);
-            font-size: 14px;
+
+            font-size: 12px;
             line-height: 24px;
+
+            max-width: 350px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
           }
 
           .divNameUserCard {
