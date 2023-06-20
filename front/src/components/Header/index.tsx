@@ -24,7 +24,7 @@ interface IHeaderProps {
 const Header = (props: IHeaderProps) => {
     const navigate = useNavigate();
     const [showButtons, setShowButtons] = useState(false);
-
+    
     const toggleButtons = () => {
         setShowButtons(!showButtons);
     };
