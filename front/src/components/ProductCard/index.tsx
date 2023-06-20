@@ -57,8 +57,8 @@ const ProductCard = ({
             </div>
             <div>
                 <h3>{title}</h3>
-                <span>{description}</span>
-                <div>
+                <span className="description">{description}</span>
+                <div className="advertiser-info">
                     <span>{advertiser[0]}</span>
                     <span>{advertiser}</span>
                 </div>
