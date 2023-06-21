@@ -46,8 +46,8 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
 
       const announcement = {
         ...data,
-        value: data.value.replace(/[^\d]+/g, ""),
-        price: data.price.replace(/[^\d]+/g, ""),
+        value: data.value.replace(/[^\d]+/g, "").slice(0, -2),
+        price: data.price.replace(/[^\d]+/g, "").slice(0, -2),
       };
 
       const res = await api.post("adverts", announcement);
