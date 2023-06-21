@@ -1,7 +1,6 @@
 import { useContext, useEffect } from "react";
 import FooterBase from "../../components/Footer";
 import { Header } from "../../components/Header";
-import ModalRegisterAd from "../../components/ModalToRegisterAd";
 import { BackgroundBody, ContainerAdverts, ContainerDivBlue } from "./style";
 import {
   AnnouncementContext,
@@ -10,13 +9,9 @@ import {
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
 
-const AdvertiserPage = () => {
-  const { modal, setModal, ad, setAd } = useContext(AnnouncementContext);
+const AdsSpecificPage = () => {
+  const { ad, setAd } = useContext(AnnouncementContext);
   const { user, setUser } = useContext(ContextLogin);
-
-  const openModal = () => {
-    setModal(true);
-  };
 
   useEffect(() => {
     (async () => {
@@ -30,10 +25,6 @@ const AdvertiserPage = () => {
     })();
   }, []);
 
-  useEffect(() => {
-    (async () => {})();
-  }, []);
-
   const userNameHeader1 = user?.name.split(" ");
 
   const userNameHeader2 = `${userNameHeader1 ? userNameHeader1[0] : ""} ${
@@ -42,7 +33,6 @@ const AdvertiserPage = () => {
 
   return (
     <>
-      {modal ? <ModalRegisterAd /> : modal}
       <BackgroundBody>
         <Header
           button1={userNameHeader2}
@@ -65,14 +55,6 @@ const AdvertiserPage = () => {
             </div>
 
             <p className="paragraph">{user?.description}</p>
-
-            <button
-              className="button"
-              type="button"
-              onClick={() => openModal()}
-            >
-              Criar Anúncio
-            </button>
           </section>
         </ContainerDivBlue>
         <ContainerAdverts>
@@ -111,14 +93,6 @@ const AdvertiserPage = () => {
                         <span className="tagInfo">{ads.year}</span>
                         <p className="price">R$ {ads.price}</p>
                       </div>
-                      <div className="divButton">
-                        <button className="buttonCard" type="button">
-                          Editar
-                        </button>
-                        <button className="buttonCard" type="button">
-                          Ver detalhes
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -132,4 +106,4 @@ const AdvertiserPage = () => {
   );
 };
 
-export default AdvertiserPage;
+export default AdsSpecificPage;
