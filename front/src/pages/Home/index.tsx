@@ -22,18 +22,44 @@ import {
   CloseFiltersHeader,
   FilterInputWrapperMobile,
 } from "./style";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
-import { mockCarros, mockFilters } from "./mock";
+import { IProductProps, mockCarros, mockFilters } from "./mock";
 import ProductCard from "../../components/ProductCard";
 import FooterBase from "../../components/Footer";
+import { IAnnouncementResponse } from "./types";
+import { api } from "../../services/api";
 
 const HomePage = () => {
   const [showFilters, setShowFilters] = useState(false);
+  const [queryString, setQueryString] = useState(``)
+  const [filters, setFilters] = useState({})
+  const [filteredProducts, setFilteredProducts] = useState([] as IAnnouncementResponse[]);
 
-  const toggleShowFilterBtns = () => {
-    setShowFilters(!showFilters);
+  useEffect(() => {
+    requestProducts(queryString)
+  }, [queryString])
+
+  const requestSetting = (field: string, filter: string) => {
+    const updateParams = { ...filters, [field]: filter }
+    if (filters[field] === filter) { delete updateParams[field] }
+    setFilters(updateParams)
+    setQueryString(generateQueryString(updateParams))
+  }
+
+
+  const requestProducts = async (queryString: string) => {
+    const response = await api.get(`/adverts?${queryString}`)
+    setFilteredProducts(response.data)
+  }
+  const toggleShowFilterBtns = () => { setShowFilters(!showFilters) };
+
+  const generateQueryString = (filters: any) => {
+    const queryParams = new URLSearchParams();
+    for (const key in filters) { queryParams.set(key, filters[key]) }
+    return queryParams.toString();
   };
+
 
   return (
     <StyledHome>
@@ -46,7 +72,7 @@ const HomePage = () => {
       <ContainerImgCar>
         <img src={Car} alt="Car" />
       </ContainerImgCar>
-      <Containerbackground></Containerbackground>
+      <Containerbackground />
       <ContainerTitle>
         <h1>Motors Shop</h1>
         <h2>A melhor plataforma de anúncios de carros do país</h2>
@@ -55,32 +81,32 @@ const HomePage = () => {
         <ProductFilters>
           <FilterSession>
             <FilterName>Marca</FilterName>
-            {mockFilters.marca.map((filter) => (
-              <Filter>{filter}</Filter>
+            {mockFilters.brand.map((filter) => (
+              <Filter key={filter} onClick={() => requestSetting("brand", filter)}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Modelo</FilterName>
-            {mockFilters.modelo.map((filter) => (
-              <Filter>{filter}</Filter>
+            {mockFilters.model.map((filter) => (
+              <Filter key={filter} onClick={() => requestSetting("model", filter)}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Cor</FilterName>
-            {mockFilters.cor.map((filter) => (
-              <Filter>{filter}</Filter>
+            {mockFilters.color.map((filter) => (
+              <Filter key={filter} onClick={() => requestSetting("color", filter)}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Ano</FilterName>
-            {mockFilters.ano.map((filter) => (
-              <Filter>{filter}</Filter>
+            {mockFilters.year.map((filter) => (
+              <Filter key={filter} onClick={() => requestSetting("year", filter)}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Combustível</FilterName>
-            {mockFilters.combustivel.map((filter) => (
-              <Filter>{filter}</Filter>
+            {mockFilters.fuel.map((filter) => (
+              <Filter key={filter} onClick={() => requestSetting("fuel", filter)}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
@@ -107,32 +133,32 @@ const HomePage = () => {
             </CloseFiltersHeader>
             <FilterSession>
               <FilterName>Marca</FilterName>
-              {mockFilters.marca.map((filter) => (
-                <Filter>{filter}</Filter>
+              {mockFilters.brand.map((filter) => (
+                <Filter key={filter} >{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Modelo</FilterName>
-              {mockFilters.modelo.map((filter) => (
-                <Filter>{filter}</Filter>
+              {mockFilters.model.map((filter) => (
+                <Filter key={filter}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Cor</FilterName>
-              {mockFilters.cor.map((filter) => (
-                <Filter>{filter}</Filter>
+              {mockFilters.color.map((filter) => (
+                <Filter key={filter}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Ano</FilterName>
-              {mockFilters.ano.map((filter) => (
-                <Filter>{filter}</Filter>
+              {mockFilters.year.map((filter) => (
+                <Filter key={filter}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Combustível</FilterName>
-              {mockFilters.combustivel.map((filter) => (
-                <Filter>{filter}</Filter>
+              {mockFilters.fuel.map((filter) => (
+                <Filter key={filter}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
@@ -154,18 +180,18 @@ const HomePage = () => {
         )}
         <ProductPage>
           <ProductFeed>
-            {mockCarros.map((car) => (
+            {filteredProducts.map(({ id, model, description, images, mileage, value, price, year, active }) => (
               <ProductCard
-                key={car.id}
-                title={car.title}
-                advertiser={car.advertiser}
-                description={car.description}
+                key={id}
+                title={model}
+                advertiser={"vendedor"}
+                description={description}
                 img={sampleCar}
-                km={car.km}
-                fipePrice={car.fipePrice}
-                price={car.price}
-                year={car.year}
-                active={car.active}
+                km={mileage}
+                fipePrice={value}
+                price={price}
+                year={year}
+                active={active}
               />
             ))}
           </ProductFeed>

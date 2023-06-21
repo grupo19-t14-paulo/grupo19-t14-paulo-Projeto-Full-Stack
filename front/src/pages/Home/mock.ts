@@ -4,7 +4,7 @@ interface IProductProps {
     title: string;
     description: string;
     advertiser: string;
-    km: string;
+    mileage: string;
     year: string;
     price: number;
     active?: boolean;
@@ -12,11 +12,11 @@ interface IProductProps {
 }
 
 interface IFilters {
-    marca: string[];
-    modelo: string[];
-    cor: string[];
-    ano: string[];
-    combustivel: string[];
+    brand: string[];
+    model: string[];
+    color: string[];
+    year: string[];
+    fuel: string[];
 }
 
 const mockCarros: IProductProps[] = [
@@ -27,7 +27,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2019",
         active: true,
         price: 25000,
@@ -40,8 +40,8 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
-        year: "2020",
+        mileage: "40000",
+        year: "2022",
         active: true,
         price: 25000,
         fipePrice: 30000
@@ -53,7 +53,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2011",
         active: true,
         price: 25000,
@@ -66,7 +66,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2019",
         active: true,
         price: 25000,
@@ -79,7 +79,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2020",
         active: true,
         price: 25000,
@@ -92,7 +92,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2011",
         active: true,
         price: 25000,
@@ -105,7 +105,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2019",
         active: true,
         price: 25000,
@@ -118,7 +118,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2020",
         active: true,
         price: 25000,
@@ -131,7 +131,7 @@ const mockCarros: IProductProps[] = [
         description:
             "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem...",
         advertiser: "Julia Carla",
-        km: "40000",
+        mileage: "40000",
         year: "2020",
         active: true,
         price: 25000,
@@ -141,14 +141,14 @@ const mockCarros: IProductProps[] = [
 ];
 
 const mockFilters: IFilters = {
-    marca: [
+    brand: [
         "General Motors",
         "Fiat",
         "Ford",
         "Honda",
         "Volksvagen"
     ],
-    modelo: [
+    model: [
         "Civic",
         "Corolla",
         "Cruze",
@@ -158,7 +158,7 @@ const mockFilters: IFilters = {
         "Onix",
         "Porsche 718",
     ],
-    cor: [
+    color: [
         "Azul",
         "Branca",
         "Cinza",
@@ -166,7 +166,7 @@ const mockFilters: IFilters = {
         "Preta",
         "Verde"
     ],
-    ano: [
+    year: [
         "2022",
         "2021",
         "2020",
@@ -176,7 +176,7 @@ const mockFilters: IFilters = {
         "2016",
         "2015",
     ],
-    combustivel: [
+    fuel: [
         "Diesel",
         "Etanol",
         "Gasolina",
@@ -185,3 +185,4 @@ const mockFilters: IFilters = {
 }
 
 export { mockCarros, mockFilters };
+export type {IProductProps};
