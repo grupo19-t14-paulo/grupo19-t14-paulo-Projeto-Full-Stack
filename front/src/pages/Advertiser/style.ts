@@ -107,6 +107,10 @@ const ContainerDivBlue = styled.div`
   }
 `;
 
+const ContainerDivAdverts = styled.div`
+  min-height: 90vh;
+`;
+
 const ContainerAdverts = styled.section`
   margin-top: -80px;
   margin-bottom: 235px;
@@ -298,4 +302,4 @@ const ContainerAdverts = styled.section`
   }
 `;
 
-export { BackgroundBody, ContainerDivBlue, ContainerAdverts };
+export { BackgroundBody, ContainerDivAdverts, ContainerDivBlue, ContainerAdverts };

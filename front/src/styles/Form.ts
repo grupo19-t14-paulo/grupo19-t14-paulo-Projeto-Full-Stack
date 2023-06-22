@@ -106,7 +106,7 @@ const SpanTextIforgotMyPassword = styled.span`
   padding-right: 5px ;
 `;
 
-const DivInput = styled.div`
+const DivInput = styled.span`
   display: flex;
   justify-content: space-between;
   gap: 10px;
@@ -171,6 +171,129 @@ const Container = styled.div`
   justify-content: center;
 `;
 
+const ContainerFormEditProfile = styled.div`
+  width: 450px;
+  height: 650px;
+  margin: 90px 0 20px 0;
+
+  border-radius: 10px;
+  background-color: var(--color--grey-10);
+  padding: 20px;
+
+  overflow-y: auto;
+
+  h2 {
+    font-weight: 600;
+    font-size: 12px;
+
+    color: var(--color--grey-1);
+    padding-bottom: 15px;
+  };
+
+  p {
+    color: var(--color--alert1);
+    margin-bottom: 10px;
+  };
+  
+  form {
+
+    div {
+      display: flex;
+      flex-direction: column;
+
+      label {
+        font-weight: 600;
+        font-size: 10.5px;
+        color: var(--color--grey-1);
+      };
+
+      input {
+        width: 100%;
+        height: 48px;
+        font-size: 11.3px;
+
+        border: 1.7px solid var(--color--grey-6);
+        border-radius: 4px;
+        padding-left: 25px;
+        margin: 5px 0 10px 0;
+      };
+
+      input:focus {
+      outline-color: var(--color--brand1);
+    };
+
+    textarea {
+      width: 100%;
+      height: 60px;
+      font-size: 11.3px;
+
+      border: 1.7px solid var(--color--grey-6);
+      border-radius: 4px;
+      padding: 20px;
+      margin: 5px 0 10px 0;
+    };
+
+    textarea:focus {
+      outline-color: var(--color--brand1);
+    };
+    };
+
+  };
+
+  @media(max-width: 370px){
+    width: 90%;
+    left: 5%;
+  };
+`
+
+const ContainerButtonEditProfile = styled.span`
+  display: flex;
+  justify-content: space-between;
+
+  button {
+    font-weight: 600;
+    width: 32%;
+    height: 48px;
+
+    border-radius: 5px;
+    border: transparent;
+  }
+  
+`
+
+const ContainerButtonEditAddress = styled.span`
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+
+  button {
+    font-weight: 600;
+    width: 37%;
+    height: 48px;
+
+    border-radius: 5px;
+    border: transparent;
+  }
+`
+const ContainerTitleButton = styled.div`
+  display: flex;
+  justify-content: space-between;
+
+  margin-bottom: 20px;
+
+  h2 {
+    font-size: 14px;
+  }
+
+  button {
+
+      color: var(--color--grey-4);
+
+      border: transparent;
+      background-color: transparent;
+  };
+`
+
 export {
   ContainerForm,
   Form,
@@ -182,5 +305,9 @@ export {
   RadioText,
   RadioWrapper,
   RadioInput,
-  Container
+  Container,
+  ContainerFormEditProfile,
+  ContainerButtonEditProfile,
+  ContainerButtonEditAddress,
+  ContainerTitleButton
 };
