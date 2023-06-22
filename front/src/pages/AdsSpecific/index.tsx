@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import FooterBase from "../../components/Footer";
-import { Header } from "../../components/Header";
 import { BackgroundBody, ContainerAdverts, ContainerDivBlue } from "./style";
 import {
   AnnouncementContext,
@@ -8,6 +7,7 @@ import {
 } from "../../contexts/AnnouncementContext/AnnouncementContext";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
+import { HeaderProfile } from "../../components/HeaderProfile";
 
 const AdsSpecificPage = () => {
   const { ad, setAd } = useContext(AnnouncementContext);
@@ -34,12 +34,7 @@ const AdsSpecificPage = () => {
   return (
     <>
       <BackgroundBody>
-        <Header
-          button1={userNameHeader2}
-          button2="Sair"
-          page1="/advertiser"
-          page2="/"
-        />
+        <HeaderProfile />
         <ContainerDivBlue>
           <section>
             <span className="initialsName">
