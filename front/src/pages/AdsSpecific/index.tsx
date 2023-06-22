@@ -1,6 +1,6 @@
 import { useContext, useEffect } from "react";
 import FooterBase from "../../components/Footer";
-import ModalRegisterAd from "../../components/ModalToRegisterAd";
+import { Header } from "../../components/Header";
 import { BackgroundBody, ContainerAdverts, ContainerDivBlue } from "./style";
 import {
   AnnouncementContext,
@@ -8,15 +8,10 @@ import {
 } from "../../contexts/AnnouncementContext/AnnouncementContext";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
-import { HeaderProfile } from "../../components/HeaderProfile";
 
-const AdvertiserPage = () => {
-  const { modal, setModal, ad, setAd } = useContext(AnnouncementContext);
+const AdsSpecificPage = () => {
+  const { ad, setAd } = useContext(AnnouncementContext);
   const { user, setUser } = useContext(ContextLogin);
-
-  const openModal = () => {
-    setModal(true);
-  };
 
   useEffect(() => {
     (async () => {
@@ -30,10 +25,6 @@ const AdvertiserPage = () => {
     })();
   }, []);
 
-  useEffect(() => {
-    (async () => {})();
-  }, []);
-
   const userNameHeader1 = user?.name.split(" ");
 
   const userNameHeader2 = `${userNameHeader1 ? userNameHeader1[0] : ""} ${
@@ -42,9 +33,13 @@ const AdvertiserPage = () => {
 
   return (
     <>
-      {modal ? <ModalRegisterAd /> : modal}
       <BackgroundBody>
-        <HeaderProfile/>
+        <Header
+          button1={userNameHeader2}
+          button2="Sair"
+          page1="/advertiser"
+          page2="/"
+        />
         <ContainerDivBlue>
           <section>
             <span className="initialsName">
@@ -60,14 +55,6 @@ const AdvertiserPage = () => {
             </div>
 
             <p className="paragraph">{user?.description}</p>
-
-            <button
-              className="button"
-              type="button"
-              onClick={() => openModal()}
-            >
-              Criar Anúncio
-            </button>
           </section>
         </ContainerDivBlue>
         <ContainerAdverts>
@@ -106,14 +93,6 @@ const AdvertiserPage = () => {
                         <span className="tagInfo">{ads.year}</span>
                         <p className="price">R$ {ads.price}</p>
                       </div>
-                      <div className="divButton">
-                        <button className="buttonCard" type="button">
-                          Editar
-                        </button>
-                        <button className="buttonCard" type="button">
-                          Ver detalhes
-                        </button>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -127,4 +106,4 @@ const AdvertiserPage = () => {
   );
 };
 
-export default AdvertiserPage;
+export default AdsSpecificPage;

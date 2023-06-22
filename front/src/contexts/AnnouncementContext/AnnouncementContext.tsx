@@ -10,8 +10,8 @@ export interface IAdvertiser {
   fuel: string;
   mileage: string;
   color: string;
-  value: number;
-  price: number;
+  value: string;
+  price: string;
   description: string;
   images?: { image: string }[];
   active?: boolean;
@@ -43,7 +43,14 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
   const submitAddAnnouncement = async (data: IAdvertiser): Promise<void> => {
     try {
       setloadingAd(true);
-      const res = await api.post("adverts", data);
+
+      const announcement = {
+        ...data,
+        value: data.value.replace(/[^\d]+/g, "").slice(0, -2),
+        price: data.price.replace(/[^\d]+/g, "").slice(0, -2),
+      };
+
+      const res = await api.post("adverts", announcement);
 
       toast.success("Anúncio adicionado com sucesso!", {
         position: "top-right",

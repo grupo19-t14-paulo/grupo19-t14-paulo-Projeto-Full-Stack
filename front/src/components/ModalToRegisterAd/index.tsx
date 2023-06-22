@@ -140,10 +140,10 @@ const ModalRegisterAd = () => {
 
   const carFuel = (type: number) => {
     if (type === 1) {
-      return "Gasolina/ Etanol";
+      return "Gasolina / Etanol";
     }
     if (type === 2) {
-      return "Gasolina";
+      return "Híbrido";
     }
     return "Elétrico";
   };

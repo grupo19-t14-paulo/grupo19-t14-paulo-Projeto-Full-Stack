@@ -83,24 +83,6 @@ const ContainerDivBlue = styled.div`
       }
     }
 
-    .button {
-      padding: 10px;
-
-      color: var(--color--brand1);
-      background-color: var(--color--grey-10);
-
-      border-radius: 4px;
-      border: 1px solid var(--color--brand1);
-
-      font-weight: 600;
-
-      transition: 0.3s;
-    }
-
-    .button:hover {
-      text-decoration: underline;
-    }
-
     @media (min-width: 650px) {
       width: 85%;
     }
@@ -249,30 +231,6 @@ const ContainerAdverts = styled.section`
                 padding-left: 110px;
 
                 color: var(--color--grey-1);
-              }
-            }
-
-            .divButton {
-              display: flex;
-              gap: 10px;
-
-              margin-top: 10px;
-
-              .buttonCard {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-
-                padding: 4px;
-
-                background-color: transparent;
-                color: var(--color--grey-1);
-
-                border-radius: 4px;
-                border: 1px solid var(--color--grey-1);
-
-                font-size: 13px;
-                font-weight: 600;
               }
             }
           }
