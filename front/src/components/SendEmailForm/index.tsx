@@ -10,11 +10,16 @@ import Button from "../Buttons";
 import { ContainerForm, Form } from "../../styles/Form";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.min.css";
+import { Input } from "../Input";
 
 const SendEmailForm = () => {
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm<SendEmailResetPasswordData>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<SendEmailResetPasswordData>({
         resolver: zodResolver(sendEmailResetPasswordSchema),
     });
 
@@ -50,10 +55,11 @@ const SendEmailForm = () => {
                 <div>
                     <h2>Informe um e-mail para a recuperação de senha</h2>
                     <div>
-                        <input
+                        <Input
                             type="email"
                             placeholder="Ex: samuel@kenzie.com.br"
                             {...register("email")}
+                            error={errors.email}
                         />
                     </div>
                 </div>

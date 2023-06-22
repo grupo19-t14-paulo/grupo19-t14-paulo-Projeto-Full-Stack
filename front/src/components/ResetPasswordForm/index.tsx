@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.min.css";
 import { useNavigate } from "react-router-dom";
 import { ContainerForm, Form } from "../../styles/Form";
 import Button from "../Buttons";
+import { Input } from "../Input";
 
 interface ResetPasswordFormProps {
     token: string;
@@ -18,7 +19,11 @@ interface ResetPasswordFormProps {
 const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
     const navigate = useNavigate();
 
-    const { register, handleSubmit } = useForm<ResetPasswordData>({
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<ResetPasswordData>({
         resolver: zodResolver(resetPasswordSchema),
     });
 
@@ -54,20 +59,22 @@ const ResetPasswordForm = ({ token }: ResetPasswordFormProps) => {
                 <div>
                     <label htmlFor="email">Nova senha</label>
                     <div>
-                        <input
+                        <Input
                             type="password"
                             placeholder="Sua nova senha"
                             {...register("password")}
+                            error={errors.password}
                         />
                     </div>
                 </div>
                 <div>
-                    <label htmlFor="password">Confirmação da senha</label>
-                    <div className="mt-2">
-                        <input
+                    <label htmlFor="password">Confirmação de senha</label>
+                    <div>
+                        <Input
                             type="password"
                             placeholder="Confirmação da senha"
                             {...register("passwordConfirm")}
+                            error={errors.passwordConfirm}
                         />
                     </div>
                 </div>
