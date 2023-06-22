@@ -1,10 +1,10 @@
 import { z } from "zod";
 import { DeepPartial } from "typeorm";
 import {
-    createUserSchema,
-    returnUserSchema,
-    returnUserWithAdverts,
-    userSchema,
+  createUserSchema,
+  returnUserSchema,
+  returnUserWithAdverts,
+  userSchema,
 } from "../schemas/users.schema";
 
 type TUser = z.infer<typeof userSchema>;

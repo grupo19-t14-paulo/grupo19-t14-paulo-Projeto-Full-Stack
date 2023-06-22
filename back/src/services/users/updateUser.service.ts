@@ -18,14 +18,19 @@ const updateUserService = async (
     throw new AppError("User not found!", 404);
   }
 
-  const newUserData = usersRepository.create({
-    ...user,
-    ...data,
+  await AppDataSource.createQueryBuilder()
+    .update(User)
+    .set({
+      ...data,
+    })
+    .where("id = :id", { id: userId })
+    .execute();
+
+  const userUp = await usersRepository.findOneBy({
+    id: userId,
   });
 
-  await usersRepository.save(newUserData);
-
-  return returnUserSchema.parse(newUserData);
+  return returnUserSchema.parse(userUp);
 };
 
 export { updateUserService };
