@@ -32,16 +32,8 @@ interface FullCar {
 const ModalRegisterAd = () => {
   const { setModal, submitAddAnnouncement } = useContext(AnnouncementContext);
   const [carsList, setCarsList] = useState<Brand>({} as Brand);
-  const [filteredBrand, setFilteredBrand] = useState<string[]>([]);
-  const [filteredModel, setFilteredModel] = useState<FullCar[]>(
-    [] as FullCar[]
-  );
   const [carsByBrand, setCarsByBrand] = useState<FullCar[]>([] as FullCar[]);
-  const [brandEntered, setBrandEntered] = useState("");
-  const [modelEntered, setModelEntered] = useState("");
   const [carInfos, setCarInfos] = useState<FullCar[]>([] as FullCar[]);
-  const [searchBrandDiv, setSearchBrandDiv] = useState(false);
-  const [searchModelDiv, setSearchModelDiv] = useState(false);
 
   useEffect(() => {
     (async () => {
@@ -95,22 +87,7 @@ const ModalRegisterAd = () => {
     control,
   });
 
-  const brandFilter = ({ target }: any) => {
-    setBrandEntered(target.value);
-    setSearchBrandDiv(true);
-    setSearchModelDiv(false);
-
-    const SearchBrand = Object.keys(carsList).filter((brand) =>
-      brand.toLowerCase().includes(brandEntered.toLowerCase())
-    );
-
-    setFilteredBrand(SearchBrand);
-  };
-
   const selectBrand = async (value: string) => {
-    setBrandEntered(value);
-    setSearchBrandDiv(false);
-
     const getCarByBrand = await axios.get(
       `https://kenzie-kars.herokuapp.com/cars?brand=${value}`
     );
@@ -118,24 +95,10 @@ const ModalRegisterAd = () => {
     setCarsByBrand(getCarByBrand.data);
   };
 
-  const handleModelChange = ({ target }: any) => {
-    setModelEntered(target.value);
-    setSearchModelDiv(true);
-    setSearchBrandDiv(false);
+  const selectModel = ({ target }: any) => {
+    const filter = carsByBrand.filter((car) => car.name === target.value);
 
-    const filter = carsByBrand.filter((car) =>
-      car.name.toLowerCase().includes(modelEntered.toLowerCase())
-    );
-
-    setFilteredModel(filter);
-  };
-
-  const selectModel = (id: string) => {
-    const filter = carsByBrand.filter((car) => car.id === id);
-
-    setModelEntered(filter[0].name);
     setCarInfos(filter);
-    setSearchModelDiv(false);
   };
 
   const carFuel = (type: number) => {
@@ -169,61 +132,45 @@ const ModalRegisterAd = () => {
             <label className="textLabel" htmlFor="brand">
               Marca
             </label>
-            <input
-              type="text"
+            <select
               id="brand"
               placeholder="Mercedes Benz"
               {...register("brand")}
-              value={brandEntered}
-              onChange={brandFilter}
-            />
+              onChange={({ target }) => {
+                selectBrand(target.value);
+              }}
+            >
+              <option>Escolha a marca</option>
+              {Object.keys(carsList).map((brand, key) => {
+                return (
+                  <option className="dataItem" value={brand} key={key}>
+                    {brand}
+                  </option>
+                );
+              })}
+            </select>
             <p>{errors.brand?.message}</p>
-
-            {searchBrandDiv && (
-              <div className="dataResult brand">
-                {filteredBrand.map((value: string, key: number) => {
-                  return (
-                    <a
-                      className="dataItem"
-                      onClick={() => selectBrand(value)}
-                      key={key}
-                    >
-                      {value}
-                    </a>
-                  );
-                })}
-              </div>
-            )}
 
             <label className="textLabel" htmlFor="model">
               Modelo
             </label>
 
-            <input
-              type="text"
+            <select
               id="model"
               placeholder="A 200 CGI ADVANCE SEDAN"
-              value={modelEntered}
               {...register("model")}
-              onChange={handleModelChange}
-            />
+              onChange={selectModel}
+            >
+              <option>Escolha o modelo</option>
+              {carsByBrand.map((car) => {
+                return (
+                  <option className="dataItem" value={car.name} key={car.id}>
+                    {car.name}
+                  </option>
+                );
+              })}
+            </select>
             <p>{errors.model?.message}</p>
-
-            {searchModelDiv && (
-              <div className="dataResult">
-                {filteredModel.map((car) => {
-                  return (
-                    <a
-                      className="dataItem"
-                      key={car.id}
-                      onClick={() => selectModel(car.id)}
-                    >
-                      {car.name}
-                    </a>
-                  );
-                })}
-              </div>
-            )}
 
             <section>
               <div>
@@ -234,7 +181,6 @@ const ModalRegisterAd = () => {
                   type="text"
                   id="year"
                   placeholder="2018"
-                  value={carInfos.length != 0 ? carInfos[0].year : ""}
                   {...register("year")}
                 />
                 <p className="errorDubleInput">{errors.year?.message}</p>

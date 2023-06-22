@@ -103,6 +103,21 @@ const ContainerModal = styled.div`
     border: 1px solid var(--color--grey-3);
   }
 
+  form > select {
+    height: 48px;
+
+    padding-left: 0.85rem;
+    margin-top: -15px;
+
+    color: var(--color--grey-1);
+
+    border-radius: 4px;
+    border: 1px solid var(--color--grey-3);
+  }
+  option {
+    color: var(--color--grey-1);
+  }
+
   form > section {
     display: flex;
     margin-bottom: 1rem;
@@ -243,20 +258,9 @@ const ContainerModal = styled.div`
     display: none;
   }
 
-  .dataResult .dataItem {
-    width: 100%;
-    height: 50px;
-    display: flex;
-    align-items: center;
-    color: black;
-  }
-
-  .dataItem {
-    margin-left: 10px;
-  }
-
-  .brand {
-    top: 83px;
+  #model,
+  #brand {
+    text-transform: capitalize;
   }
 `;
 
