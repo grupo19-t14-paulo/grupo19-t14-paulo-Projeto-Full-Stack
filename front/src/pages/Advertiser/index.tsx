@@ -1,6 +1,5 @@
 import { useContext, useEffect } from "react";
 import FooterBase from "../../components/Footer";
-import { Header } from "../../components/Header";
 import ModalRegisterAd from "../../components/ModalToRegisterAd";
 import { BackgroundBody, ContainerAdverts, ContainerDivBlue } from "./style";
 import {
@@ -9,6 +8,7 @@ import {
 } from "../../contexts/AnnouncementContext/AnnouncementContext";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
+import { HeaderProfile } from "../../components/HeaderProfile";
 
 const AdvertiserPage = () => {
   const { modal, setModal, ad, setAd } = useContext(AnnouncementContext);
@@ -44,12 +44,7 @@ const AdvertiserPage = () => {
     <>
       {modal ? <ModalRegisterAd /> : modal}
       <BackgroundBody>
-        <Header
-          button1={userNameHeader2}
-          button2="Sair"
-          page1="/advertiser"
-          page2="/"
-        />
+        <HeaderProfile/>
         <ContainerDivBlue>
           <section>
             <span className="initialsName">
