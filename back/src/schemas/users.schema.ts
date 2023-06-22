@@ -1,5 +1,6 @@
-import { z } from "zod";
+import { nullable, z } from "zod";
 import { announcementSchema } from "./adverts.schema";
+import { UserType } from "../entities/users.entity";
 
 const userSchema = z.object({
   id: z.string(),
@@ -8,9 +9,9 @@ const userSchema = z.object({
   cpf: z.string().max(11),
   phone: z.string().max(13),
   birthDate: z.date().or(z.string()),
-  description: z.string().nullable(),
+  description: z.string().nullable().optional(),
   password: z.string().min(4).max(127),
-  type: z.string(),
+  type: z.nativeEnum(UserType),
   street: z.string().max(127),
   number: z.string().max(20),
   complement: z.string().max(50),

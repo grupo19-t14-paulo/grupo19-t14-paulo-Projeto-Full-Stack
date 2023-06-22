@@ -91,7 +91,12 @@ const AdsSpecificPage = () => {
                       <div className="divKmYear">
                         <span className="tagInfo">{ads.mileage} KM</span>
                         <span className="tagInfo">{ads.year}</span>
-                        <p className="price">R$ {ads.price}</p>
+                        <p className="price">
+                          {new Intl.NumberFormat("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          }).format(Number(ads.price))}
+                        </p>
                       </div>
                     </div>
                   </div>
