@@ -37,21 +37,23 @@ const HomePage = () => {
   const [filteredProducts, setFilteredProducts] = useState([] as IAnnouncementResponse[]);
 
   useEffect(() => {
-    requestProducts(queryString)
-  }, [queryString])
+    requestProducts(queryString);
+  }, [filters]);
 
   const requestSetting = (field: string, filter: string) => {
     const updateParams = { ...filters, [field]: filter }
     if (filters[field] === filter) { delete updateParams[field] }
-    setFilters(updateParams)
-    setQueryString(generateQueryString(updateParams))
-  }
+    if (updateParams[field] === "") { delete updateParams[field]}
+    setFilters(updateParams);
+    setQueryString(generateQueryString(updateParams));
+  };
 
 
   const requestProducts = async (queryString: string) => {
-    const response = await api.get(`/adverts?${queryString}`)
-    setFilteredProducts(response.data)
-  }
+    console.log(queryString)
+    const response = await api.get(`/adverts?${queryString}`);
+    setFilteredProducts(response.data);
+  };
   const toggleShowFilterBtns = () => { setShowFilters(!showFilters) };
 
   const generateQueryString = (filters: any) => {
@@ -112,18 +114,18 @@ const HomePage = () => {
           <FilterSession>
             <FilterName>Km</FilterName>
             <FilterInputWrapper>
-              <FilterInput placeholder="Mínima" />
-              <FilterInput placeholder="Máxima" />
+              <FilterInput placeholder="Mínima" onChange={event => requestSetting("minMileage", event.target.value)}/>
+              <FilterInput placeholder="Máxima" onChange={event => requestSetting("maxMileage", event.target.value)}/>
             </FilterInputWrapper>
           </FilterSession>
           <FilterSession>
             <FilterName>Preço</FilterName>
             <FilterInputWrapper>
-              <FilterInput placeholder="Mínimo" />
-              <FilterInput placeholder="Máximo" />
+              <FilterInput placeholder="Mínimo" onChange={event => requestSetting("minPrice", event.target.value)}/>
+              <FilterInput placeholder="Máximo" onChange={event => requestSetting("maxPrice", event.target.value)}/>
             </FilterInputWrapper>
           </FilterSession>
-          <ClearFiltersBtn>Limpar Filtros</ClearFiltersBtn>
+          <ClearFiltersBtn onClick={() => {setQueryString(""), setFilters({})}}>Limpar Filtros</ClearFiltersBtn>
         </ProductFilters>
         {showFilters && (
           <ProductFiltersMobile>
@@ -164,7 +166,7 @@ const HomePage = () => {
             <FilterSession>
               <FilterName>Km</FilterName>
               <FilterInputWrapperMobile>
-                <FilterInput placeholder="Mínima" />
+                <FilterInput placeholder="Mínima" onChange={(event) => requestSetting("model", event)} />
                 <FilterInput placeholder="Máxima" />
               </FilterInputWrapperMobile>
             </FilterSession>
@@ -175,7 +177,7 @@ const HomePage = () => {
                 <FilterInput placeholder="Máximo" />
               </FilterInputWrapperMobile>
             </FilterSession>
-            <ClearFiltersBtn>Limpar Filtros</ClearFiltersBtn>
+            <ClearFiltersBtn onClick={() => { setQueryString(""); setFilters({})}}>Limpar Filtros</ClearFiltersBtn>
           </ProductFiltersMobile>
         )}
         <ProductPage>

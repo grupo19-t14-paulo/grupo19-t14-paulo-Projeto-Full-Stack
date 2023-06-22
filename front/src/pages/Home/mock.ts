@@ -160,11 +160,11 @@ const mockFilters: IFilters = {
     ],
     color: [
         "Azul",
-        "Branca",
+        "branco",
         "Cinza",
         "Prata",
-        "Preta",
-        "Verde"
+        "Rosa",
+        "verde"
     ],
     year: [
         "2022",
@@ -177,10 +177,9 @@ const mockFilters: IFilters = {
         "2015",
     ],
     fuel: [
-        "Diesel",
-        "Etanol",
-        "Gasolina",
-        "Flex"
+        "Híbrido",
+        "Gasolina / Etanol",
+        "Elétrico"
     ]
 }
 
