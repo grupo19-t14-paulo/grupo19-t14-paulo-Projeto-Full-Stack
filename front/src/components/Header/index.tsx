@@ -14,13 +14,7 @@ import {
     MenuImage,
 } from "./style";
 import { useNavigate } from "react-router-dom";
-
-interface IHeaderProps {
-    button1?: string;
-    button2?: string;
-    page1: string;
-    page2: string;
-}
+import { IHeaderProps } from "../../interfaces/HeaderInterface";
 
 const Header = (props: IHeaderProps) => {
     const navigate = useNavigate();

@@ -30,10 +30,6 @@ const AdvertiserPage = () => {
     })();
   }, []);
 
-  useEffect(() => {
-    (async () => {})();
-  }, []);
-
   const userNameHeader1 = user?.name.split(" ");
 
   const userNameHeader2 = `${userNameHeader1 ? userNameHeader1[0] : ""} ${
@@ -44,7 +40,12 @@ const AdvertiserPage = () => {
     <>
       {modal ? <ModalRegisterAd /> : modal}
       <BackgroundBody>
-        <HeaderProfile/>
+        <HeaderProfile
+        button1="Fazer Login"
+        button2="Cadastrar"
+        page1="/login"
+        page2="/register"
+        />
         <ContainerDivAdverts>
           <ContainerDivBlue>
             <section>
