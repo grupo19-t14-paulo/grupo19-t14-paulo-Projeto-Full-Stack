@@ -35,8 +35,8 @@ class Adverts {
     })
     fuel: FuelCar;
 
-    @Column({ length: 10 })
-    mileage: string;
+    @Column({type: "decimal", precision: 10})
+    mileage: number;
 
     @Column({ length: 50 })
     color: string;

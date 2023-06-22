@@ -4,6 +4,10 @@ const StyledHome = styled.div`
   width: 100vw;
   display: flex;
   flex-direction: column;
+  .selected {
+    color: var(--color--brand1);
+    text-decoration: underline;
+  }
 `;
 
 const ContainerImgCar = styled.div`
@@ -151,6 +155,7 @@ const MenuImage = styled.img`
 `;
 
 const HomeMain = styled.main`
+  margin-bottom: 20px;
   width: 100vw;
   max-width: 100vw;
   margin-top: 25px;
@@ -175,6 +180,8 @@ const ProductFilters = styled.section`
 
 const ProductFiltersMobile = styled.section`
   width: 100vw;
+  padding-bottom: 30px;
+
   height: fit-content;
   position: absolute;
   top: 90px;
@@ -234,7 +241,8 @@ const Filter = styled.a`
 
 const FilterInput = styled.input`
   background-color: var(--color--grey-5);
-  width: 85px;
+  min-width: 85px;
+  width: 100%;
   height: 37px;
   border: none;
   display: flex;
@@ -246,6 +254,8 @@ const FilterInput = styled.input`
 
 const FilterInputWrapper = styled.div`
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
   gap: 12px;
   @media (max-width: 840px) {
     flex-direction: column;
@@ -339,7 +349,8 @@ const ShowFiltersBtn = styled.button`
   cursor: pointer;
   @media (min-width: 650px) {
     display: none;
-  }
+}
+
 `;
 
 export {
