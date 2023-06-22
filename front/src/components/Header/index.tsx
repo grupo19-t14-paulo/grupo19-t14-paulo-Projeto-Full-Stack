@@ -3,12 +3,13 @@ import MenuImg from "../../assets/Menu.png";
 import { useState } from "react";
 import {
     ConteinerHeader,
-    ConteinerButtonHeader,
+    ContainerButtonHeader,
     LinkNoMargin,
     LinkRegister,
     Container,
     ButtonsContainer,
-    StyledLink,
+    StyledLinkLogin,
+    StyledLinkRegister,
     CloseButton,
     MenuImage,
 } from "./style";
@@ -37,12 +38,12 @@ const Header = (props: IHeaderProps) => {
             <Container>
                 {showButtons ? (
                     <ButtonsContainer>
-                        <StyledLink to={props.page1}>
+                        <StyledLinkLogin to={props.page1}>
                             {props.button1}
-                        </StyledLink>
-                        <StyledLink to={props.page2}>
+                        </StyledLinkLogin>
+                        <StyledLinkRegister to={props.page2}>
                             {props.button2}
-                        </StyledLink>
+                        </StyledLinkRegister>
                         <CloseButton onClick={toggleButtons}>X</CloseButton>
                     </ButtonsContainer>
                 ) : (
@@ -53,10 +54,10 @@ const Header = (props: IHeaderProps) => {
                     />
                 )}
             </Container>
-            <ConteinerButtonHeader>
+            <ContainerButtonHeader>
                 <LinkNoMargin to={props.page1}>{props.button1}</LinkNoMargin>
                 <LinkRegister to={props.page2}>{props.button2}</LinkRegister>
-            </ConteinerButtonHeader>
+            </ContainerButtonHeader>
         </ConteinerHeader>
     );
 };
