@@ -34,7 +34,12 @@ const AdsSpecificPage = () => {
   return (
     <>
       <BackgroundBody>
-        <HeaderProfile />
+        <HeaderProfile
+          button1="Fazer Login"
+          button2="Cadastrar"
+          page1="/login"
+          page2="/register"
+         />
         <ContainerDivBlue>
           <section>
             <span className="initialsName">
