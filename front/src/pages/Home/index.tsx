@@ -1,6 +1,7 @@
 import Car from "../../assets/Photo.png";
 import sampleCar from "../../images/carroExample.png";
 import { Header } from "../../components/Header";
+import {} from "../../assets/error-svgrepo-com.svg"
 import {
   ContainerImgCar,
   Containerbackground,
@@ -24,39 +25,40 @@ import {
 } from "./style";
 import { useEffect, useState } from "react";
 
-import { IProductProps, mockCarros, mockFilters } from "./mock";
+import { mockFilters } from "./mock";
 import ProductCard from "../../components/ProductCard";
 import FooterBase from "../../components/Footer";
-import { IAnnouncementResponse } from "./types";
+import { IAnnouncementResponse, IFilters } from "./types";
 import { api } from "../../services/api";
 
 const HomePage = () => {
   const [showFilters, setShowFilters] = useState(false);
   const [queryString, setQueryString] = useState(``)
-  const [filters, setFilters] = useState({})
   const [filteredProducts, setFilteredProducts] = useState([] as IAnnouncementResponse[]);
+  const [filters, setFilters] = useState({} as IFilters)
+
 
   useEffect(() => {
     requestProducts(queryString);
   }, [filters]);
 
   const requestSetting = (field: string, filter: string) => {
-    const updateParams = { ...filters, [field]: filter }
+    const updateParams = { ...filters, [field]: filter };
     if (filters[field] === filter) { delete updateParams[field] }
-    if (updateParams[field] === "") { delete updateParams[field]}
+    if (updateParams[field] === "") { delete updateParams[field] }
     setFilters(updateParams);
     setQueryString(generateQueryString(updateParams));
+
   };
 
 
   const requestProducts = async (queryString: string) => {
-    console.log(queryString)
     const response = await api.get(`/adverts?${queryString}`);
     setFilteredProducts(response.data);
   };
   const toggleShowFilterBtns = () => { setShowFilters(!showFilters) };
 
-  const generateQueryString = (filters: any) => {
+  const generateQueryString = (filters: string) => {
     const queryParams = new URLSearchParams();
     for (const key in filters) { queryParams.set(key, filters[key]) }
     return queryParams.toString();
@@ -84,48 +86,48 @@ const HomePage = () => {
           <FilterSession>
             <FilterName>Marca</FilterName>
             {mockFilters.brand.map((filter) => (
-              <Filter key={filter} onClick={() => requestSetting("brand", filter)}>{filter}</Filter>
+              <Filter key={filter} onClick={() => requestSetting("brand", filter)} className={filters.brand === filter ? "selected" : ""}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Modelo</FilterName>
             {mockFilters.model.map((filter) => (
-              <Filter key={filter} onClick={() => requestSetting("model", filter)}>{filter}</Filter>
+              <Filter key={filter} onClick={() => requestSetting("model", filter)} className={filters.model === filter ? "selected" : ""}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Cor</FilterName>
             {mockFilters.color.map((filter) => (
-              <Filter key={filter} onClick={() => requestSetting("color", filter)}>{filter}</Filter>
+              <Filter key={filter} onClick={() => requestSetting("color", filter)} className={filters.color === filter ? "selected" : ""}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Ano</FilterName>
             {mockFilters.year.map((filter) => (
-              <Filter key={filter} onClick={() => requestSetting("year", filter)}>{filter}</Filter>
+              <Filter key={filter} onClick={() => requestSetting("year", filter)} className={filters.year === filter ? "selected" : ""}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Combustível</FilterName>
             {mockFilters.fuel.map((filter) => (
-              <Filter key={filter} onClick={() => requestSetting("fuel", filter)}>{filter}</Filter>
+              <Filter key={filter} onClick={() => requestSetting("fuel", filter)} className={filters.fuel === filter ? "selected" : ""}>{filter}</Filter>
             ))}
           </FilterSession>
           <FilterSession>
             <FilterName>Km</FilterName>
             <FilterInputWrapper>
-              <FilterInput placeholder="Mínima" onChange={event => requestSetting("minMileage", event.target.value)}/>
-              <FilterInput placeholder="Máxima" onChange={event => requestSetting("maxMileage", event.target.value)}/>
+              <FilterInput placeholder="Mínima" onChange={event => requestSetting("minMileage", event.target.value)} />
+              <FilterInput placeholder="Máxima" onChange={event => requestSetting("maxMileage", event.target.value)} />
             </FilterInputWrapper>
           </FilterSession>
           <FilterSession>
             <FilterName>Preço</FilterName>
             <FilterInputWrapper>
-              <FilterInput placeholder="Mínimo" onChange={event => requestSetting("minPrice", event.target.value)}/>
-              <FilterInput placeholder="Máximo" onChange={event => requestSetting("maxPrice", event.target.value)}/>
+              <FilterInput type="number" placeholder="Mínimo" onChange={event => requestSetting("minPrice", event.target.value)} />
+              <FilterInput placeholder="Máximo" onChange={event => requestSetting("maxPrice", event.target.value)} />
             </FilterInputWrapper>
           </FilterSession>
-          <ClearFiltersBtn onClick={() => {setQueryString(""), setFilters({})}}>Limpar Filtros</ClearFiltersBtn>
+          <ClearFiltersBtn onClick={() => { setQueryString(""), setFilters({}) }}>Limpar Filtros</ClearFiltersBtn>
         </ProductFilters>
         {showFilters && (
           <ProductFiltersMobile>
@@ -136,53 +138,54 @@ const HomePage = () => {
             <FilterSession>
               <FilterName>Marca</FilterName>
               {mockFilters.brand.map((filter) => (
-                <Filter key={filter} >{filter}</Filter>
+                <Filter key={filter} onClick={() => requestSetting("brand", filter)} className={filters.brand === filter ? "selected" : ""}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Modelo</FilterName>
               {mockFilters.model.map((filter) => (
-                <Filter key={filter}>{filter}</Filter>
+                <Filter key={filter} onClick={() => requestSetting("model", filter)} className={filters.model === filter ? "selected" : ""}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Cor</FilterName>
               {mockFilters.color.map((filter) => (
-                <Filter key={filter}>{filter}</Filter>
+                <Filter key={filter} onClick={() => requestSetting("color", filter)} className={filters.color === filter ? "selected" : ""}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Ano</FilterName>
               {mockFilters.year.map((filter) => (
-                <Filter key={filter}>{filter}</Filter>
+                <Filter key={filter} onClick={() => requestSetting("year", filter)} className={filters.year === filter ? "selected" : ""}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Combustível</FilterName>
               {mockFilters.fuel.map((filter) => (
-                <Filter key={filter}>{filter}</Filter>
+                <Filter key={filter} onClick={() => requestSetting("fuel", filter)} className={filters.fuel === filter ? "selected" : ""}>{filter}</Filter>
               ))}
             </FilterSession>
             <FilterSession>
               <FilterName>Km</FilterName>
-              <FilterInputWrapperMobile>
-                <FilterInput placeholder="Mínima" onChange={(event) => requestSetting("model", event)} />
-                <FilterInput placeholder="Máxima" />
-              </FilterInputWrapperMobile>
+              <FilterInputWrapper>
+                <FilterInput placeholder="Mínima" onChange={event => requestSetting("minMileage", event.target.value)} />
+                <FilterInput placeholder="Máxima" onChange={event => requestSetting("maxMileage", event.target.value)} />
+              </FilterInputWrapper>
             </FilterSession>
             <FilterSession>
               <FilterName>Preço</FilterName>
-              <FilterInputWrapperMobile>
-                <FilterInput placeholder="Mínimo" />
-                <FilterInput placeholder="Máximo" />
-              </FilterInputWrapperMobile>
+              <FilterInputWrapper>
+                <FilterInput placeholder="Mínimo" onChange={event => requestSetting("minPrice", event.target.value)} />
+                <FilterInput placeholder="Máximo" onChange={event => requestSetting("maxPrice", event.target.value)} />
+              </FilterInputWrapper>
             </FilterSession>
-            <ClearFiltersBtn onClick={() => { setQueryString(""); setFilters({})}}>Limpar Filtros</ClearFiltersBtn>
+            <ClearFiltersBtn onClick={() => { setQueryString(""), setFilters({}) }}>Limpar Filtros</ClearFiltersBtn>
           </ProductFiltersMobile>
         )}
         <ProductPage>
           <ProductFeed>
-            {filteredProducts.map(({ id, model, description, images, mileage, value, price, year, active }) => (
+            {filteredProducts.length > 0 ? 
+            filteredProducts.map(({ id, model, description, images, mileage, value, price, year, active }) => (
               <ProductCard
                 key={id}
                 title={model}
@@ -195,7 +198,8 @@ const HomePage = () => {
                 year={year}
                 active={active}
               />
-            ))}
+            )):
+            <h1>{"Não há nenhum veículo com essas características :("}</h1>}
           </ProductFeed>
           <ShowFiltersBtn onClick={toggleShowFilterBtns}>
             Mostrar Filtros

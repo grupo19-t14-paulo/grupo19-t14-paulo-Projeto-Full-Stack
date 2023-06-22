@@ -1,18 +1,14 @@
-// interface IFilters {
-//     brand?: string;
-//     model?: string;
-//     color?: string;
-//     year?: string;
-//     fuel?: string;
-//     mileage?: {
-//         minMileage?: string;
-//         maxMileage?: string;
-//     };
-//     price?: {
-//         minPrice?: string;
-//         maxPrice?: string;
-//     };
-// };
+interface IFilters {
+    brand?: string;
+    model?: string;
+    color?: string;
+    year?: string;
+    fuel?: string;
+    minMileage?: string;
+    maxMileage?: string;
+    minPrice?: string;
+    maxPrice?: string;
+};
 
 // interface IFilterSetting {
 //     field: string,
@@ -39,4 +35,4 @@ interface IAnnouncementResponse {
 
 
 
-export type { IAnnouncementResponse };
+export type { IAnnouncementResponse, IFilters };
