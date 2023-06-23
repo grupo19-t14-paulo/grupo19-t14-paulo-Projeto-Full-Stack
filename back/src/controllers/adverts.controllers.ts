@@ -12,7 +12,7 @@ import { listAllAdvertsOfOneSellerService } from "../services/adverts/listAllAdv
 
 const createAnnouncementController = async (req: Request, res: Response) => {
   const data: IAnnouncementRequest = req.body;
-  const userId: string = res.locals.id;
+  const userId: string = res.locals.userId;
 
   const announcement = await createAnnouncementService(data, userId);
 

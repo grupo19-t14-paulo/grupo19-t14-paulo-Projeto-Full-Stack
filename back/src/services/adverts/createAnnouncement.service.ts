@@ -51,10 +51,10 @@ const createAnnouncementService = async (
     model: data.model,
     year: data.year,
     fuel: data.fuel,
-    mileage: data.mileage,
-    value: data.value,
+    mileage: Number(data.mileage),
+    value: Number(data.value),
     color: data.color,
-    price: data.price,
+    price: Number(data.price),
     description: data.description,
     active: data.active,
   };
