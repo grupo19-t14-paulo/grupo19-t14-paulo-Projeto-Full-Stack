@@ -8,13 +8,15 @@ interface IFilters {
     maxMileage?: string;
     minPrice?: string;
     maxPrice?: string;
-};
+}
 
-// interface IFilterSetting {
-//     field: string,
-//     filter: string
-// }
-
+interface IApiFilters {
+    brand: string[];
+    color: string[];
+    fuel: string[];
+    model: string[];
+    year: string[];
+}
 
 interface IAnnouncementResponse {
     id: string;
@@ -35,4 +37,4 @@ interface IAnnouncementResponse {
 
 
 
-export type { IAnnouncementResponse, IFilters };
+export type { IAnnouncementResponse, IFilters, IApiFilters };

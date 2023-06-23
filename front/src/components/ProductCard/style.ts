@@ -47,7 +47,7 @@ export const StyledProductCard = styled.li`
       font-size: 14px;
       line-height: 24px;
       font-weight: 500;
-      z-index: 100;
+      z-index: 5;
     }
     > span {
       position: absolute;

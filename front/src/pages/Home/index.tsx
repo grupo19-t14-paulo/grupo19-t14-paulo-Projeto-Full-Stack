@@ -1,6 +1,6 @@
 import Car from "../../assets/Photo.png";
 import { Header } from "../../components/Header";
-import {} from "../../assets/error-svgrepo-com.svg";
+import { } from "../../assets/error-svgrepo-com.svg";
 import {
   ContainerImgCar,
   Containerbackground,
@@ -27,7 +27,7 @@ import { useEffect, useState } from "react";
 import { mockFilters } from "./mock";
 import ProductCard from "../../components/ProductCard";
 import FooterBase from "../../components/Footer";
-import { IAnnouncementResponse, IFilters } from "./types";
+import { IAnnouncementResponse, IApiFilters, IFilters } from "./types";
 import { api } from "../../services/api";
 
 const HomePage = () => {
@@ -36,6 +36,7 @@ const HomePage = () => {
   const [filteredProducts, setFilteredProducts] = useState(
     [] as IAnnouncementResponse[]
   );
+  const [availableFilters, setAvailableFilters] = useState({} as IApiFilters)
   const [filters, setFilters] = useState({} as IFilters);
 
   useEffect(() => {
@@ -55,8 +56,10 @@ const HomePage = () => {
   };
 
   const requestProducts = async (queryString: string) => {
-    const response = await api.get(`/adverts?${queryString}`);
-    setFilteredProducts(response.data);
+    const products = await api.get(`/adverts?${queryString}`);
+    setFilteredProducts(products.data);
+    const possibleFilters = await api.get("/adverts/filters");
+    setAvailableFilters(possibleFilters.data)
   };
   const toggleShowFilterBtns = () => {
     setShowFilters(!showFilters);
@@ -70,6 +73,16 @@ const HomePage = () => {
     return queryParams.toString();
   };
 
+  const translation = (key: string) => {
+    const words: { [key: string]: string } = {
+      brand: "Marca",
+      fuel: "Combustível",
+      color: "Cor",
+      year: "Ano",
+      model: "Modelo"
+    }
+    return words[key]
+  }
   return (
     <StyledHome>
       <Header
@@ -88,66 +101,21 @@ const HomePage = () => {
       </ContainerTitle>
       <HomeMain>
         <ProductFilters>
-          <FilterSession>
-            <FilterName>Marca</FilterName>
-            {mockFilters.brand.map((filter) => (
-              <Filter
-                key={filter}
-                onClick={() => requestSetting("brand", filter)}
-                className={filters.brand === filter ? "selected" : ""}
-              >
-                {filter}
-              </Filter>
-            ))}
-          </FilterSession>
-          <FilterSession>
-            <FilterName>Modelo</FilterName>
-            {mockFilters.model.map((filter) => (
-              <Filter
-                key={filter}
-                onClick={() => requestSetting("model", filter)}
-                className={filters.model === filter ? "selected" : ""}
-              >
-                {filter}
-              </Filter>
-            ))}
-          </FilterSession>
-          <FilterSession>
-            <FilterName>Cor</FilterName>
-            {mockFilters.color.map((filter) => (
-              <Filter
-                key={filter}
-                onClick={() => requestSetting("color", filter)}
-                className={filters.color === filter ? "selected" : ""}
-              >
-                {filter}
-              </Filter>
-            ))}
-          </FilterSession>
-          <FilterSession>
-            <FilterName>Ano</FilterName>
-            {mockFilters.year.map((filter) => (
-              <Filter
-                key={filter}
-                onClick={() => requestSetting("year", filter)}
-                className={filters.year === filter ? "selected" : ""}
-              >
-                {filter}
-              </Filter>
-            ))}
-          </FilterSession>
-          <FilterSession>
-            <FilterName>Combustível</FilterName>
-            {mockFilters.fuel.map((filter) => (
-              <Filter
-                key={filter}
-                onClick={() => requestSetting("fuel", filter)}
-                className={filters.fuel === filter ? "selected" : ""}
-              >
-                {filter}
-              </Filter>
-            ))}
-          </FilterSession>
+          {Object.keys(availableFilters).map((key) => (
+            <FilterSession key={key}>
+              <FilterName>{translation(key)}</FilterName>
+              {availableFilters[key].map((filter) => (
+                <Filter
+                  key={filter}
+                  onClick={() => requestSetting(key, filter)}
+                  className={filters[key] === filter ? "selected" : ""}
+                >
+                  {filter}
+                </Filter>
+              ))}
+            </FilterSession>
+          ))}
+
           <FilterSession>
             <FilterName>Km</FilterName>
             <FilterInputWrapper>
@@ -197,66 +165,24 @@ const HomePage = () => {
               <h3>Filtros</h3>
               <button onClick={toggleShowFilterBtns}>X</button>
             </CloseFiltersHeader>
-            <FilterSession>
-              <FilterName>Marca</FilterName>
-              {mockFilters.brand.map((filter) => (
-                <Filter
-                  key={filter}
-                  onClick={() => requestSetting("brand", filter)}
-                  className={filters.brand === filter ? "selected" : ""}
-                >
-                  {filter}
-                </Filter>
-              ))}
-            </FilterSession>
-            <FilterSession>
-              <FilterName>Modelo</FilterName>
-              {mockFilters.model.map((filter) => (
-                <Filter
-                  key={filter}
-                  onClick={() => requestSetting("model", filter)}
-                  className={filters.model === filter ? "selected" : ""}
-                >
-                  {filter}
-                </Filter>
-              ))}
-            </FilterSession>
-            <FilterSession>
-              <FilterName>Cor</FilterName>
-              {mockFilters.color.map((filter) => (
-                <Filter
-                  key={filter}
-                  onClick={() => requestSetting("color", filter)}
-                  className={filters.color === filter ? "selected" : ""}
-                >
-                  {filter}
-                </Filter>
-              ))}
-            </FilterSession>
-            <FilterSession>
-              <FilterName>Ano</FilterName>
-              {mockFilters.year.map((filter) => (
-                <Filter
-                  key={filter}
-                  onClick={() => requestSetting("year", filter)}
-                  className={filters.year === filter ? "selected" : ""}
-                >
-                  {filter}
-                </Filter>
-              ))}
-            </FilterSession>
-            <FilterSession>
-              <FilterName>Combustível</FilterName>
-              {mockFilters.fuel.map((filter) => (
-                <Filter
-                  key={filter}
-                  onClick={() => requestSetting("fuel", filter)}
-                  className={filters.fuel === filter ? "selected" : ""}
-                >
-                  {filter}
-                </Filter>
-              ))}
-            </FilterSession>
+
+
+            {Object.keys(availableFilters).map((key) => (
+              <FilterSession key={key}>
+                <FilterName>{translation(key)}</FilterName>
+                {availableFilters[key].map((filter) => (
+                  <Filter
+                    key={filter}
+                    onClick={() => requestSetting(key, filter)}
+                    className={filters[key] === filter ? "selected" : ""}
+                  >
+                    {filter}
+                  </Filter>
+                ))}
+              </FilterSession>
+            ))}
+
+
             <FilterSession>
               <FilterName>Km</FilterName>
               <FilterInputWrapper>
@@ -278,6 +204,7 @@ const HomePage = () => {
               <FilterName>Preço</FilterName>
               <FilterInputWrapper>
                 <FilterInput
+                  type="number"
                   placeholder="Mínimo"
                   onChange={(event) =>
                     requestSetting("minPrice", event.target.value)
@@ -313,7 +240,6 @@ const HomePage = () => {
                   value,
                   price,
                   year,
-                  active,
                 }) => (
                   <ProductCard
                     key={id}
@@ -325,7 +251,6 @@ const HomePage = () => {
                     fipePrice={value}
                     price={price}
                     year={year}
-                    active={active}
                   />
                 )
               )

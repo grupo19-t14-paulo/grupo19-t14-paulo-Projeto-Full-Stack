@@ -181,6 +181,8 @@ const ProductFilters = styled.section`
 const ProductFiltersMobile = styled.section`
   width: 100vw;
   padding-bottom: 30px;
+  z-index: 100;
+
 
   height: fit-content;
   position: absolute;
@@ -189,7 +191,7 @@ const ProductFiltersMobile = styled.section`
   flex-direction: column;
   align-items: center;
   background-color: var(--color--whiteFixed);
-  z-index: 1;
+
   h2 {
     padding-left: 3vw;
   }
@@ -237,6 +239,9 @@ const Filter = styled.a`
   text-decoration: none;
   font-size: 2.3em;
   margin-left: 10px;
+  :hover {
+    cursor: pointer;
+  }
 `;
 
 const FilterInput = styled.input`
