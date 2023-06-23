@@ -25,10 +25,9 @@ export const StyledProductCard = styled.li`
     border: 2px solid var(--color--grey-7);
 
     img {
-   
-      width: 100%;
-      transform: scale(.8);
-      
+      max-width: 100%;
+      object-fit: cover;
+      background-color: var(--color--grey-7);
     }
     .product-img-wrapper {
       padding: 10px;
@@ -48,6 +47,7 @@ export const StyledProductCard = styled.li`
       font-size: 14px;
       line-height: 24px;
       font-weight: 500;
+      z-index: 100;
     }
     > span {
       position: absolute;
@@ -95,8 +95,7 @@ export const StyledProductCard = styled.li`
       display: -webkit-box;
       overflow: hidden;
       -webkit-line-clamp: 2;
-      -webkit-box-orient: vertical
-
+      -webkit-box-orient: vertical;
     }
 
     > div:nth-child(3) {
@@ -123,8 +122,6 @@ export const StyledProductCard = styled.li`
         font-weight: 500;
 
         color: var(--color--whiteFixed);
-
-
       }
       > span:nth-child(2) {
         font-size: 14px;
@@ -132,7 +129,6 @@ export const StyledProductCard = styled.li`
         font-weight: 500;
 
         color: var(--color--grey-2);
-
       }
     }
     > div:nth-child(4) {
@@ -164,7 +160,6 @@ export const StyledProductCard = styled.li`
           font-size: 14px;
           line-height: 24px;
           font-weight: 500;
-
         }
       }
       > span {
@@ -174,8 +169,6 @@ export const StyledProductCard = styled.li`
         font-family: var(--font--lexend);
 
         color: var(--color--grey-1);
-
-
       }
     }
   }

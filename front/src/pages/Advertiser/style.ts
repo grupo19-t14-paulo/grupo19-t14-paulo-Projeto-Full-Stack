@@ -160,6 +160,11 @@ const ContainerAdverts = styled.section`
             background-color: var(--color--grey-7);
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
+
+            /* :hover {
+              transform: scale(1.1);
+              transition: transform 0.3s ease;
+            } */
           }
         }
 
@@ -302,4 +307,9 @@ const ContainerAdverts = styled.section`
   }
 `;
 
-export { BackgroundBody, ContainerDivAdverts, ContainerDivBlue, ContainerAdverts };
+export {
+  BackgroundBody,
+  ContainerDivAdverts,
+  ContainerDivBlue,
+  ContainerAdverts,
+};
