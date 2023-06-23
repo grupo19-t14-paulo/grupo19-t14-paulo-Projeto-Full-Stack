@@ -56,12 +56,10 @@ const listAdvertsService = async ({
     queryBuilder.andWhere("item.mileage <= :maxMileage", { maxMileage });
   }
 
+  queryBuilder.leftJoinAndSelect("item.images", "image")
+
   try {
-    const adverts = await advertsRepository.find({
-      relations: {
-        images: true,
-      },
-    });
+    const adverts = await queryBuilder.getMany();
 
     const response = adverts.map((el) => {
       el.price = +`${el.price}`;
