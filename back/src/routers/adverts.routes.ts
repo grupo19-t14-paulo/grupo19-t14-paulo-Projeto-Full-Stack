@@ -3,6 +3,7 @@ import {
   createAnnouncementController,
   deleteAnnouncementController,
   listAdvertsController,
+  listAdvertsFiltersController,
   listAllAdvertsOfOneSellerController,
   retriveAnnouncementController,
   updateAnnouncementController,
@@ -13,6 +14,7 @@ import { ensureIsAdvertOwnerMiddleware } from "../middlewares/ensureIsAdvertOwne
 const adverstsRoutes = Router();
 
 adverstsRoutes.get("", listAdvertsController);
+// adverstsRoutes.get("/filters", listAdvertsFiltersController)
 adverstsRoutes.get("/:id", retriveAnnouncementController);
 adverstsRoutes.get("/seller/:id", listAllAdvertsOfOneSellerController);
 adverstsRoutes.use(tokenVerifyMiddleware);

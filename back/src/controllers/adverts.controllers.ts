@@ -9,6 +9,7 @@ import retriveAnnouncementService from "../services/adverts/retriveAnnouncement.
 import updateAnnouncementService from "../services/adverts/updateAnnouncement.service";
 import deleteAnnouncementService from "../services/adverts/deleteAnnouncement.service";
 import { listAllAdvertsOfOneSellerService } from "../services/adverts/listAllAdvertsOfOneSeller.service";
+import listAdvertsFiltersService from "../services/adverts/listAdvertsFiltes.service";
 
 const createAnnouncementController = async (req: Request, res: Response) => {
   const data: IAnnouncementRequest = req.body;
@@ -22,6 +23,11 @@ const createAnnouncementController = async (req: Request, res: Response) => {
 const listAdvertsController = async (req: Request, res: Response) => {
   const adverts = await listAdvertsService(req.query);
   return res.json(adverts);
+};
+
+const listAdvertsFiltersController = async (req: Request, res: Response) => {
+  const filters = await listAdvertsFiltersService();
+  return res.json(filters);
 };
 
 const retriveAnnouncementController = async (req: Request, res: Response) => {
@@ -62,4 +68,5 @@ export {
   updateAnnouncementController,
   deleteAnnouncementController,
   listAllAdvertsOfOneSellerController,
+  listAdvertsFiltersController
 };
