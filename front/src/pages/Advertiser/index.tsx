@@ -95,11 +95,11 @@ const AdvertiserPage = () => {
                       <div className="divNameUserCard">
                         <span>
                           <h2 className="initials">
-                            {userNameHeader1 ? userNameHeader1[0][0] : ""}
-                            {userNameHeader1 ? userNameHeader1[1][0] : ""}
+                            {userNameHeader1 && userNameHeader1.length > 0 ? userNameHeader1[0][0] : ""}
+                            {userNameHeader1 && userNameHeader1.length > 1 ? (userNameHeader1[1] ? ` ${userNameHeader1[1][0]}` : "") : ""}
                           </h2>
                         </span>
-                        <h3>{userNameHeader2}</h3>
+                        <h3>{userNameHeader2 && userNameHeader2.replace("undefined", "").trim()}</h3>
                       </div>
 
                       <div className="divKmPriceYear">
