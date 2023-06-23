@@ -2,11 +2,8 @@ import { AppDataSource } from "../../data-source";
 import Adverts from "../../entities/adverts.entity";
 import { User } from "../../entities/users.entity";
 import AppError from "../../errors/AppError";
-import { IAnnouncementResponse } from "../../interfaces/adverts.interfaces";
 
-const listAllAdvertsOfOneSellerService = async (
-  userId: string
-): Promise<IAnnouncementResponse> => {
+const listAllAdvertsOfOneSellerService = async (userId: string) => {
   const usersRepository = AppDataSource.getRepository(User);
 
   const advertsRepository = AppDataSource.getRepository(Adverts);
