@@ -10,21 +10,25 @@ const listAdvertsFiltersService = async () => {
 
     const uniqueFilters: {
       brand: string[];
-      fuel: FuelCar[];
+      model: string[];
       color: string[];
       year: string[];
-      model: string[];
+      fuel: FuelCar[];
     } = {
       brand: [],
-      fuel: [],
-      color: [],
-      year: [],
       model: [],
+      year: [],
+      color: [],
+      fuel: [],
     };
 
     adverts.forEach((advert) => {
       if (!uniqueFilters.brand.includes(advert.brand)) {
         uniqueFilters.brand.push(advert.brand);
+      }
+
+      if (!uniqueFilters.model.includes(advert.model)) {
+        uniqueFilters.model.push(advert.model);
       }
 
       if (!uniqueFilters.fuel.includes(advert.fuel)) {
@@ -37,10 +41,6 @@ const listAdvertsFiltersService = async () => {
 
       if (!uniqueFilters.year.includes(advert.year)) {
         uniqueFilters.year.push(advert.year);
-      }
-
-      if (!uniqueFilters.model.includes(advert.model)) {
-        uniqueFilters.model.push(advert.model);
       }
     });
 
