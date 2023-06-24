@@ -20,7 +20,9 @@ const createImageservice = async (
   const image = await imageRepository.findOne({
     where: {
       image: data.image,
-      announcement: announcement,
+      announcement: {
+        id: announcement.id,
+      },
     },
   });
 

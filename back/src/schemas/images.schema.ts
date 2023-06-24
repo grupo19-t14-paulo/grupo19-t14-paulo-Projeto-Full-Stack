@@ -2,7 +2,7 @@ import { z } from "zod";
 
 const imageSchema = z.object({
   id: z.string(),
-  image: z.string(),
+  image: z.string().max(1500),
 });
 
 const imageSchemaRequest = imageSchema.omit({
