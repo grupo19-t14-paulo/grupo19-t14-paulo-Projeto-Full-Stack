@@ -56,7 +56,7 @@ const listAdvertsService = async ({
     queryBuilder.andWhere("item.mileage <= :maxMileage", { maxMileage });
   }
 
-  queryBuilder.leftJoinAndSelect("item.images", "image")
+  queryBuilder.leftJoinAndSelect("item.images", "image");
 
   try {
     const adverts = await queryBuilder.getMany();
