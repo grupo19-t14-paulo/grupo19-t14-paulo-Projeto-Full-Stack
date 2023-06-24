@@ -86,6 +86,7 @@ const createAnnouncementService = async (
 
   const response = {
     ...findAdvert,
+    mileage: Number(announcement?.mileage),
     value: Number(announcement?.value),
     price: Number(announcement?.price),
     images: imagesData,
