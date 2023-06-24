@@ -61,6 +61,7 @@ const listAdvertsService = async ({
     const adverts = await queryBuilder.getMany();
 
     const response = adverts.map((el) => {
+      el.mileage = +`${el.mileage}`;
       el.price = +`${el.price}`;
       el.value = +`${el.value}`;
       return el;

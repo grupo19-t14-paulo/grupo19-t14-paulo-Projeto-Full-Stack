@@ -7,10 +7,7 @@ import {
   IAnnouncementRequest,
   TAnnouncementWithUserSchema,
 } from "../../interfaces/adverts.interfaces";
-import {
-  announcementSchema,
-  announcementWithUserSchema,
-} from "../../schemas/adverts.schema";
+import { announcementWithUserSchema } from "../../schemas/adverts.schema";
 
 const createAnnouncementService = async (
   data: IAnnouncementRequest,
@@ -39,6 +36,9 @@ const createAnnouncementService = async (
       brand: data.brand,
       model: data.model,
       color: data.color,
+      user: {
+        id: userId,
+      },
     },
   });
 
