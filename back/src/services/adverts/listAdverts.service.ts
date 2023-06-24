@@ -48,7 +48,6 @@ const listAdvertsService = async ({
   }
 
   if (minMileage) {
-    console.log(minMileage);
     queryBuilder.andWhere("item.mileage >= :minMileage", { minMileage });
   }
 
