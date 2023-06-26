@@ -18,49 +18,48 @@ const listAdvertsService = async ({
 }: IFilters): Promise<IAnnouncementResponse> => {
   const advertsRepository = AppDataSource.getRepository(Adverts);
 
-  const queryBuilder = advertsRepository.createQueryBuilder("item");
+  const queryBuilder = advertsRepository.createQueryBuilder("advert");
 
   if (model) {
-    queryBuilder.andWhere("item.model = :model", { model });
+    queryBuilder.andWhere("advert.model = :model", { model });
   }
 
   if (year) {
-    queryBuilder.andWhere("item.year = :year", { year });
+    queryBuilder.andWhere("advert.year = :year", { year });
   }
 
   if (color) {
-    queryBuilder.andWhere("item.color = :color", { color });
+    queryBuilder.andWhere("advert.color = :color", { color });
   }
 
   if (fuel) {
-    queryBuilder.andWhere("item.fuel = :fuel", { fuel });
+    queryBuilder.andWhere("advert.fuel = :fuel", { fuel });
   }
   if (brand) {
-    queryBuilder.andWhere("item.brand = :brand", { brand });
+    queryBuilder.andWhere("advert.brand = :brand", { brand });
   }
 
   if (minPrice) {
-    queryBuilder.andWhere("item.price >= :minPrice", { minPrice });
+    queryBuilder.andWhere("advert.price >= :minPrice", { minPrice });
   }
 
   if (maxPrice) {
-    queryBuilder.andWhere("item.price <= :maxPrice", { maxPrice });
+    queryBuilder.andWhere("advert.price <= :maxPrice", { maxPrice });
   }
 
   if (minMileage) {
-    console.log(minMileage);
-    queryBuilder.andWhere("item.mileage >= :minMileage", { minMileage });
+    queryBuilder.andWhere("advert.mileage >= :minMileage", { minMileage });
   }
 
   if (maxMileage) {
-    queryBuilder.andWhere("item.mileage <= :maxMileage", { maxMileage });
+    queryBuilder.andWhere("advert.mileage <= :maxMileage", { maxMileage });
   }
 
-  queryBuilder.leftJoinAndSelect("item.images", "image")
+  queryBuilder.leftJoinAndSelect("advert.images", "image");
+  queryBuilder.leftJoinAndSelect("advert.user", "User");
 
   try {
     const adverts = await queryBuilder.getMany();
-
     const response = adverts.map((el) => {
       el.price = +`${el.price}`;
       el.value = +`${el.value}`;
