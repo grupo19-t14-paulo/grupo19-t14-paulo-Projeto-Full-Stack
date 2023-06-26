@@ -33,6 +33,12 @@ interface IAnnouncementResponse {
     images: {
         image: string;
     }[];
+    user: {
+        id: string;
+        name: string;
+        phone: string;
+        type: string;
+    };
 }[];
 
 
