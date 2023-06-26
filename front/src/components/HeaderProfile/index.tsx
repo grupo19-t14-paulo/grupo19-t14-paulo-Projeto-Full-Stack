@@ -56,13 +56,13 @@ const HeaderProfile = (props: IHeaderProps) => {
                 token ? (
                     <ConteinerButtonHeaderProfile >
                         <ButtonInitials onClick={() => Menu()}>
-                            {userNameHeader1 ? userNameHeader1[0][0] : ""}
-                            {userNameHeader1 ? userNameHeader1[1][0] : ""}
+                            {userNameHeader1 && userNameHeader1.length > 0 ? userNameHeader1[0][0] : ""}
+                            {userNameHeader1 && userNameHeader1.length > 1 ? (userNameHeader1[1] ? ` ${userNameHeader1[1][0]}` : "") : ""}
                         </ButtonInitials>
-                        <ButtonName onClick={() => Menu()}>{userNameHeader2}</ButtonName>
+                        <ButtonName onClick={() => Menu()}>{userNameHeader2 && userNameHeader2.replace("undefined", "").trim()}</ButtonName>
                     </ConteinerButtonHeaderProfile>
                 ): 
-                (   
+                (  
                     <div>
                         <Container>
                         {showButtons ? (
