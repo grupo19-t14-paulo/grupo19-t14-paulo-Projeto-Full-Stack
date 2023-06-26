@@ -60,6 +60,7 @@ const HomePage = () => {
     setFilteredProducts(products.data);
     const possibleFilters = await api.get("/adverts/filters");
     setAvailableFilters(possibleFilters.data)
+    console.log(products.data[0])
   };
   const toggleShowFilterBtns = () => {
     setShowFilters(!showFilters);
@@ -236,6 +237,7 @@ const HomePage = () => {
                   model,
                   description,
                   images,
+                  user,
                   mileage,
                   value,
                   price,
@@ -244,7 +246,7 @@ const HomePage = () => {
                   <ProductCard
                     key={id}
                     title={model}
-                    advertiser={"vendedor"}
+                    advertiser={user.name}
                     description={description}
                     img={images[0].image}
                     km={mileage}
