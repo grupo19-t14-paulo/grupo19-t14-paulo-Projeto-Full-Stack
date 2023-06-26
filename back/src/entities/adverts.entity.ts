@@ -7,6 +7,7 @@ import {
 } from "typeorm";
 import Images from "./images.entity";
 import { User } from "./users.entity";
+import { Comment } from "./comments.entity";
 
 export enum FuelCar {
     ONE = "Gasolina / Etanol",
@@ -35,7 +36,7 @@ class Adverts {
     })
     fuel: FuelCar;
 
-    @Column({type: "decimal", precision: 10})
+    @Column({ type: "decimal", precision: 10 })
     mileage: number;
 
     @Column({ length: 50 })
@@ -55,6 +56,11 @@ class Adverts {
 
     @ManyToOne(() => User, (user) => user.adverts, { onDelete: "CASCADE" })
     user: User;
+
+    @OneToMany(() => Comment, (comment) => comment.advert, {
+        onDelete: "CASCADE",
+    })
+    comments: Comment[];
 
     @OneToMany(() => Images, (images) => images.announcement, {
         nullable: true,

@@ -4,40 +4,45 @@ import { imageSchemaRequest } from "./images.schema";
 import { returnUserSchema } from "./users.schema";
 
 const announcementSchema = z.object({
-  id: z.string(),
-  brand: z.string().min(2).max(127),
-  model: z.string().min(2).max(127),
-  year: z.string().min(2).max(4),
-  fuel: z.nativeEnum(FuelCar),
-  mileage: z.number(),
-  color: z.string().max(50),
-  value: z.number(),
-  price: z.number(),
-  description: z.string(),
-  active: z.boolean(),
-  images: z.array(imageSchemaRequest).optional().default([]),
+    id: z.string(),
+    brand: z.string().min(2).max(127),
+    model: z.string().min(2).max(127),
+    year: z.string().min(2).max(4),
+    fuel: z.nativeEnum(FuelCar),
+    mileage: z.number(),
+    color: z.string().max(50),
+    value: z.number(),
+    price: z.number(),
+    description: z.string(),
+    active: z.boolean(),
+    images: z.array(imageSchemaRequest).optional().default([]),
 });
 
 const announcementSchemaRequest = announcementSchema.omit({
-  id: true,
+    id: true,
 });
 
 const announcementWithUserSchema = announcementSchema.extend({
-  user: returnUserSchema,
+    user: returnUserSchema,
 });
 
 const announcementSchemaUpdate = announcementSchema
-  .omit({
-    id: true,
-  })
-  .partial();
+    .omit({
+        id: true,
+    })
+    .partial();
 
 const advertsSchemaResponse = z.array(announcementSchema);
 
+const advertForComment = z.object({
+    id: z.string(),
+});
+
 export {
-  announcementSchema,
-  announcementSchemaRequest,
-  advertsSchemaResponse,
-  announcementSchemaUpdate,
-  announcementWithUserSchema,
+    announcementSchema,
+    announcementSchemaRequest,
+    advertsSchemaResponse,
+    announcementSchemaUpdate,
+    announcementWithUserSchema,
+    advertForComment,
 };
