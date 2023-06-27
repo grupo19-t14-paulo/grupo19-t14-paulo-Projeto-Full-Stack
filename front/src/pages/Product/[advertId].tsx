@@ -23,6 +23,7 @@ import Button from "../../components/Buttons";
 import { CommentsForm } from "../../components/CommentForm";
 import { ContextComment } from "../../contexts/CommentContex/CommentContex";
 import moment from 'moment';
+import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 
 interface IImage {
   image: string;
@@ -59,12 +60,13 @@ const DinamicProductPage = () => {
   const navigate = useNavigate();
 
   const {listComments, listCommentsProduct} = useContext(ContextComment);
+  const {user} = useContext(ContextLogin)
 
   const [advert, setAdvert] = useState<IAdvertData>({} as IAdvertData);
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  const user: IUserData = userData;
+  console.log(user)
 
   const { advertId } = useParams();
 
@@ -234,9 +236,9 @@ const DinamicProductPage = () => {
           <StyledUserCommentField>
             <div id="userCommentFieldUserData">
               <div>
-                <h3>{createInitials(user.name)}</h3>
+                <h3>{createInitials(`${user?.name}`)}</h3>
               </div>
-              <h3>{user.name}</h3>
+              <h3>{user?.name}</h3>
             </div>
             <div id="userCommentField">
               <CommentsForm advertsId={advert.id}/>
