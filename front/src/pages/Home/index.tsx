@@ -273,12 +273,13 @@ const HomePage = () => {
                                     value,
                                     price,
                                     year,
+                                    user
                                 }) => (
                                     <ProductCard
                                         key={id}
                                         id={id}
                                         title={model}
-                                        advertiser={"vendedor"}
+                                        advertiser={user.name}
                                         description={description}
                                         img={images[0].image}
                                         km={mileage}

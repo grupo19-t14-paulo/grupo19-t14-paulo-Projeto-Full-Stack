@@ -16,6 +16,12 @@ const announcementSchema = z.object({
     description: z.string(),
     active: z.boolean(),
     images: z.array(imageSchemaRequest).optional().default([]),
+    user: z.object({
+        id: z.string(),
+        name: z.string(),
+        phone: z.string(),
+        type: z.string(),
+    })
 });
 
 const announcementSchemaRequest = announcementSchema.omit({
