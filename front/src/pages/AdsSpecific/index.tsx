@@ -8,6 +8,7 @@ import {
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
 import { HeaderProfile } from "../../components/HeaderProfile";
+//import { useParams } from "react-router-dom";
 
 const AdsSpecificPage = () => {
   const { ad, setAd } = useContext(AnnouncementContext);
@@ -15,9 +16,11 @@ const AdsSpecificPage = () => {
 
   useEffect(() => {
     (async () => {
-      const resUser = await api.get("/users");
+      const resUser = await api.get(`/users`);
+
       setUser(resUser.data);
 
+      //const { id } = useParams();
       const id = resUser.data.id;
 
       const resAds = await api.get<IAdvertiser[]>(`/adverts/seller/${id}`);
@@ -39,18 +42,27 @@ const AdsSpecificPage = () => {
           button2="Cadastrar"
           page1="/login"
           page2="/register"
-         />
+        />
         <ContainerDivBlue>
           <section>
             <span className="initialsName">
               <h1>
-                {userNameHeader1 && userNameHeader1.length > 0 ? userNameHeader1[0][0] : ""}
-                {userNameHeader1 && userNameHeader1.length > 1 ? (userNameHeader1[1] ? ` ${userNameHeader1[1][0]}` : "") : ""}
+                {userNameHeader1 && userNameHeader1.length > 0
+                  ? userNameHeader1[0][0]
+                  : ""}
+                {userNameHeader1 && userNameHeader1.length > 1
+                  ? userNameHeader1[1]
+                    ? ` ${userNameHeader1[1][0]}`
+                    : ""
+                  : ""}
               </h1>
             </span>
 
             <div>
-              <h3>{userNameHeader2 && userNameHeader2.replace("undefined", "").trim()}</h3>
+              <h3>
+                {userNameHeader2 &&
+                  userNameHeader2.replace("undefined", "").trim()}
+              </h3>
               <p className="tagInfo">{user?.type}</p>
             </div>
 
@@ -80,11 +92,20 @@ const AdsSpecificPage = () => {
                     <div className="divNameUserCard">
                       <span>
                         <h2 className="initials">
-                          {userNameHeader1 && userNameHeader1.length > 0 ? userNameHeader1[0][0] : ""}
-                          {userNameHeader1 && userNameHeader1.length > 1 ? (userNameHeader1[1] ? ` ${userNameHeader1[1][0]}` : "") : ""}
+                          {userNameHeader1 && userNameHeader1.length > 0
+                            ? userNameHeader1[0][0]
+                            : ""}
+                          {userNameHeader1 && userNameHeader1.length > 1
+                            ? userNameHeader1[1]
+                              ? ` ${userNameHeader1[1][0]}`
+                              : ""
+                            : ""}
                         </h2>
                       </span>
-                      <h3>{userNameHeader2 && userNameHeader2.replace("undefined", "").trim()}</h3>
+                      <h3>
+                        {userNameHeader2 &&
+                          userNameHeader2.replace("undefined", "").trim()}
+                      </h3>
                     </div>
 
                     <div className="divKmPriceYear">
