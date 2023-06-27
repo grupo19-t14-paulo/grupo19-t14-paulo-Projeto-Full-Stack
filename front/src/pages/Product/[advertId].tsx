@@ -13,13 +13,14 @@ import {
   StyledSpaceContainer,
   StyledUserCommentField,
 } from "./styles";
-import { userData, commentsData } from "./data";
+import { userData } from "./data";
 import FooterBase from "../../components/Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { HeaderProfile } from "../../components/HeaderProfile";
 import Button from "../../components/Buttons";
+import { CommentsForm } from "../../components/CommentForm";
 
 interface IImage {
   image: string;
@@ -52,14 +53,6 @@ interface IAdvertData {
   user: IUserData;
 }
 
-interface IComments {
-  id: string;
-  comment: string;
-  createdAt: string;
-  user_id: string;
-  advert_id: string;
-}
-
 const DinamicProductPage = () => {
   const navigate = useNavigate();
 
@@ -68,8 +61,6 @@ const DinamicProductPage = () => {
   const [loading, setLoading] = useState<boolean>(true);
 
   const user: IUserData = userData;
-
-  const comments: IComments[] = commentsData;
 
   const { advertId } = useParams();
 
@@ -240,19 +231,7 @@ const DinamicProductPage = () => {
               <h3>{user.name}</h3>
             </div>
             <div id="userCommentField">
-              <textarea
-                name="commentsField"
-                id=""
-                placeholder="Carro muuito confortável, foi uma ótima experiência de compra..."
-              ></textarea>
-              <button id="postCommentButton">Comentar</button>
-            </div>
-            <div id="autoCommentButtons">
-              <button id="likeCommentButton">Gostei muito!</button>
-              <button id="incredibleCommentButton">Incrível</button>
-              <button id="recommendCommentButton">
-                Recomendarei para meus amigos!
-              </button>
+              <CommentsForm advertsId={advert.id}/>
             </div>
           </StyledUserCommentField>
           <StyledSpaceContainer></StyledSpaceContainer>

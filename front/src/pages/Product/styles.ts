@@ -524,9 +524,15 @@ const StyledUserCommentField = styled.div`
                 transition: 0.3s ease;
             }
         }
+
+        @media(min-width: 37.625rem){
+            position: relative;
+            top: -70px;
+        }
     }
 
     @media (min-width: 37.6rem) {
+        
         height: fit-content;
         width: 75.1rem;
         padding: 6.6rem 4.4rem;
