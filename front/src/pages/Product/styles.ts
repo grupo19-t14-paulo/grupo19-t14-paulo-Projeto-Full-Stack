@@ -369,6 +369,8 @@ const StyledCommentSection = styled.section`
         display: flex;
         flex-direction: column;
         gap: 4.4rem;
+        max-height: 50vh;
+        overflow-y: auto;
     }
 
     @media (min-width: 37.6rem) {
@@ -379,12 +381,13 @@ const StyledCommentSection = styled.section`
 
 const StyledComment = styled.li`
     height: 21.2rem;
-    width: 28.3rem;
+    max-width: 95%;
     margin-bottom: 4.4rem;
     background-color: var(--color--grey-10);
     border-radius: 0.4rem;
 
     #userDataComment {
+        width: 100%;
         display: flex;
         align-items: center;
         gap: 1rem;
@@ -423,6 +426,7 @@ const StyledComment = styled.li`
     }
 
     #commentParagraph {
+        width: 100%;
         font-size: 1.4rem;
         font-weight: 400;
         line-height: 2.4rem;

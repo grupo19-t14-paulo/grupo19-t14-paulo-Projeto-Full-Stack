@@ -20,6 +20,7 @@ const CommentsForm = ({advertsId}: CommentsFormProps) => {
     });
 
     const submit: SubmitHandler<TCommentFormProps> = (formData) => {
+        formData.comment = commentText;
         createComment(advertsId, formData);
         reset();
     };
@@ -36,7 +37,6 @@ const CommentsForm = ({advertsId}: CommentsFormProps) => {
                     id="comment"
                     placeholder="Escreva um comentário..."
                     {...register("comment")}
-                    value={commentText}
                     onChange={(e) => setCommentText(e.target.value)}
                 ></textarea>
                 <button id="postCommentButton" type="submit">Comentar</button>

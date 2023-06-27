@@ -16,11 +16,13 @@ import {
 import { userData } from "./data";
 import FooterBase from "../../components/Footer";
 import { useNavigate, useParams } from "react-router-dom";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { HeaderProfile } from "../../components/HeaderProfile";
 import Button from "../../components/Buttons";
 import { CommentsForm } from "../../components/CommentForm";
+import { ContextComment } from "../../contexts/CommentContex/CommentContex";
+import moment from 'moment';
 
 interface IImage {
   image: string;
@@ -56,6 +58,8 @@ interface IAdvertData {
 const DinamicProductPage = () => {
   const navigate = useNavigate();
 
+  const {listComments, listCommentsProduct} = useContext(ContextComment);
+
   const [advert, setAdvert] = useState<IAdvertData>({} as IAdvertData);
 
   const [loading, setLoading] = useState<boolean>(true);
@@ -69,6 +73,7 @@ const DinamicProductPage = () => {
       const response = await api.get(`/adverts/${advertId}`);
 
       setAdvert(response.data);
+      listCommentsProduct(advertId!);
 
       setLoading(false);
     })();
@@ -91,6 +96,33 @@ const DinamicProductPage = () => {
     }
 
     return initials.toUpperCase();
+  };
+
+  const formatElapsedTime = (createdAt: string) => {
+    const now = moment();
+    const commentDate = moment(createdAt);
+  
+    const duration = moment.duration(now.diff(commentDate));
+  
+    const years = duration.years();
+    const months = duration.months();
+    const days = duration.days();
+    const hours = duration.hours();
+    const minutes = duration.minutes();
+  
+    if (years > 0) {
+      return `há ${years} ano${years > 1 ? 's' : ''}`;
+    } else if (months > 0) {
+      return `há ${months} mês${months > 1 ? 'es' : ''}`;
+    } else if (days > 0) {0
+      return `há ${days} dia${days > 1 ? 's' : ''}`;
+    } else if (hours > 0) {
+      return `há ${hours} hora${hours > 1 ? 's' : ''}`;
+    } else if (minutes > 0) {
+      return `há ${minutes} minuto${minutes > 1 ? 's' : ''}`;
+    } else {
+      return 'Agora';
+    }
   };
 
   return (
@@ -173,54 +205,30 @@ const DinamicProductPage = () => {
           <StyledCommentSection>
             <h2>Comentários</h2>
             <ul>
-              <StyledComment>
-                <div id="userDataComment">
-                  <div>
-                    <h3>{createInitials("Júlia Lima")}</h3>
-                  </div>
-                  <h3>Júlia Lima</h3>
-                  <div id="elipseComment"> </div>
-                  <p>há 3 dias</p>
-                </div>
-                <p id="commentParagraph">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod
-                  culpa corrupti rerum voluptate accusamus, dolor distinctio
-                  suscipit labore aliquid ipsa, dolorem sequi adipisci,
-                  doloremque eveniet error natus minus obcaecati iure?
-                </p>
-              </StyledComment>
-              <StyledComment>
-                <div id="userDataComment">
-                  <div>
-                    <h3>{createInitials("Marcos Antônio")}</h3>
-                  </div>
-                  <h3>Marcos Antônio</h3>
-                  <div id="elipseComment"> </div>
-                  <p>há 3 dias</p>
-                </div>
-                <p id="commentParagraph">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod
-                  culpa corrupti rerum voluptate accusamus, dolor distinctio
-                  suscipit labore aliquid ipsa, dolorem sequi adipisci,
-                  doloremque eveniet error natus minus obcaecati iure?
-                </p>
-              </StyledComment>
-              <StyledComment>
-                <div id="userDataComment">
-                  <div>
-                    <h3>{createInitials("Camila Silva")}</h3>
-                  </div>
-                  <h3>Camila Silva</h3>
-                  <div id="elipseComment"> </div>
-                  <p>há 3 dias</p>
-                </div>
-                <p id="commentParagraph">
-                  Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quod
-                  culpa corrupti rerum voluptate accusamus, dolor distinctio
-                  suscipit labore aliquid ipsa, dolorem sequi adipisci,
-                  doloremque eveniet error natus minus obcaecati iure?
-                </p>
-              </StyledComment>
+              {
+                listComments !== undefined && 
+                listComments?.length <= 0 && (
+                  <h3>Nenhum comentário disponível.</h3>
+                )
+              }
+              {
+                listComments !== undefined && 
+                listComments.map((comment) =>(
+                  <StyledComment key={(comment.id)}>
+                    <div id="userDataComment">
+                      <div>
+                        <h3>{createInitials(`${comment.user.name}`)}</h3>
+                      </div>
+                      <h3>{comment.user.name}</h3>
+                      <div id="elipseComment"> </div>
+                      <p>{formatElapsedTime(comment.created_at)}</p>
+                    </div>
+                    <p id="commentParagraph">
+                    {comment.comment}
+                    </p>
+                  </StyledComment>
+                ))
+              }
             </ul>
           </StyledCommentSection>
           <StyledUserCommentField>
