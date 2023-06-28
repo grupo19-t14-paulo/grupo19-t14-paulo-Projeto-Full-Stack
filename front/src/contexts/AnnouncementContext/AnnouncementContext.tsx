@@ -19,7 +19,7 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
   const [loadingAd, setloadingAd] = useState(false);
   const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
-  const [deleteModal, setDeleteModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(true);
   const [ad, setAd] = useState<IAdvertiser[] | undefined>([]);
   const [userAdvertiser, setUserAdvertiser] = useState<IUserAdvertiser | null>(
     null
