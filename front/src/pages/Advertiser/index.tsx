@@ -14,6 +14,7 @@ import { HeaderProfile } from "../../components/HeaderProfile";
 import { IAdvertiser } from "../../interfaces/AdvertsInterfaces";
 import ModalEditAd from "../../components/ModalEditAd";
 import ModalDeleteAd from "../../components/ModalDeleteAd";
+import { useNavigate } from "react-router";
 
 const AdvertiserPage = () => {
   const { modal, setModal, ad, setAd, editModal, setEditModal, deleteModal } =
@@ -21,8 +22,14 @@ const AdvertiserPage = () => {
   const { user, setUser } = useContext(ContextLogin);
   const [idAd, setIdAd] = useState<string | undefined>("");
 
+  const navegate = useNavigate();
+
   const openModal = () => {
     setModal(true);
+  };
+
+  const seeDetails = (id: string | undefined) => {
+    navegate(`/product/${id}`);
   };
 
   const openModalEdit = (id: string | undefined) => {
@@ -162,7 +169,11 @@ const AdvertiserPage = () => {
                           >
                             Editar
                           </button>
-                          <button className="buttonCard" type="button">
+                          <button
+                            className="buttonCard"
+                            type="button"
+                            onClick={() => seeDetails(ads.id)}
+                          >
                             Ver detalhes
                           </button>
                         </div>
