@@ -1,4 +1,5 @@
 import { AnnouncementProvider } from "./contexts/AnnouncementContext/AnnouncementContext";
+import { AuthCommentProvider } from "./contexts/CommentContex/CommentContex";
 import { AuthLoginProvider } from "./contexts/LoginContext/LoginContex";
 import { AuthRegisterProvider } from "./contexts/RegisterContext/RegisterContext";
 import { RoutesMain } from "./routes";
@@ -24,7 +25,9 @@ const App = () => {
       <AuthRegisterProvider>
         <AuthLoginProvider>
           <AnnouncementProvider>
-            <RoutesMain />
+            <AuthCommentProvider>
+              <RoutesMain/>
+            </AuthCommentProvider>
           </AnnouncementProvider>
         </AuthLoginProvider>
       </AuthRegisterProvider>
