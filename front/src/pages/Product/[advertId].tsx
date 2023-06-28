@@ -102,6 +102,8 @@ const DinamicProductPage = () => {
     return initials.toUpperCase();
   };
 
+  const userId = advert.user?.id;
+
   return (
     <>
       <HeaderProfile
@@ -169,7 +171,7 @@ const DinamicProductPage = () => {
                   <p>{advert.user.description}</p>
                   <Button
                     buttonStyle="grey-1-big"
-                    onClick={() => navigate(`/adsSpecific/${advert.user.id}}`)}
+                    onClick={() => navigate(`/adsSpecific/${userId}`)}
                   >
                     Ver todos os anúncios
                   </Button>

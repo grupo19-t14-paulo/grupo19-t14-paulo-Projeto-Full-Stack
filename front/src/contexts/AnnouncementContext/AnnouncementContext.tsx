@@ -1,34 +1,14 @@
-import React, { ReactNode, createContext, useState } from "react";
+import { ReactNode, createContext, useState } from "react";
 import { toast } from "react-toastify";
 import { api } from "../../services/api";
-
-export interface IAdvertiser {
-  id?: string;
-  brand: string;
-  model: string;
-  year: string;
-  fuel: string;
-  mileage: string;
-  color: string;
-  value: string;
-  price: string;
-  description: string;
-  images?: { image: string }[];
-  active?: boolean;
-}
+import {
+  IAdvertiser,
+  IAnnouncementContext,
+  IUserAdvertiser,
+} from "../../interfaces/AdvertsInterfaces";
 
 interface IAdProviderProps {
   children: ReactNode;
-}
-
-interface IAnnouncementContext {
-  modal: boolean;
-  setModal: React.Dispatch<React.SetStateAction<boolean>>;
-  loadingAd: boolean;
-  setloadingAd: React.Dispatch<React.SetStateAction<boolean>>;
-  ad: IAdvertiser[] | undefined;
-  setAd: React.Dispatch<React.SetStateAction<IAdvertiser[] | undefined>>;
-  submitAddAnnouncement(data: IAdvertiser): Promise<void>;
 }
 
 const AnnouncementContext = createContext<IAnnouncementContext>(
@@ -38,7 +18,12 @@ const AnnouncementContext = createContext<IAnnouncementContext>(
 const AnnouncementProvider = ({ children }: IAdProviderProps) => {
   const [loadingAd, setloadingAd] = useState(false);
   const [modal, setModal] = useState(false);
+  const [editModal, setEditModal] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
   const [ad, setAd] = useState<IAdvertiser[] | undefined>([]);
+  const [userAdvertiser, setUserAdvertiser] = useState<IUserAdvertiser | null>(
+    null
+  );
 
   const submitAddAnnouncement = async (data: IAdvertiser): Promise<void> => {
     try {
@@ -83,16 +68,54 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
     }
   };
 
+  const removeAd = async (id: string): Promise<void> => {
+    try {
+      await api.delete(`adverts/${id}`);
+      toast.success("Anúncio removido!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      const filterRemove = ad?.filter((element) => element.id !== id);
+      setAd(filterRemove);
+      setDeleteModal(false);
+    } catch (err) {
+      toast.error("Ops, algo deu errado!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      console.log(err);
+    } finally {
+      setloadingAd(false);
+    }
+  };
+
   return (
     <AnnouncementContext.Provider
       value={{
         modal,
         setModal,
+        editModal,
+        setEditModal,
         ad,
         setAd,
         submitAddAnnouncement,
         loadingAd,
         setloadingAd,
+        userAdvertiser,
+        setUserAdvertiser,
+        removeAd,
+        deleteModal,
+        setDeleteModal,
       }}
     >
       {children}
