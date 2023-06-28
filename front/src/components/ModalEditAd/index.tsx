@@ -9,6 +9,15 @@ import { useContext, useEffect, useState } from "react";
 import { AnnouncementContext } from "../../contexts/AnnouncementContext/AnnouncementContext";
 import axios from "axios";
 import { IAdvertiser } from "../../interfaces/AdvertsInterfaces";
+import {
+  DivRadio,
+  RadioInput,
+  RadioLabel,
+  RadioText,
+  RadioWrapper,
+} from "../../styles/Form";
+import { toast } from "react-toastify";
+import { api } from "../../services/api";
 
 interface Car {
   name: string;
@@ -27,8 +36,13 @@ interface FullCar {
   value: number;
 }
 
-const ModalRegisterAd = () => {
-  const { setModal, submitAddAnnouncement } = useContext(AnnouncementContext);
+export interface ModalEditAndDeleteProps {
+  idAdvertiser: string | undefined;
+}
+
+const ModalEditAd = ({ idAdvertiser }: ModalEditAndDeleteProps) => {
+  const { setloadingAd, ad, setAd, setEditModal, setDeleteModal } =
+    useContext(AnnouncementContext);
   const [carsList, setCarsList] = useState<Brand>({} as Brand);
   const [carsByBrand, setCarsByBrand] = useState<FullCar[]>([] as FullCar[]);
   const [carInfos, setCarInfos] = useState<FullCar[]>([] as FullCar[]);
@@ -44,26 +58,31 @@ const ModalRegisterAd = () => {
   }, []);
 
   const refModal = useOutClick(() => {
-    setModal(false);
+    setEditModal(false);
   });
 
   const closeModal = () => {
-    setModal(false);
+    setEditModal(false);
+  };
+
+  const openModalDelete = () => {
+    setDeleteModal(true);
   };
 
   const schema = z.object({
-    brand: z.string().nonempty("Marca é obrigatório"),
-    model: z.string().nonempty("Modelo é obrigatório"),
-    year: z.string().nonempty("Ano é obrigatório"),
-    fuel: z.string().nonempty("Tipo do combustível é obrigatório"),
-    mileage: z.string().nonempty("KM é obrigatório"),
-    color: z.string().nonempty("Cor é obrigatório"),
-    value: z.string().nonempty("Valor da tabela Fipe é obrigatório"),
-    price: z.string().nonempty("Preço de venda é obrigatório"),
+    brand: z.string(),
+    model: z.string(),
+    year: z.string(),
+    fuel: z.string(),
+    mileage: z.string(),
+    color: z.string(),
+    value: z.string(),
+    price: z.string(),
     description: z.string(),
+    active: z.union([z.literal("true"), z.literal("false")]),
     images: z.array(
       z.object({
-        image: z.string().max(1500, "É permito até 1500 caracteres"),
+        image: z.string(),
       })
     ),
   });
@@ -109,14 +128,116 @@ const ModalRegisterAd = () => {
     return "Elétrico";
   };
 
+  const editAnnouncement = async (data: IAdvertiser) => {
+    try {
+      setloadingAd(true);
+
+      if (data.active === "true") {
+        data.active = true;
+      } else if (data.active === "false") {
+        data.active = false;
+      }
+
+      const oldAd = await api.get(`adverts/${idAdvertiser}`);
+
+      let announcement = { ...data };
+
+      delete announcement.images;
+
+      if (data.brand === "Escolha a marca") {
+        announcement.brand = oldAd.data.brand;
+      }
+
+      if (data.model === "Escolha o modelo") {
+        announcement.model = oldAd.data.model;
+      }
+
+      if (data.year === "") {
+        announcement.year = oldAd.data.year;
+      }
+
+      if (data.fuel === "") {
+        announcement.fuel = oldAd.data.fuel;
+      }
+
+      if (data.mileage && data.mileage !== "") {
+        announcement.mileage = announcement.mileage.replace(/[^\d]+/g, "");
+      } else if (data.mileage === "") {
+        announcement.mileage = oldAd.data.mileage;
+      }
+
+      if (data.color === "") {
+        announcement.color = oldAd.data.color;
+      }
+
+      if (data.value && data.value !== "") {
+        announcement.value = announcement.value
+          .replace(/[^\d]+/g, "")
+          .slice(0, -2);
+      } else if (data.value === "") {
+        announcement.value = oldAd.data.value;
+      }
+
+      if (data.price && data.price !== "") {
+        announcement.price = announcement.price
+          .replace(/[^\d]+/g, "")
+          .slice(0, -2);
+      } else if (data.price === "") {
+        announcement.price = oldAd.data.price;
+      }
+
+      if (data.description === "") {
+        announcement.description = oldAd.data.description;
+      }
+
+      if (data.images?.length !== 0 && data.images?.[0].image !== "") {
+        const imgs = await api.get(`adverts/images/${idAdvertiser}`);
+
+        imgs.data.map(
+          async (e: any) => await api.delete(`adverts/images/${e.id}`)
+        );
+
+        data.images!.forEach(async (img) => {
+          const newImage = {
+            image: img.image,
+          };
+
+          await api.post(`adverts/images/${idAdvertiser}`, newImage);
+        });
+      }
+
+      const res = await api.patch(`adverts/${idAdvertiser}`, announcement);
+
+      const upAds = ad?.map((ads) =>
+        ads.id === idAdvertiser ? (ads = res.data) : ads
+      );
+
+      setAd(upAds);
+      setEditModal(false);
+      setloadingAd(false);
+    } catch (err) {
+      toast.error("Ops algo de errado, revise os campo!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      console.log(err);
+    } finally {
+      setloadingAd(false);
+    }
+  };
+
   return createPortal(
     <>
       <ToastContainer />
-
       <ContainerModal>
         <div className="content__modal" ref={refModal}>
           <div className="headerModal">
-            <h3 className="">Criar Anúncio</h3>
+            <h3 className="">Editar anúncio</h3>
             <button
               className="close__modal"
               type="button"
@@ -126,7 +247,7 @@ const ModalRegisterAd = () => {
             </button>
           </div>
           <h4 className="subTitleModal">Informações do veículo</h4>
-          <form onSubmit={handleSubmit(submitAddAnnouncement)}>
+          <form onSubmit={handleSubmit(editAnnouncement)}>
             <label className="textLabel" htmlFor="brand">
               Marca
             </label>
@@ -274,6 +395,34 @@ const ModalRegisterAd = () => {
             />
             <p>{errors.description?.message}</p>
 
+            <h4 className="textLabel">Publicado</h4>
+
+            <DivRadio>
+              <RadioWrapper>
+                <RadioInput
+                  type="radio"
+                  id="active"
+                  value="true"
+                  {...register("active")}
+                />
+                <RadioLabel htmlFor="active">
+                  <RadioText>Sim</RadioText>
+                </RadioLabel>
+              </RadioWrapper>
+
+              <RadioWrapper>
+                <RadioInput
+                  type="radio"
+                  id="noActive"
+                  value="false"
+                  {...register("active")}
+                />
+                <RadioLabel htmlFor="noActive">
+                  <RadioText>Não</RadioText>
+                </RadioLabel>
+              </RadioWrapper>
+            </DivRadio>
+
             {fields.map((fields, index) => {
               return (
                 <span key={fields.id}>
@@ -307,14 +456,14 @@ const ModalRegisterAd = () => {
 
             <div className="divButtons">
               <button
-                className="btnCancel"
+                className="btnDelete"
                 type="button"
-                onClick={() => closeModal()}
+                onClick={() => openModalDelete()}
               >
-                Cancelar
+                Excluir anúncio
               </button>
-              <button className="btnCreate" type="submit">
-                Criar anúncio
+              <button className="btnSave" type="submit">
+                Salvar alteralções
               </button>
             </div>
           </form>
@@ -325,4 +474,4 @@ const ModalRegisterAd = () => {
   );
 };
 
-export default ModalRegisterAd;
+export default ModalEditAd;

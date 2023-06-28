@@ -1,34 +1,35 @@
 import { useContext, useEffect } from "react";
 import FooterBase from "../../components/Footer";
 import { BackgroundBody, ContainerAdverts, ContainerDivBlue } from "./style";
-import {
-  AnnouncementContext,
-  IAdvertiser,
-} from "../../contexts/AnnouncementContext/AnnouncementContext";
+import { AnnouncementContext } from "../../contexts/AnnouncementContext/AnnouncementContext";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
 import { HeaderProfile } from "../../components/HeaderProfile";
-//import { useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import { IAdvertiser } from "../../interfaces/AdvertsInterfaces";
 
 const AdsSpecificPage = () => {
-  const { ad, setAd } = useContext(AnnouncementContext);
-  const { user, setUser } = useContext(ContextLogin);
+  const { ad, setAd, userAdvertiser, setUserAdvertiser } =
+    useContext(AnnouncementContext);
+  const { setUser } = useContext(ContextLogin);
+
+  const { userId } = useParams();
 
   useEffect(() => {
     (async () => {
-      const resUser = await api.get(`/users`);
-
+      const resUser = await api.get("/users");
       setUser(resUser.data);
 
-      //const { id } = useParams();
-      const id = resUser.data.id;
+      const resAds = await api.get<IAdvertiser[]>(`/adverts/seller/${userId}`);
 
-      const resAds = await api.get<IAdvertiser[]>(`/adverts/seller/${id}`);
+      const user = resAds.data[0].user;
+
+      setUserAdvertiser(user);
       setAd(resAds.data);
     })();
   }, []);
 
-  const userNameHeader1 = user?.name.split(" ");
+  const userNameHeader1 = userAdvertiser?.name.split(" ");
 
   const userNameHeader2 = `${userNameHeader1 ? userNameHeader1[0] : ""} ${
     userNameHeader1 ? userNameHeader1[1] : ""
@@ -63,10 +64,10 @@ const AdsSpecificPage = () => {
                 {userNameHeader2 &&
                   userNameHeader2.replace("undefined", "").trim()}
               </h3>
-              <p className="tagInfo">{user?.type}</p>
+              <p className="tagInfo">{userAdvertiser?.type}</p>
             </div>
 
-            <p className="paragraph">{user?.description}</p>
+            <p className="paragraph">{userAdvertiser?.description}</p>
           </section>
         </ContainerDivBlue>
         <ContainerAdverts>

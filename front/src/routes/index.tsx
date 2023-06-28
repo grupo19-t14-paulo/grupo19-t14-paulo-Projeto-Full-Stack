@@ -16,7 +16,7 @@ const RoutesMain = () => {
       <Route path="/register" element={<RegisterPage />} />
       <Route path="/resetPassword" element={<SendEmailResetPassword />} />
       <Route path="/resetPassword/:token" element={<ResetPassword />} />
-      <Route path="/adsSpecific/:id" element={<AdsSpecificPage />} />
+      <Route path="/adsSpecific/:userId" element={<AdsSpecificPage />} />
       <Route path="/product/:advertId" element={<DinamicProductPage />} />
       <Route path="/advertiser" element={<AdvertiserPage />} />
     </Routes>
