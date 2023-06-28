@@ -13,7 +13,6 @@ import {
   StyledSpaceContainer,
   StyledUserCommentField,
 } from "./styles";
-import { userData } from "./data";
 import FooterBase from "../../components/Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
