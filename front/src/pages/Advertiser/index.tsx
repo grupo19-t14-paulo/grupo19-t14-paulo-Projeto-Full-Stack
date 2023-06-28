@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import FooterBase from "../../components/Footer";
 import ModalRegisterAd from "../../components/ModalToRegisterAd";
 import {
@@ -19,16 +19,19 @@ const AdvertiserPage = () => {
   const { modal, setModal, ad, setAd, editModal, setEditModal, deleteModal } =
     useContext(AnnouncementContext);
   const { user, setUser } = useContext(ContextLogin);
+  const [idAd, setIdAd] = useState<string | undefined>("");
 
   const openModal = () => {
     setModal(true);
   };
 
-  const openModalEdit = () => {
+  const openModalEdit = (id: string | undefined) => {
     setEditModal(true);
+
+    setIdAd(id);
   };
 
-  if (deleteModal === true) {
+  if (deleteModal) {
     setEditModal(false);
   }
 
@@ -53,6 +56,8 @@ const AdvertiserPage = () => {
   return (
     <>
       {modal ? <ModalRegisterAd /> : modal}
+      {editModal ? <ModalEditAd idAdvertiser={idAd} /> : editModal}
+      {deleteModal ? <ModalDeleteAd idAdvertiser={idAd} /> : deleteModal}
       <BackgroundBody>
         <HeaderProfile
           button1="Fazer Login"
@@ -101,19 +106,9 @@ const AdvertiserPage = () => {
               <section className="sectionCards">
                 {ad?.map((ads) => (
                   <div className="card" key={ads.id}>
-                    {deleteModal ? (
-                      <ModalDeleteAd idAdvertiser={ads.id} />
-                    ) : (
-                      deleteModal
-                    )}
-                    {editModal ? (
-                      <ModalEditAd idAdvertiser={ads.id} />
-                    ) : (
-                      editModal
-                    )}
                     <figure>
                       {ads.images?.map((img, i) =>
-                        i === 0 ? (
+                        i === 0 && img.image !== undefined ? (
                           <img
                             key={i}
                             src={img.image}
@@ -163,7 +158,7 @@ const AdvertiserPage = () => {
                           <button
                             className="buttonCard"
                             type="button"
-                            onClick={() => openModalEdit()}
+                            onClick={() => openModalEdit(ads.id)}
                           >
                             Editar
                           </button>

@@ -190,11 +190,7 @@ const ModalEditAd = ({ idAdvertiser }: ModalEditAndDeleteProps) => {
         announcement.description = oldAd.data.description;
       }
 
-      const filterImages = data.images?.filter((img) =>
-        img.image !== "" ? img : undefined
-      );
-
-      if (filterImages?.length !== 0) {
+      if (data.images?.length !== 0 && data.images?.[0].image !== "") {
         const imgs = await api.get(`adverts/images/${idAdvertiser}`);
 
         imgs.data.map(
