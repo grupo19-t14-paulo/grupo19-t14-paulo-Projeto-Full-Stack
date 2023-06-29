@@ -6,10 +6,12 @@ import { ModalEditAddress } from "../ModalEditAddress";
 import { useNavigate } from "react-router-dom";
 import { ModalDelete } from "../ModalDelete";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
+import { api } from "../../services/api";
+import { AxiosRequestHeaders } from "axios";
 
 const ModalMenuProfile = ({modalOpenMenuProfile }: IModalMenuProfile)=> {
 
-    const { user } = useContext(ContextLogin);
+    const { user, setUser } = useContext(ContextLogin);
     const [modalOpenEdit, setModalOpenEdit] = useState(false);
     const [modalOpenEditAddress, setModalOpenEditAddress] = useState(false);
     const [modalOpenDelete, setModalOpenDelete] = useState(false);
@@ -17,8 +19,12 @@ const ModalMenuProfile = ({modalOpenMenuProfile }: IModalMenuProfile)=> {
     const navigate = useNavigate();
 
     const logoutUser = () => {
-        window.localStorage.clear();
-        navigate("/");
+      localStorage.removeItem("@token");
+  
+      setUser(null);
+      api.defaults.headers.authorization = undefined as AxiosRequestHeaders["authorization"];
+    
+      navigate("/");
     };
 
     const adverts = () => {
