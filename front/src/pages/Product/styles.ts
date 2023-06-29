@@ -237,20 +237,22 @@ const StyledGaleryCard = styled.div`
             background-color: var(--color--grey-7);
             border-radius: 0.4rem;
 
-            :hover {
-                transform: scale(1.1);
-                transition: transform 0.3s ease;
-            }
-
             figure {
                 width: 100%;
                 height: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                overflow: hidden;
 
                 img {
                     width: 100%;
+
+                    :hover {
+                        transform: scale(1.1);
+                        transition: transform 0.3s ease;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -385,6 +387,14 @@ const StyledComment = styled.li`
     margin-bottom: 4.4rem;
     background-color: var(--color--grey-10);
     border-radius: 0.4rem;
+    position: relative;
+
+    img {
+        width: 20px;
+        position: relative;
+        right: -95%;
+        top: -70%;
+    }
 
     #userDataComment {
         width: 100%;
@@ -486,21 +496,47 @@ const StyledUserCommentField = styled.div`
             padding: 1.6rem;
         }
 
+        textarea:focus {
+            border: 2px solid var(--color--brand1);
+            outline: none;
+        }
+
         #postCommentButton {
             width: 10.8rem;
             height: 3.8rem;
-            background-color: var(--color--brand1);
-            border: 0.15rem solid var(--color--brand1);
             border-radius: 0.4rem;
             font-size: 1.4rem;
             font-weight: 600;
-            color: var(--color--whiteFixed);
             margin-top: 2.4rem;
+            background-color: var(--color--brand1);
+            border: 0.15rem solid var(--color--brand1);
+            color: var(--color--whiteFixed);
             transition: 0.3s ease;
 
             :hover {
                 background-color: var(--color--brand2);
                 transition: 0.3s ease;
+            }
+        }
+
+        #postCommentButtonNotLogged {
+            width: 10.8rem;
+            height: 3.8rem;
+            border-radius: 0.4rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 2.4rem;
+            position: relative;
+            top: -75px;
+            left: 80%;
+            background-color: var(--color--grey-5);
+            border: transparent;
+            color: var(--color--whiteFixed);
+        }
+
+        @media (max-width: 37.563rem) {
+            #postCommentButtonNotLogged {
+                left: 55%;
             }
         }
     }
@@ -529,14 +565,13 @@ const StyledUserCommentField = styled.div`
             }
         }
 
-        @media(min-width: 37.625rem){
+        @media (min-width: 37.625rem) {
             position: relative;
             top: -70px;
         }
     }
 
     @media (min-width: 37.6rem) {
-        
         height: fit-content;
         width: 75.1rem;
         padding: 6.6rem 4.4rem;

@@ -12,7 +12,8 @@ export const StyledProductCard = styled.li`
   }
 
   > div:nth-child(1) {
-    height: 44%;
+    width: 100%;
+    height: 200px;
 
     position: relative;
 
@@ -23,15 +24,15 @@ export const StyledProductCard = styled.li`
     background-color: var(--color--grey-7);
 
     border: 2px solid var(--color--grey-7);
+    background-color: red;
+
 
     img {
       max-width: 100%;
-      object-fit: cover;
+      height: 100%;
       background-color: var(--color--grey-7);
     }
-    .product-img-wrapper {
-      padding: 10px;
-    }
+
     > button {
       position: absolute;
       top: 11px;

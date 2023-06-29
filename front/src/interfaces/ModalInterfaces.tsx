@@ -8,6 +8,13 @@ export interface IModalMenuProfile {
     setModalOpenMenuProfile: boolean | any;
 }
 
+export interface IModalMenuComment {
+    modalOpenMenuComment: boolean;
+    setModalOpenMenuComment: boolean | any;
+    setSelectedCard: React.Dispatch<React.SetStateAction<string | null>>;
+    selectedCard: string;
+}
+
 export interface IModalEdit {
     modalOpenEdit: boolean;
     setModalOpenEdit: boolean | any;

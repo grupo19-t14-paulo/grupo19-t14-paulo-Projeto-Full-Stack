@@ -2,14 +2,10 @@ import { AppDataSource } from "../../data-source";
 import Adverts from "../../entities/adverts.entity";
 import AppError from "../../errors/AppError";
 import {
-  IAnnouncement,
   IAnnouncementUpdate,
   TAnnouncementWithUserSchema,
 } from "../../interfaces/adverts.interfaces";
-import {
-  announcementSchema,
-  announcementWithUserSchema,
-} from "../../schemas/adverts.schema";
+import { announcementWithUserSchema } from "../../schemas/adverts.schema";
 
 const updateAnnouncementService = async (
   data: IAnnouncementUpdate,
@@ -22,6 +18,18 @@ const updateAnnouncementService = async (
 
   if (!announcement) {
     throw new AppError("ad does not exist", 404);
+  }
+
+  if (data.mileage) {
+    data.mileage = Number(data.mileage);
+  }
+
+  if (data.value) {
+    data.value = Number(data.value);
+  }
+
+  if (data.price) {
+    data.price = Number(data.price);
   }
 
   await AppDataSource.createQueryBuilder()
@@ -52,6 +60,7 @@ const updateAnnouncementService = async (
 
   const response = {
     ...findAdvert,
+    mileage: Number(announcement?.mileage),
     value: Number(announcement?.value),
     price: Number(announcement?.price),
     images: announcementUp?.images,

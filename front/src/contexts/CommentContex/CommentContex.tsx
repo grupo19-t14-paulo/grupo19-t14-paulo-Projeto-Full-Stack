@@ -27,7 +27,7 @@ const AuthCommentProvider = ({children}: IProviderProps) => {
         }
     };
 
-    const addCommentToList = (comment: any) => {
+    const addCommentToList = (comment: ICommentList) => {
         setListComments((prevListComments) => {
           if (prevListComments) {
             return [...prevListComments, comment];
@@ -48,8 +48,30 @@ const AuthCommentProvider = ({children}: IProviderProps) => {
         }
     };
 
+    const deleteComment = async (commentId: string) => {
+        
+        const token = window.localStorage.getItem("@token");
+
+        try {
+            await api.delete(`/comments/${commentId}`, {
+                headers: {
+                    authorization: `Bearer ${token}`
+                }
+            })
+
+            const filterList = listComments?.filter((comment) => comment.id !== commentId)
+            setListComments(filterList)
+            
+            toast.success("Comentário excluido com sucesso!");
+            
+        } catch (error) {
+            console.log(error)
+            toast.error("Ops! Algo deu errado");
+        }
+    }
+
     return (
-        <ContextComment.Provider value={{createComment, comment, setComment, listCommentsProduct, listComments}}>
+        <ContextComment.Provider value={{createComment, comment, setComment, listCommentsProduct, listComments, deleteComment}}>
             {children}
         </ContextComment.Provider>
     );

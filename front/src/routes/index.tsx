@@ -9,18 +9,18 @@ import AdsSpecificPage from "../pages/AdsSpecific";
 import { DinamicProductPage } from "../pages/Product";
 
 const RoutesMain = () => {
-    return (
-        <Routes>
-            <Route path="/" element={<HomePage />} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="/register" element={<RegisterPage />} />
-            <Route path="/resetPassword" element={<SendEmailResetPassword />} />
-            <Route path="/resetPassword/:token" element={<ResetPassword />} />
-            <Route path="/adsSpecific" element={<AdsSpecificPage />} />
-            <Route path="/product/:advertId" element={<DinamicProductPage />} />
-            <Route path="/advertiser" element={<AdvertiserPage />} />
-        </Routes>
-    );
+  return (
+    <Routes>
+      <Route path="/" element={<HomePage />} />
+      <Route path="/login" element={<LoginPage />} />
+      <Route path="/register" element={<RegisterPage />} />
+      <Route path="/resetPassword" element={<SendEmailResetPassword />} />
+      <Route path="/resetPassword/:token" element={<ResetPassword />} />
+      <Route path="/adsSpecific/:userId" element={<AdsSpecificPage />} />
+      <Route path="/product/:advertId" element={<DinamicProductPage />} />
+      <Route path="/advertiser" element={<AdvertiserPage />} />
+    </Routes>
+  );
 };
 
 export { RoutesMain };
