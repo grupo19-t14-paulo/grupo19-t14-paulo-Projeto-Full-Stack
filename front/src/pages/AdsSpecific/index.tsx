@@ -5,35 +5,35 @@ import { AnnouncementContext } from "../../contexts/AnnouncementContext/Announce
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
 import { HeaderProfile } from "../../components/HeaderProfile";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IAdvertiser } from "../../interfaces/AdvertsInterfaces";
 
 const AdsSpecificPage = () => {
-  const { ad, setAd, userAdvertiser, setUserAdvertiser } =
-    useContext(AnnouncementContext);
-  const { setUser } = useContext(ContextLogin);
+    const { ad, setAd, userAdvertiser, setUserAdvertiser } =
+        useContext(AnnouncementContext);
+    const { setUser } = useContext(ContextLogin);
 
-  const { userId } = useParams();
+    const navegate = useNavigate();
 
-  useEffect(() => {
-    (async () => {
-      const resUser = await api.get("/users");
-      setUser(resUser.data);
+    const { userId } = useParams();
 
-      const resAds = await api.get<IAdvertiser[]>(`/adverts/seller/${userId}`);
+    useEffect(() => {
+        (async () => {
+            const resUser = await api.get("/users");
+            setUser(resUser.data);
 
-      const user = resAds.data[0].user;
+            const resAds = await api.get<IAdvertiser[]>(
+                `/adverts/seller/${userId}`
+            );
 
-      setUserAdvertiser(user);
-      setAd(resAds.data);
-    })();
-  }, []);
+            const user = resAds.data[0].user;
 
-  const userNameHeader1 = userAdvertiser?.name.split(" ");
+            setUserAdvertiser(user);
+            setAd(resAds.data);
+        })();
+    }, []);
 
-  const userNameHeader2 = `${userNameHeader1 ? userNameHeader1[0] : ""} ${
-    userNameHeader1 ? userNameHeader1[1] : ""
-  }`;
+    const userNameHeader1 = userAdvertiser?.name.split(" ");
 
   const findPercentage = (price: number, fipePrice: number): number => {
     const value = ((fipePrice - price) / price) * 100;
@@ -64,14 +64,6 @@ const AdsSpecificPage = () => {
               </h1>
             </span>
 
-            <div>
-              <h3>
-                {userNameHeader2 &&
-                  userNameHeader2.replace("undefined", "").trim()}
-              </h3>
-              <p className="tagInfo">{userAdvertiser?.type}</p>
-            </div>
-
             <p className="paragraph">{userAdvertiser?.description}</p>
           </section>
         </ContainerDivBlue>
@@ -81,7 +73,8 @@ const AdsSpecificPage = () => {
             <section className="sectionCards">
               {ad?.map((ads) =>
                 ads.active ? (
-                  <div className="card" key={ads.id}>
+                  <div className="card" key={ads.id} onClick={() => navegate(`/product/${ads.id}`)} >
+                
                     {findPercentage(Number(ads.price), Number(ads.value)) >
                     5 ? (
                       <span className="dollarSign">{"$"}</span>
@@ -146,6 +139,7 @@ const AdsSpecificPage = () => {
       </BackgroundBody>
     </>
   );
+
 };
 
 export default AdsSpecificPage;
