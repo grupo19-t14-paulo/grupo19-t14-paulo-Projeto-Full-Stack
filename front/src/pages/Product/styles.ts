@@ -385,6 +385,14 @@ const StyledComment = styled.li`
     margin-bottom: 4.4rem;
     background-color: var(--color--grey-10);
     border-radius: 0.4rem;
+    position: relative;
+
+    img {
+        width: 20px;
+        position: relative;
+        right: -95%;
+        top: -70%;
+    }
 
     #userDataComment {
         width: 100%;
@@ -486,16 +494,21 @@ const StyledUserCommentField = styled.div`
             padding: 1.6rem;
         }
 
+        textarea:focus {
+            border: 2px solid var(--color--brand1);
+            outline: none;
+        }
+
         #postCommentButton {
             width: 10.8rem;
             height: 3.8rem;
-            background-color: var(--color--brand1);
-            border: 0.15rem solid var(--color--brand1);
             border-radius: 0.4rem;
             font-size: 1.4rem;
             font-weight: 600;
-            color: var(--color--whiteFixed);
             margin-top: 2.4rem;
+            background-color: var(--color--brand1);
+            border: 0.15rem solid var(--color--brand1);
+            color: var(--color--whiteFixed);
             transition: 0.3s ease;
 
             :hover {
@@ -503,6 +516,28 @@ const StyledUserCommentField = styled.div`
                 transition: 0.3s ease;
             }
         }
+
+        #postCommentButtonNotLogged {
+            width: 10.8rem;
+            height: 3.8rem;
+            border-radius: 0.4rem;
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-top: 2.4rem;
+            position: relative;
+            top: -75px;
+            left: 80%;
+            background-color: var(--color--grey-5);
+            border: transparent;
+            color: var(--color--whiteFixed);
+        }
+
+        @media(max-width: 37.563rem) {
+            #postCommentButtonNotLogged {
+                left: 55%;
+            }
+        }
+
     }
 
     #autoCommentButtons {

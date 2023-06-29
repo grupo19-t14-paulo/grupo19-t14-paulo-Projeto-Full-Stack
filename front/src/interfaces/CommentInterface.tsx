@@ -8,14 +8,11 @@ export interface ICommentFormData {
 
 export interface IContextComment {
   createComment: (advertsId: string, formData: ICommentFormData) => Promise<void>;
-  comment: {
-      comment: string;
-  } | undefined;
-  setComment: React.Dispatch<React.SetStateAction<{
-      comment: string;
-  } | undefined>>;
+  comment: { comment: string; } | undefined;
+  setComment: React.Dispatch<React.SetStateAction<{ comment: string; } | undefined>>;
   listCommentsProduct: (advertsId: string) => Promise<void>;
-  listComments: ICommentList[] | undefined
+  listComments: ICommentList[] | undefined;
+  deleteComment: (commentId: string) => Promise<void>;
 }
 
 export interface IComment {
@@ -36,7 +33,7 @@ export interface ICommentList {
     id: string;
     name: string;
   };
-  advert: {
+  advert?: {
     id: string;
   };
 }

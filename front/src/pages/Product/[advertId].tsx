@@ -13,7 +13,6 @@ import {
   StyledSpaceContainer,
   StyledUserCommentField,
 } from "./styles";
-import { userData } from "./data";
 import FooterBase from "../../components/Footer";
 import { useNavigate, useParams } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
@@ -24,6 +23,9 @@ import { CommentsForm } from "../../components/CommentForm";
 import { ContextComment } from "../../contexts/CommentContex/CommentContex";
 import moment from 'moment';
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
+import MenuImg from "../../assets/Menu.png";
+import { ModalMenuComment } from "../../components/ModalMenuComment";
+import randomColor from 'randomcolor';
 
 interface IImage {
   image: string;
@@ -63,10 +65,10 @@ const DinamicProductPage = () => {
   const {user} = useContext(ContextLogin)
 
   const [advert, setAdvert] = useState<IAdvertData>({} as IAdvertData);
-
   const [loading, setLoading] = useState<boolean>(true);
-
-  console.log(user)
+  const [modalOpenMenuComment, setModalOpenMenuComment] = useState(false);
+  const [selectedCard, setSelectedCard] = useState<string | null>(null);
+  const [userColors, setUserColors] = useState<{ [key: string]: string }>({});
 
   const { advertId } = useParams();
 
@@ -95,6 +97,7 @@ const DinamicProductPage = () => {
       initials =
         splitedName[0].charAt(0) +
         splitedName[splitedName.length - 1].charAt(0);
+
     }
 
     return initials.toUpperCase();
@@ -126,7 +129,31 @@ const DinamicProductPage = () => {
       return 'Agora';
     }
   };
+  
+  const getUserColor = (userName: string) => {
+    if (userColors[userName]) {
+      return userColors[userName];
+    } else {
+      const color = randomColor();
+      setUserColors(prevColors => ({
+        ...prevColors,
+        [userName]: color
+      }));
+      return color;
+    }
+  };
 
+  const handleMenuClick = (cardId: string) => {
+
+    if (modalOpenMenuComment && selectedCard === cardId) {
+      setModalOpenMenuComment(false);
+      
+    } else {
+      setSelectedCard(cardId);
+      setModalOpenMenuComment(true);
+    }
+  };
+  
   return (
     <>
       <HeaderProfile
@@ -218,7 +245,7 @@ const DinamicProductPage = () => {
                 listComments.map((comment) =>(
                   <StyledComment key={(comment.id)}>
                     <div id="userDataComment">
-                      <div>
+                      <div style={{ background: getUserColor(comment.user.name)}}>
                         <h3>{createInitials(`${comment.user.name}`)}</h3>
                       </div>
                       <h3>{comment.user.name}</h3>
@@ -228,18 +255,29 @@ const DinamicProductPage = () => {
                     <p id="commentParagraph">
                     {comment.comment}
                     </p>
+                    {
+                      user?.name === comment.user.name && 
+                      <img onClick={() => handleMenuClick(comment.id)} src={MenuImg} alt="Menu" />
+                    }
+                    {selectedCard === comment.id && (
+                      <ModalMenuComment modalOpenMenuComment={true} setModalOpenMenuComment={setModalOpenMenuComment} setSelectedCard={setSelectedCard} selectedCard={selectedCard}/>
+                    )}
                   </StyledComment>
                 ))
               }
             </ul>
           </StyledCommentSection>
           <StyledUserCommentField>
-            <div id="userCommentFieldUserData">
-              <div>
-                <h3>{createInitials(`${user?.name}`)}</h3>
-              </div>
-              <h3>{user?.name}</h3>
-            </div>
+            {
+              user && (
+                <div id="userCommentFieldUserData">
+                  <div style={{ background: getUserColor(user.name)}}>
+                    <h3>{createInitials(`${user?.name}`)}</h3>
+                  </div>
+                  <h3>{user?.name}</h3>
+                </div>
+              )
+            }
             <div id="userCommentField">
               <CommentsForm advertsId={advert.id}/>
             </div>

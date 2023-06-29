@@ -10,7 +10,6 @@ const ContainerModalDelete = styled.div`
     background-color: var(--color--whiteFixed);
     border-radius: 10px;
 
-
     h2 {
         font-weight: 600;
         font-size: 16px;
