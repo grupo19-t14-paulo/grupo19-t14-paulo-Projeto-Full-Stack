@@ -271,8 +271,10 @@ const HomePage = () => {
                                     value,
                                     price,
                                     year,
-                                    user
+                                    user,
+                                    active
                                 }) => (
+                                     active &&
                                     <ProductCard
                                         key={id}
                                         id={id}
@@ -284,7 +286,10 @@ const HomePage = () => {
                                         fipePrice={value}
                                         price={price}
                                         year={year}
+                                        active={active}
+                                        showActive={false}
                                     />
+                                    
                                 )
                             )
                         ) : (
