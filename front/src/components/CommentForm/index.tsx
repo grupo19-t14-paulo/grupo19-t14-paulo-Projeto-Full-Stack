@@ -4,11 +4,17 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { CommentSchema, TCommentFormProps } from "./commentFormSchema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { IComment, CommentsFormProps } from "../../interfaces/CommentInterface";
+import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
+import { useNavigate } from "react-router-dom";
 
 const CommentsForm = ({advertsId}: CommentsFormProps) => {
 
     const { createComment } = useContext(ContextComment);
+    const { user } = useContext(ContextLogin);
+
     const [commentText, setCommentText] = useState("");
+
+    const navigate = useNavigate();
 
     const {
         register,
@@ -31,20 +37,28 @@ const CommentsForm = ({advertsId}: CommentsFormProps) => {
     };
 
     return (
-        <>
+        <>       
             <form onSubmit={handleSubmit(submit)}>
                 <textarea
                     id="comment"
                     placeholder="Escreva um comentário..."
                     {...register("comment")}
                     onChange={(e) => setCommentText(e.target.value)}
+                    disabled={!user}
                 ></textarea>
-                <button id="postCommentButton" type="submit">Comentar</button>
+                {
+                    user ? (
+                        <button id="postCommentButton" type="submit">Comentar</button>
+                    ):
+                    (
+                        <button onClick={() => {navigate("/login")}} id="postCommentButtonNotLogged">Comentar</button>
+                    )
+                }  
             </form>
             <div id="autoCommentButtons">
-              <button id="likeCommentButton" onClick={() => handleButtonClick("Gostei muito!")} >Gostei muito!</button>
-              <button id="incredibleCommentButton" onClick={() => handleButtonClick("Incrível")} >Incrível</button>
-              <button id="recommendCommentButton" onClick={() =>handleButtonClick("Recomendarei para meus amigos!")} >
+              <button id="likeCommentButton" onClick={() => handleButtonClick("Gostei muito!")} disabled={!user}>Gostei muito!</button>
+              <button id="incredibleCommentButton" onClick={() => handleButtonClick("Incrível")} disabled={!user}>Incrível</button>
+              <button id="recommendCommentButton" onClick={() =>handleButtonClick("Recomendarei para meus amigos!")} disabled={!user}>
                 Recomendarei para meus amigos!
               </button>
             </div>
