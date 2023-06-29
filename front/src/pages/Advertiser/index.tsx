@@ -3,9 +3,9 @@ import FooterBase from "../../components/Footer";
 import ModalRegisterAd from "../../components/ModalToRegisterAd";
 import {
   BackgroundBody,
-  ContainerDivAdverts,
   ContainerAdverts,
   ContainerDivBlue,
+  StyledButton,
 } from "./style";
 import { AnnouncementContext } from "../../contexts/AnnouncementContext/AnnouncementContext";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
@@ -72,119 +72,122 @@ const AdvertiserPage = () => {
           page1="/login"
           page2="/register"
         />
-        <ContainerDivAdverts>
-          <ContainerDivBlue>
-            <section>
-              <span className="initialsName">
-                <h1>
-                  {userNameHeader1 && userNameHeader1.length > 0
-                    ? userNameHeader1[0][0]
-                    : ""}
-                  {userNameHeader1 && userNameHeader1.length > 1
-                    ? userNameHeader1[1]
-                      ? ` ${userNameHeader1[1][0]}`
-                      : ""
-                    : ""}
-                </h1>
-              </span>
+        <ContainerDivBlue>
+          <section>
+            <span className="initialsName">
+              <h1>
+                {userNameHeader1 && userNameHeader1.length > 0
+                  ? userNameHeader1[0][0]
+                  : ""}
+                {userNameHeader1 && userNameHeader1.length > 1
+                  ? userNameHeader1[1]
+                    ? ` ${userNameHeader1[1][0]}`
+                    : ""
+                  : ""}
+              </h1>
+            </span>
 
-              <div>
-                <h3>
-                  {userNameHeader2 &&
-                    userNameHeader2.replace("undefined", "").trim()}
-                </h3>
-                <p className="tagInfo">{user?.type}</p>
-              </div>
+            <div>
+              <h3>
+                {userNameHeader2 &&
+                  userNameHeader2.replace("undefined", "").trim()}
+              </h3>
+              <p className="tagInfo">{user?.type}</p>
+            </div>
 
-              <p className="paragraph">{user?.description}</p>
+            <p className="paragraph">{user?.description}</p>
 
-              <button
-                className="button"
-                type="button"
-                onClick={() => openModal()}
-              >
-                Criar Anúncio
-              </button>
-            </section>
-          </ContainerDivBlue>
-          <ContainerAdverts>
-            <div className="adsArea">
-              <h2 className="advertiserName">Anúncios</h2>
-              <section className="sectionCards">
-                {ad?.map((ads) => (
-                  <div className="card" key={ads.id}>
-                    <figure>
-                      {ads.images?.map((img, i) =>
-                        i === 0 && img.image !== undefined ? (
-                          <img
-                            key={i}
-                            src={img.image}
-                            alt="Imagem do veículo"
-                          />
-                        ) : (
-                          <img key={i} src="" alt="Imagem do veículo" />
-                        )
-                      )}
-                    </figure>
-                    <div className="infoCard">
+            <button
+              className="button"
+              type="button"
+              onClick={() => openModal()}
+            >
+              Criar Anúncio
+            </button>
+          </section>
+        </ContainerDivBlue>
+        <ContainerAdverts>
+          <div className="adsArea">
+            <section className="sectionCards">
+              {ad?.map((ads) => (
+                <div className="card" key={ads.id}>
+                  {ads.active ? (
+                    <StyledButton buttonStyle={ads.active}>
+                      {"Ativo"}
+                    </StyledButton>
+                  ) : (
+                    <StyledButton buttonStyle={ads.active}>
+                      {"Inativo"}
+                    </StyledButton>
+                  )}
+
+                  <figure>
+                    {ads.images?.map((img, i) =>
+                      i === 0 && img.image !== undefined ? (
+                        <img key={i} src={img.image} alt="Imagem do veículo" />
+                      ) : (
+                        <img key={i} src="" alt="Imagem do veículo" />
+                      )
+                    )}
+                  </figure>
+                  <div className="infoCard">
+                    <h3>
+                      {ads.brand} - {ads.model}
+                    </h3>
+                    <p className="description">{ads.description}</p>
+                    <div className="divNameUserCard">
+                      <span>
+                        <h2 className="initials">
+                          {userNameHeader1 && userNameHeader1.length > 0
+                            ? userNameHeader1[0][0]
+                            : ""}
+                          {userNameHeader1 && userNameHeader1.length > 1
+                            ? userNameHeader1[1]
+                              ? ` ${userNameHeader1[1][0]}`
+                              : ""
+                            : ""}
+                        </h2>
+                      </span>
                       <h3>
-                        {ads.brand} - {ads.model}
+                        {userNameHeader2 &&
+                          userNameHeader2.replace("undefined", "").trim()}
                       </h3>
-                      <p className="description">{ads.description}</p>
-                      <div className="divNameUserCard">
-                        <span>
-                          <h2 className="initials">
-                            {userNameHeader1 && userNameHeader1.length > 0
-                              ? userNameHeader1[0][0]
-                              : ""}
-                            {userNameHeader1 && userNameHeader1.length > 1
-                              ? userNameHeader1[1]
-                                ? ` ${userNameHeader1[1][0]}`
-                                : ""
-                              : ""}
-                          </h2>
-                        </span>
-                        <h3>
-                          {userNameHeader2 &&
-                            userNameHeader2.replace("undefined", "").trim()}
-                        </h3>
-                      </div>
+                    </div>
 
-                      <div className="divKmPriceYear">
-                        <div className="divKmYear">
-                          <span className="tagInfo">{ads.mileage} KM</span>
-                          <span className="tagInfo">{ads.year}</span>
-                          <p className="price">
-                            {new Intl.NumberFormat("pt-BR", {
-                              style: "currency",
-                              currency: "BRL",
-                            }).format(Number(ads.price))}
-                          </p>
-                        </div>
-                        <div className="divButton">
-                          <button
-                            className="buttonCard"
-                            type="button"
-                            onClick={() => openModalEdit(ads.id)}
-                          >
-                            Editar
-                          </button>
-                          <button
-                            className="buttonCard"
-                            type="button"
-                            onClick={() => seeDetails(ads.id)}
-                          >
-                            Ver detalhes
-                          </button>
-                        </div>
+                    <div className="divKmPriceYear">
+                      <div className="divKmYear">
+                        <span className="tagInfo">{ads.mileage} KM</span>
+                        <span className="tagInfo">{ads.year}</span>
+                        <p className="price">
+                          {new Intl.NumberFormat("pt-BR", {
+                            style: "currency",
+                            currency: "BRL",
+                          }).format(Number(ads.price))}
+                        </p>
+                      </div>
+                      <div className="divButton">
+                        <button
+                          className="buttonCard"
+                          type="button"
+                          onClick={() => openModalEdit(ads.id)}
+                        >
+                          Editar
+                        </button>
+                        <button
+                          className="buttonCard"
+                          type="button"
+                          onClick={() => seeDetails(ads.id)}
+                        >
+                          Ver detalhes
+                        </button>
                       </div>
                     </div>
                   </div>
-                ))}
-              </section>
-            </div>
-          </ContainerAdverts>
-        </ContainerDivAdverts>
+                </div>
+              ))}
+            </section>
+          </div>
+        </ContainerAdverts>
         <FooterBase />
       </BackgroundBody>
     </>
