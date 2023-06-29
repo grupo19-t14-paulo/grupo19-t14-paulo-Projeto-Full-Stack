@@ -22,7 +22,6 @@ import {
     CloseFiltersHeader,
 } from "./style";
 import { useEffect, useState } from "react";
-
 import ProductCard from "../../components/ProductCard";
 import FooterBase from "../../components/Footer";
 import { IAnnouncementResponse, IApiFilters, IFilters } from "./types";

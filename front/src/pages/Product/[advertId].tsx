@@ -25,8 +25,8 @@ import moment from "moment";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import MenuImg from "../../assets/Menu.png";
 import { ModalMenuComment } from "../../components/ModalMenuComment";
-import randomColor from "randomcolor";
 import { ProductImagesModal } from "../../components/ModalBase";
+import { ContextRegister } from "../../contexts/RegisterContext/RegisterContext";
 
 interface IImage {
     image: string;
@@ -64,12 +64,12 @@ const DinamicProductPage = () => {
 
     const { listComments, listCommentsProduct } = useContext(ContextComment);
     const { user } = useContext(ContextLogin);
+    const { getUserColor, createInitials } = useContext(ContextRegister)
 
     const [advert, setAdvert] = useState<IAdvertData>({} as IAdvertData);
     const [loading, setLoading] = useState<boolean>(true);
     const [modalOpenMenuComment, setModalOpenMenuComment] = useState(false);
     const [selectedCard, setSelectedCard] = useState<string | null>(null);
-    const [userColors, setUserColors] = useState<{ [key: string]: string }>({});
     const [showImagesModal, setShowImagesModal] = useState<boolean>(false);
     const toggleModal = () => setShowImagesModal(!showImagesModal);
 
@@ -87,25 +87,6 @@ const DinamicProductPage = () => {
             })();
         }
     }, []);
-
-    const createInitials = (userName: string) => {
-        const trimnedName = userName.trim();
-
-        let initials = "";
-
-        let splitedName = [];
-
-        if (trimnedName.indexOf(" ") === -1) {
-            initials = initials + trimnedName.charAt(0);
-        } else {
-            splitedName = trimnedName.split(" ");
-            initials =
-                splitedName[0].charAt(0) +
-                splitedName[splitedName.length - 1].charAt(0);
-        }
-
-        return initials.toUpperCase();
-    };
 
     const userId = advert.user?.id;
 
@@ -134,19 +115,6 @@ const DinamicProductPage = () => {
             return `há ${minutes} minuto${minutes > 1 ? "s" : ""}`;
         } else {
             return "Agora";
-        }
-    };
-
-    const getUserColor = (userName: string) => {
-        if (userColors[userName]) {
-            return userColors[userName];
-        } else {
-            const color = randomColor();
-            setUserColors((prevColors) => ({
-                ...prevColors,
-                [userName]: color,
-            }));
-            return color;
         }
     };
 

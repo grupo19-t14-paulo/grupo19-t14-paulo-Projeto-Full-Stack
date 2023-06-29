@@ -1,6 +1,8 @@
 import { useNavigate } from "react-router-dom";
 import { StyledButton } from "../Buttons/style";
 import { StyledProductCard } from "./style";
+import { useContext } from "react";
+import { ContextRegister } from "../../contexts/RegisterContext/RegisterContext";
 
 interface IProductProps {
     id: string;
@@ -30,6 +32,7 @@ const ProductCard = ({
     showActive = true
 }: IProductProps) => {
     const navigate = useNavigate();
+    const { getUserColor, createInitials } = useContext(ContextRegister)
 
     const findPercentage = (price: number, fipePrice: number): number => {
         const value = ((fipePrice - price) / price) * 100;
@@ -61,13 +64,13 @@ const ProductCard = ({
                     <span>{"$"}</span>
                 ) : null}
 
-                <img src={img} alt={title} />
+                <img src={img} alt={title}/>
             </div>
             <div>
                 <h3>{title}</h3>
                 <span className="description">{description}</span>
                 <div className="advertiser-info">
-                    <span>{advertiser[0]}</span>
+                    <span style={{ background: getUserColor( advertiser)}}>{createInitials(advertiser)}</span>
                     <span>{advertiser}</span>
                 </div>
                 <div>
