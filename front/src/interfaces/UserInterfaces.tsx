@@ -29,6 +29,8 @@ export interface IUserContextRegister {
   setSeller: React.Dispatch<
     React.SetStateAction<"Cliente" | "Vendedor" | undefined>
   >;
+  getUserColor: (userName: string) => string;
+  createInitials: (userName: string) => string
 }
 
 export interface IUserContextLogin {
