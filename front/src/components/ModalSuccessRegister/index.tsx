@@ -11,6 +11,9 @@ const ModalSuccessRegister = ({ modalOpen, setModalOpen}: IModal) => {
   const closeModalAndRedirect = () => {
     setModalOpen(false);
     setSuccess(false);
+    if(success){
+      console.log("src/components/ModalSuccessRegister.tsx")
+    }
     navigate("/login");
   };
 

@@ -73,14 +73,16 @@ const DinamicProductPage = () => {
   const { advertId } = useParams();
 
   useEffect(() => {
-    (async () => {
-      const response = await api.get(`/adverts/${advertId}`);
+    if (advertId) {
+      (async () => {
+        const response = await api.get(`/adverts/${advertId}`);
 
-      setAdvert(response.data);
-      listCommentsProduct(advertId!);
+        setAdvert(response.data);
+        listCommentsProduct(advertId);
 
-      setLoading(false);
-    })();
+        setLoading(false);
+      })();
+    }
   }, []);
 
   const createInitials = (userName: string) => {

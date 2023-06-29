@@ -8,9 +8,11 @@ interface IFilters {
     maxMileage?: string;
     minPrice?: string;
     maxPrice?: string;
+    [key: string]: string | undefined;
 }
 
 interface IApiFilters {
+    [key: string]: string[];
     brand: string[];
     color: string[];
     fuel: string[];

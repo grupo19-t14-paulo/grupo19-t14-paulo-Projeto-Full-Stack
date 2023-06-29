@@ -20,11 +20,9 @@ import {
     ShowFiltersBtn,
     ProductFiltersMobile,
     CloseFiltersHeader,
-    FilterInputWrapperMobile,
 } from "./style";
 import { useEffect, useState } from "react";
 
-import { mockFilters } from "./mock";
 import ProductCard from "../../components/ProductCard";
 import FooterBase from "../../components/Footer";
 import { IAnnouncementResponse, IApiFilters, IFilters } from "./types";
@@ -41,7 +39,7 @@ const HomePage = () => {
 
     useEffect(() => {
         requestProducts(queryString);
-    }, [filters]);
+    }, [filters, queryString]);
 
     const requestSetting = (field: string, filter: string) => {
         const updateParams = { ...filters, [field]: filter };
@@ -65,10 +63,10 @@ const HomePage = () => {
         setShowFilters(!showFilters);
     };
 
-    const generateQueryString = (filters: string) => {
+    const generateQueryString = (filters: IFilters) => {
         const queryParams = new URLSearchParams();
         for (const key in filters) {
-            queryParams.set(key, filters[key]);
+            queryParams.set(key, filters[key] || '');
         }
         return queryParams.toString();
     };
@@ -273,8 +271,10 @@ const HomePage = () => {
                                     value,
                                     price,
                                     year,
-                                    user
+                                    user,
+                                    active
                                 }) => (
+                                     active &&
                                     <ProductCard
                                         key={id}
                                         id={id}
@@ -286,7 +286,10 @@ const HomePage = () => {
                                         fipePrice={value}
                                         price={price}
                                         year={year}
+                                        active={active}
+                                        showActive={false}
                                     />
+                                    
                                 )
                             )
                         ) : (

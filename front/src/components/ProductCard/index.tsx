@@ -13,6 +13,7 @@ interface IProductProps {
     price: number;
     active?: boolean;
     fipePrice: number;
+    showActive?: boolean ;
 }
 
 const ProductCard = ({
@@ -26,6 +27,7 @@ const ProductCard = ({
     price,
     active,
     fipePrice,
+    showActive = true
 }: IProductProps) => {
     const navigate = useNavigate();
 
@@ -39,7 +41,8 @@ const ProductCard = ({
     return (
         <StyledProductCard onClick={() => navigate(`/product/${advertId}`)}>
             <div className="product-img-wrapper">
-                {active ? (
+                {showActive && (
+                active ? (
                     <StyledButton
                         buttonStyle={
                             active ? "brand1-medium" : "negative-medium"
@@ -51,6 +54,7 @@ const ProductCard = ({
                     <StyledButton buttonStyle={"negative-medium"}>
                         {"Inativo"}
                     </StyledButton>
+                )
                 )}
 
                 {findPercentage(price, fipePrice) > 5 ? (
