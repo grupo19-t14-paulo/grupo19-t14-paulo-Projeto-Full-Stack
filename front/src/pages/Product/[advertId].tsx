@@ -80,6 +80,9 @@ const DinamicProductPage = () => {
       setAdvert(response.data);
 
       setLoading(false);
+      if(comments){
+        console.log("const comments: src/pages/[advertId].tsx")
+      }
     })();
   }, []);
 
