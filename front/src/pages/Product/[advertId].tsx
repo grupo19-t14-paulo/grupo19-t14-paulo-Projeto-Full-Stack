@@ -65,7 +65,6 @@ const DinamicProductPage = () => {
 
   const [loading, setLoading] = useState<boolean>(true);
 
-  console.log(user);
 
   const { advertId } = useParams();
 
@@ -77,9 +76,6 @@ const DinamicProductPage = () => {
       listCommentsProduct(advertId!);
 
       setLoading(false);
-      if(comments){
-        console.log("const comments: src/pages/[advertId].tsx")
-      }
     })();
   }, []);
 
