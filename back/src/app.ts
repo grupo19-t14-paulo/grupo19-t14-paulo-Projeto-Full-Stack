@@ -8,6 +8,8 @@ import { usersRoutes } from "./routers/users.routes";
 import { sessionRoutes } from "./routers/session.routes";
 import cors from "cors";
 import { commentsRoutes } from "./routers/comments.routes";
+import SwaggerUi from "swagger-ui-express";
+import swaggerDocument from "../swagger.json";
 
 const app: Application = express();
 app.use(cors());
@@ -17,6 +19,8 @@ app.use("/adverts/images", imagesRoutes);
 app.use("/comments", commentsRoutes);
 app.use("/login", sessionRoutes);
 app.use("/users", usersRoutes);
+
+app.use("/api-docs", SwaggerUi.serve, SwaggerUi.setup(swaggerDocument));
 
 app.use(handleAppError);
 

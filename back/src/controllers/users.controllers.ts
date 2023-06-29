@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response, Router } from "express";
 import { TUser } from "../interfaces/users.interfaces";
 import { createUserService } from "../services/users/createUser.service";
 import { retrieveUsersService } from "../services/users/retrieveUser.service";
