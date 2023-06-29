@@ -21,7 +21,7 @@ import { HeaderProfile } from "../../components/HeaderProfile";
 import Button from "../../components/Buttons";
 import { CommentsForm } from "../../components/CommentForm";
 import { ContextComment } from "../../contexts/CommentContex/CommentContex";
-import moment from 'moment';
+import moment from "moment";
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import MenuImg from "../../assets/Menu.png";
 import { ModalMenuComment } from "../../components/ModalMenuComment";
@@ -61,8 +61,8 @@ interface IAdvertData {
 const DinamicProductPage = () => {
   const navigate = useNavigate();
 
-  const {listComments, listCommentsProduct} = useContext(ContextComment);
-  const {user} = useContext(ContextLogin)
+  const { listComments, listCommentsProduct } = useContext(ContextComment);
+  const { user } = useContext(ContextLogin);
 
   const [advert, setAdvert] = useState<IAdvertData>({} as IAdvertData);
   const [loading, setLoading] = useState<boolean>(true);
@@ -103,30 +103,33 @@ const DinamicProductPage = () => {
     return initials.toUpperCase();
   };
 
+  const userId = advert.user?.id;
+
   const formatElapsedTime = (createdAt: string) => {
     const now = moment();
     const commentDate = moment(createdAt);
-  
+
     const duration = moment.duration(now.diff(commentDate));
-  
+
     const years = duration.years();
     const months = duration.months();
     const days = duration.days();
     const hours = duration.hours();
     const minutes = duration.minutes();
-  
+
     if (years > 0) {
-      return `há ${years} ano${years > 1 ? 's' : ''}`;
+      return `há ${years} ano${years > 1 ? "s" : ""}`;
     } else if (months > 0) {
-      return `há ${months} mês${months > 1 ? 'es' : ''}`;
-    } else if (days > 0) {0
-      return `há ${days} dia${days > 1 ? 's' : ''}`;
+      return `há ${months} mês${months > 1 ? "es" : ""}`;
+    } else if (days > 0) {
+      0;
+      return `há ${days} dia${days > 1 ? "s" : ""}`;
     } else if (hours > 0) {
-      return `há ${hours} hora${hours > 1 ? 's' : ''}`;
+      return `há ${hours} hora${hours > 1 ? "s" : ""}`;
     } else if (minutes > 0) {
-      return `há ${minutes} minuto${minutes > 1 ? 's' : ''}`;
+      return `há ${minutes} minuto${minutes > 1 ? "s" : ""}`;
     } else {
-      return 'Agora';
+      return "Agora";
     }
   };
   
@@ -221,7 +224,7 @@ const DinamicProductPage = () => {
                   <p>{advert.user.description}</p>
                   <Button
                     buttonStyle="grey-1-big"
-                    onClick={() => navigate(`/adsSpecific/${advert.user.id}}`)}
+                    onClick={() => navigate(`/adsSpecific/${userId}`)}
                   >
                     Ver todos os anúncios
                   </Button>
@@ -234,16 +237,12 @@ const DinamicProductPage = () => {
           <StyledCommentSection>
             <h2>Comentários</h2>
             <ul>
-              {
-                listComments !== undefined && 
-                listComments?.length <= 0 && (
-                  <h3>Nenhum comentário disponível.</h3>
-                )
-              }
-              {
-                listComments !== undefined && 
-                listComments.map((comment) =>(
-                  <StyledComment key={(comment.id)}>
+              {listComments !== undefined && listComments?.length <= 0 && (
+                <h3>Nenhum comentário disponível.</h3>
+              )}
+              {listComments !== undefined &&
+                listComments.map((comment) => (
+                  <StyledComment key={comment.id}>
                     <div id="userDataComment">
                       <div style={{ background: getUserColor(comment.user.name)}}>
                         <h3>{createInitials(`${comment.user.name}`)}</h3>
@@ -252,9 +251,7 @@ const DinamicProductPage = () => {
                       <div id="elipseComment"> </div>
                       <p>{formatElapsedTime(comment.created_at)}</p>
                     </div>
-                    <p id="commentParagraph">
-                    {comment.comment}
-                    </p>
+                    <p id="commentParagraph">{comment.comment}</p>
                     {
                       user?.name === comment.user.name && 
                       <img onClick={() => handleMenuClick(comment.id)} src={MenuImg} alt="Menu" />
@@ -263,8 +260,7 @@ const DinamicProductPage = () => {
                       <ModalMenuComment modalOpenMenuComment={true} setModalOpenMenuComment={setModalOpenMenuComment} setSelectedCard={setSelectedCard} selectedCard={selectedCard}/>
                     )}
                   </StyledComment>
-                ))
-              }
+                ))}
             </ul>
           </StyledCommentSection>
           <StyledUserCommentField>
@@ -279,7 +275,7 @@ const DinamicProductPage = () => {
               )
             }
             <div id="userCommentField">
-              <CommentsForm advertsId={advert.id}/>
+              <CommentsForm advertsId={advert.id} />
             </div>
           </StyledUserCommentField>
           <StyledSpaceContainer></StyledSpaceContainer>

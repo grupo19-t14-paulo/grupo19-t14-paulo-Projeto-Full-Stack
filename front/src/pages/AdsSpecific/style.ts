@@ -131,13 +131,19 @@ const ContainerAdverts = styled.section`
           display: flex;
           align-items: center;
           justify-content: center;
+          overflow: hidden;
 
           img {
             width: 100%;
-            transform: scale(1);
             background-color: var(--color--grey-7);
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
+            transition: 0.8s ease;
+            object-fit: cover;
+          }
+
+          img:hover {
+            transform: scale(1.1);
           }
         }
 
