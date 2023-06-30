@@ -137,6 +137,8 @@ A autenticação é feita por Bearer token, ao fazer login.
 - [Users](#1-users)
     - [POST - /users](#11-criação-de-usuário)
     - [GET - /users](#12-listando-usuário)
+    - [PATCH - /users](#12-editando-usuário)
+    - [DELETE - /users](#12-deletando-usuário)
 - [Posts](#2-posts)
     - [POST - /posts](#21-criação-de-posts)
     - [GET - /posts](#22-listar-todos-os-posts)
@@ -305,6 +307,102 @@ Vazio
 |-----------------|-----------------|
 | 401 Unauthorized   | Invalid token. |
 | 401 Unauthorized   | No token has been sent. |
+| 404 Not Found   | User not found. |
+
+
+[ Voltar para os Índices ](#7-índice)
+
+---
+
+### 1.3. **Editando Usuário**
+
+### `/users`
+
+### Exemplo de Request:
+```
+PATCH /users
+Host: http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+ "name": "user_1 da Silva",
+ "password": "123456",
+ "birthDate": "2000-12-01"
+}
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "1a0cd370-7b80-48ba-a5a4-eca313ffd60e",
+	"name": "user_1 da Silva",
+	"email": "user_1@mail.com",
+	"cpf": "12345678910",
+	"phone": "5541987654321",
+	"birthDate": "2000-12-01",
+	"description": "Descrição teste",
+	"type": "Cliente",
+	"street": "Rua sem saida",
+	"number": "000",
+	"complement": "",
+	"city": "cidade",
+	"state": "estado",
+	"cep": "00000000",
+	"reset_token": null
+}
+```
+
+### Possíveis Erros:
+| Código do Erro  | Descrição       |
+|-----------------|-----------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 404 Not Found   | User not found. |
+| 409 Conflict    | Email already registered.  |
+
+
+[ Voltar para os Índices ](#7-índice)
+
+---
+
+### 1.4. **Deletando Usuário**
+
+### `/users`
+
+### Exemplo de Request:
+```
+DELETE /users
+Host: http://localhost:3000/users
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+204 No content
+```
+```json
+
+```
+
+### Possíveis Erros:
+| Código do Erro  | Descrição       |
+|-----------------|-----------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 404 Not Found   | User not found. |
 
 
 [ Voltar para os Índices ](#7-índice)
