@@ -25,12 +25,6 @@ Nossa equipe assumiu a responsabilidade tanto do back-end quanto do front-end do
 
 Seguindo o planejamento estabelecido pelo nosso P.O., enfrentamos desafios, superamos obstáculos e trabalhamos em colaboração para alcançar o objetivo final: a criação da Kenzie Shop. Agora, convidamos você a explorar nossa plataforma e desfrutar da qualidade e satisfação que proporcionamos aos nossos clientes. Bem-vindo à Kenzie Shop, o lugar perfeito para comprar e vender veículos.
 
-- [NodeJS](https://nodejs.org/en/)
-- [Express](https://expressjs.com/pt-br/)
-- [TypeScript](https://www.typescriptlang.org/)
-- [PostgreSQL](https://www.postgresql.org/)
-- [TypeORM](https://typeorm.io/)
-
 ---
 
 ## 2. Desenvolvedores
@@ -45,7 +39,6 @@ Seguindo o planejamento estabelecido pelo nosso P.O., enfrentamos desafios, supe
 ---
 
 ## 3. Documentação
-
 
 
 ### 3.1 Front-End
@@ -65,7 +58,6 @@ A documentação do Back End está aqui abaixo.
 ---
 
 ## 4. Início Rápido
-
 
 
 ### 4.1. Instalando Dependências
@@ -93,14 +85,6 @@ Execute as migrations com o comando:
 yarn typeorm migration:run -d src/data-source.ts
 ```
 
-### 4.4. Testes
-
-Para executar os teste, rode o comando:
-
-```
-yarn test
-```
-
 A URL base da aplicação:
 http://localhost:3001/
 
@@ -110,23 +94,33 @@ http://localhost:3001/
 ---
 ## 5. Autenticação
 
-Por enquanto, não foi implementada autenticação.
+A autenticação é feita por Bearer token, ao fazer login.
 
 ---
 
 ## 6. Endpoints
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
-| Método | Rota             | Descrição                          |
-|--------|------------------|------------------------------------|
-| POST   | /users           | Criação de um usuário.             |
-| GET    | /users           | Lista as informações do usuário.   |
-| POST   | /posts           | Criação de um post.                |
-| GET    | /posts           | Lista todos os posts.              |
-| GET    | /posts/:id       | Lista um post específico.          |
-| POST   | /posts/comment   | Faz um comentário em um post.      |
-| POST   | /reposts         | Criação de um repost.              |
-| POST   | /reposts/comment | Faz um comentário em um repost.    |
+
+| Método | Rota                        | Descrição                           |
+|--------|-----------------------------|-------------------------------------|
+| POST   | /users                      | Criação de um usuário.              |
+| GET    | /users                      | Lista as informações do usuário.    |
+| PATCH  | /users                      | Edita as informações do usuário. |
+| DELETE | /users                      | Deleta o usuário.                   |
+| POST   | /users/resetpassword        | Envia um email para resetar a senha.|
+| PATCH  | /users/resetpassword/:token | Reseta a senha.                     |
+| POST   | /login                      | Faz login no site.                  |
+| POST   | /adverts                    | Criação de um anúncio.               |
+| GET   | /adverts                    | Lista todos os anúncios.               |
+| GET   | /adverts/filters            | Lista os anúncios com filtro.       |
+| GET   | /adverts/:id                | Lista um anúncio específico.          |
+| GET   | /adverts/seller/:id         | Lista todos os anúncios de um vendedor. |
+| PATCH   | /adverts/:id              | Edita as informações do anúncio.     |
+| DELETE   | /adverts/:id                    | Deleta o anúncio.               |
+| GET   | /adverts/images/:id               | Lista as imagens do anúncio.  |
+| POST   | /adverts/images/:id                | Cria uma imagen no anúncio.  |
+| DELETE   | /adverts/images/:id              | Deleta uma imagem do anúncio.  |
+
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
