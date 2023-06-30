@@ -69,6 +69,16 @@ const AdsSpecificPage = () => {
                             </h1>
                         </span>
 
+                        <div>
+                            <h3>
+                                {userNameHeader2 &&
+                                    userNameHeader2
+                                        .replace("undefined", "")
+                                        .trim()}
+                            </h3>
+                            <p className="tagInfo">{user?.type}</p>
+                        </div>
+
                         <p className="paragraph">
                             {userAdvertiser?.description}
                         </p>
