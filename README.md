@@ -101,25 +101,30 @@ A autenticação é feita por Bearer token, ao fazer login.
 ## 6. Endpoints
 
 
-| Método | Rota                        | Descrição                           |
-|--------|-----------------------------|-------------------------------------|
-| POST   | /users                      | Criação de um usuário.              |
-| GET    | /users                      | Lista as informações do usuário.    |
-| PATCH  | /users                      | Edita as informações do usuário. |
-| DELETE | /users                      | Deleta o usuário.                   |
-| POST   | /users/resetpassword        | Envia um email para resetar a senha.|
-| PATCH  | /users/resetpassword/:token | Reseta a senha.                     |
-| POST   | /login                      | Faz login no site.                  |
-| POST   | /adverts                    | Criação de um anúncio.               |
-| GET   | /adverts                    | Lista todos os anúncios.               |
-| GET   | /adverts/filters            | Lista os anúncios com filtro.       |
-| GET   | /adverts/:id                | Lista um anúncio específico.          |
-| GET   | /adverts/seller/:id         | Lista todos os anúncios de um vendedor. |
-| PATCH   | /adverts/:id              | Edita as informações do anúncio.     |
-| DELETE   | /adverts/:id                    | Deleta o anúncio.               |
-| GET   | /adverts/images/:id               | Lista as imagens do anúncio.  |
-| POST   | /adverts/images/:id                | Cria uma imagen no anúncio.  |
-| DELETE   | /adverts/images/:id              | Deleta uma imagem do anúncio.  |
+| Método | Rota                        | Descrição                           				 |
+|--------|-----------------------------|-----------------------------------------------------------------|
+| POST   | /users                      | Criação de um usuário.              				 |
+| GET    | /users                      | Lista as informações do usuário.    				 |
+| PATCH  | /users                      | Edita as informações do usuário. 				 |
+| DELETE | /users                      | Deleta o usuário.                   				 |
+| POST   | /users/resetpassword        | Envia um email para resetar a senha.				 |
+| PATCH  | /users/resetpassword/:token | Reseta a senha.                     				 |
+| POST   | /login                      | Faz login no site.                  				 |
+| POST   | /adverts                    | Criação de um anúncio.               				 |
+| GET    | /adverts                    | Lista todos os anúncios.               			 |
+| GET    | /adverts/filters            | Lista os anúncios com filtro.       				 |
+| GET    | /adverts/:id                | Lista um anúncio específico.          				 |
+| GET    | /adverts/seller/:id         | Lista todos os anúncios de um vendedor. 			 |
+| PATCH  | /adverts/:id                | Edita as informações do anúncio.     				 |
+| DELETE | /adverts/:id                | Deleta o anúncio.               				 |
+| GET    | /adverts/images/:id         | Lista as imagens do anúncio.   				 |
+| POST   | /adverts/images/:id         | Cria uma imagen no anúncio.  					 |
+| DELETE | /adverts/images/:id         | Deleta uma imagem do anúncio.  				 |
+| POST   | /comments/:id               | Cria um comentário em um anúncio.                               |
+| GET    | /comments/:id               | Lista todos os comentários do anúncio.                          |
+| GET    | /comments/users/:id         | Lista todos os comentários do anúncio de um usuário específico. |
+| PATCH  | /comments/:id               | Edita um comentário.  						 |
+| DELETE | /comments/:id               | deleta um comentário.  					 |
 
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
