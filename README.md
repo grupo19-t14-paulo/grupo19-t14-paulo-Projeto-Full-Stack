@@ -139,6 +139,8 @@ A autenticação é feita por Bearer token, ao fazer login.
     - [GET - /users](#12-listando-usuário)
     - [PATCH - /users](#13-editando-usuário)
     - [DELETE - /users](#14-deletando-usuário)
+    - [POST - /users/resetpassword](#15-enviando-email-para-resetar-a-senha-do-usuário)
+    - [PATCH - /users/resetpassword/:token](#16-resetando-a-senha-do-usuário)
 - [Posts](#2-posts)
     - [POST - /posts](#21-criação-de-posts)
     - [GET - /posts](#22-listar-todos-os-posts)
@@ -412,7 +414,7 @@ Vazio
 
 ### Exemplo de Request:
 ```
-PATCH /users/resetpassword
+POST /users/resetpassword
 Host: http://localhost:3000/users/resetpassword
 Authorization: None
 Content-type: application/json
@@ -430,13 +432,54 @@ Content-type: application/json
 200 OK
 ```
 ```json
-{ message: "Token sent to your email." }
+{
+ "message": "Token sent to your email."
+}
 ```
 
 ### Possíveis Erros:
 | Código do Erro  | Descrição       |
 |-----------------|-----------------|
 | 404 Not Found   | User not found. |
+
+
+[ Voltar para os Índices ](#7-índice)
+
+---
+
+### 1.6. **Resetando a senha do usuário**
+
+### `/users/resetpassword/:token`
+
+### Exemplo de Request:
+```
+PATCH /users/resetpassword/:token
+Host: http://localhost:3000/users/resetpassword/:token
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+ "password": "1234567"
+}
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+ "message": "Your password has been changed."
+}
+```
+
+### Possíveis Erros:
+| Código do Erro  | Descrição       |
+|-----------------|-----------------|
+| 400 Bad Request | String must contain at least 4 character(s). |
 
 
 [ Voltar para os Índices ](#7-índice)
