@@ -64,7 +64,7 @@ const DinamicProductPage = () => {
 
     const { listComments, listCommentsProduct } = useContext(ContextComment);
     const { user } = useContext(ContextLogin);
-    const { getUserColor, createInitials } = useContext(ContextRegister)
+    const { getUserColor, createInitials } = useContext(ContextRegister);
 
     const [advert, setAdvert] = useState<IAdvertData>({} as IAdvertData);
     const [loading, setLoading] = useState<boolean>(true);
@@ -165,9 +165,7 @@ const DinamicProductPage = () => {
                                 />
                             </StyledMainImage>
                             <StyledAdvertCard>
-                                <h2>
-                                    {`${advert.brand} - ${advert.model}`.toUpperCase()}
-                                </h2>
+                                <h2>{`${advert.brand} - ${advert.model}`}</h2>
                                 <div>
                                     <div>
                                         <div>
