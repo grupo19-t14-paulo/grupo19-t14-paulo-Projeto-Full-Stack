@@ -40,12 +40,12 @@ Seguindo o planejamento estabelecido pelo nosso P.O., enfrentamos desafios, supe
 | [Linkedin](https://www.linkedin.com/in/diegodcramos/)  | [Linkedin](https://www.linkedin.com/in/franklin-marins/) |[Linkedin](https://www.linkedin.com/in/jessica-dayane-4885b7183/)|[Linkedin](https://www.linkedin.com/in/petrarcacavalcante/)|[Linkedin](https://www.linkedin.com/in/valdecir-teixeira/)|
 | [Github](https://github.com/Diegodelli) | [Github](https://github.com/Franklmarins)  |[Github](https://github.com/jessicadmonteiro)|[Github](https://github.com/Petrarca-Cavalcante)|[Github](https://github.com/vardeba)|
 
-
+[ Voltar para o topo ](#tabela-de-conteúdos)
 
 ---
 
 ## 3. Documentação
-[ Voltar para o topo ](#tabela-de-conteúdos)
+
 
 
 ### 3.1 Front-End
@@ -60,10 +60,12 @@ A documentação do Back End está aqui abaixo.
 
 - [Índice](#7-índice)
 
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
 ---
 
 ## 4. Início Rápido
-[ Voltar para o topo ](#tabela-de-conteúdos)
+
 
 
 ### 4.1. Instalando Dependências
@@ -102,10 +104,11 @@ yarn test
 A URL base da aplicação:
 http://localhost:3001/
 
----
-## 5. Autenticação
+
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
+---
+## 5. Autenticação
 
 Por enquanto, não foi implementada autenticação.
 
@@ -125,11 +128,12 @@ Por enquanto, não foi implementada autenticação.
 | POST   | /reposts         | Criação de um repost.              |
 | POST   | /reposts/comment | Faz um comentário em um repost.    |
 
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
 ---
 
 
 ## 7. Índice
-[ Voltar para o topo ](#tabela-de-conteúdos)
 
 - [Users](#1-users)
     - [POST - /users](#11-criação-de-usuário)
@@ -144,10 +148,12 @@ Por enquanto, não foi implementada autenticação.
     - [POST - /reposts](#41-criação-de-repost)
 - [CommentReposts](#5-Comentário-de-repost)
     - [POST - /reposts/comment](#51-Criação-de-comentário-de-repost)
+
+[ Voltar para o topo ](#tabela-de-conteúdos)
+
 ---
 
 ## 1. **Users**
-[ Voltar para os Endpoints ](#5-endpoints)
 
 O objeto User é definido como:
 
@@ -166,11 +172,12 @@ O objeto User é definido como:
 | POST     | /users     | Criação de um usuário.                  |
 | GET      | /users     | Lista as informações do usuário.        |
 
+
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 1.1. **Criação de Usuário**
-
-[ Voltar para os Endpoints ](#5-endpoints)
 
 ### `/users`
 
@@ -211,11 +218,12 @@ Content-type: application/json
 | 413 Payload too large   | Exceeds the maximum number of characters allowed.   |
 | 400 Bad request         | 'name' key required.                                |
 
+
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 1.2. **Listando Usuário**
-
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/users`
 
@@ -257,10 +265,12 @@ Content-type: application/json
 |-----------------|-----------------|
 | 404 Not Found   | User not found. |
 
+
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ## 2. **Posts**
-[ Voltar para os Endpoints ](#5-endpoints)
 
 O objeto Post é definido como:
 
@@ -278,11 +288,12 @@ O objeto Post é definido como:
 | POST     | /posts     | Criação de um usuário.                  |
 | GET      | /posts     | Lista as informações do usuário.        |
 
+
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 2.1. **Criação de posts**
-
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/posts`
 
@@ -335,11 +346,12 @@ Content-type: application/json
 | 413 Payload too large | Exceeds the maximum number of characters allowed. |
 | 404 Not Found         | User not found.                                   |
 
+
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 2.2. **Listar todos os posts**
-
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/posts`
 
@@ -381,11 +393,11 @@ Vazio
 
 Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 2.3. **Listar posts por user id**
-
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/posts`
 
@@ -432,10 +444,11 @@ Vazio
 |-----------------|-----------------|
 | 404 Not Found   | User not found. |
 
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ## 3. **Comentário de post**
-[ Voltar para os Endpoints ](#5-endpoints)
 
 O objeto Comment Post é definido como:
 
@@ -453,11 +466,11 @@ O objeto Comment Post é definido como:
 |----------|----------------|-----------------------------------------|
 | POST     | /posts/comment | Criação de comentário do post.          |
 
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 3.1. **Criação de comentário de post**
-
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/posts/comment`
 
@@ -517,10 +530,11 @@ Content-type: application/json
 | 413 Payload too large | Exceeds the maximum number of characters allowed. |
 | 404 Not Found         | User or post not found.                           |
 
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ## 4. **Repost**
-[ Voltar para os Endpoints ](#5-endpoints)
 
 O objeto Repost é definido como:
 
@@ -536,11 +550,11 @@ O objeto Repost é definido como:
 |----------|-----------|-------------------------------------|
 | POST     | /reposts  | Criação de repost do post.          |
 
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 4.1. **Criação de repost**
-
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/reposts`
 
@@ -589,10 +603,11 @@ Content-type: application/json
 | 400 Bad request       | "'userId' and 'postId' keys required   |
 | 404 Not Found         | User or post not found.                |
 
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ## 5. **Comentário de repost**
-[ Voltar para os Endpoints ](#5-endpoints)
 
 O objeto Comment Repost é definido como:
 
@@ -610,11 +625,11 @@ O objeto Comment Repost é definido como:
 |----------|-------------------|-------------------------------------|
 | POST     | /reposts/comment  | Criação de comentario do repost.    |
 
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 5.1. **Criação de comentário de repost**
-
-[ Voltar aos Endpoints ](#5-endpoints)
 
 ### `/reposts/comment`
 
@@ -672,5 +687,7 @@ Content-type: application/json
 | 400 Bad request       | 'userId','repostId' and 'content' keys required   |
 | 413 Payload too large | Exceeds the maximum number of characters allowed. |
 | 404 Not Found         | User or repost not found.                         |
+
+[ Voltar para os Índices ](#7-índice)
 
 ---
