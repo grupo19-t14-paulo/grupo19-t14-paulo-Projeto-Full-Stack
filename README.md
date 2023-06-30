@@ -156,20 +156,35 @@ A autenticação é feita por Bearer token, ao fazer login.
 
 O objeto User é definido como:
 
-| Campo               | Tipo   | Descrição                         |
-| --------------------|--------|-----------------------------------|
-| id                  | number | Identificador único do usuário.   |
-| name                | string | O nome do usuário.                |
-| lastInteractionDate | date   | Última interação do usuário.      |
-| dailyInteractions   | number | Número de interações do dia.      |
-| createdAt           | date   | Data de criação do usuário.       |
+| Campo        | Tipo   | Descrição                         	   |
+| -------------|--------|------------------------------------------|
+| id           | string | Identificador único do usuário.  	   |
+| name         | string | O nome do usuário.                	   |
+| email        | string | Email do usuário.                        |
+| cpf          | string | CPF do usuário.        		   |
+| phone        | string | Telefone do usuário.                     |
+| birthDate    | date ou string | Data de aniversário do usuário.  |
+| description  | null ou string | Descrição do usuário.            |
+| password     | string | Senha do usuário.       		   |
+| type         | string | Tipo de usuário.        		   |
+| street       | string | Rua onde o usuário mora.         	   |
+| number       | string | Número da casa do usuário.       	   |
+| complement   | string | Complemento da casa do usuário.          |
+| city         | string | Cidade onde o usuário mora.      	   |
+| state        | string | Estado onde fica a cidade.       	   |
+| cep          | string | Cep onde o usuário mora.       	   |
+| reset_token  | null ou string | token para resetar a senha.      |
 
 ### Endpoints
 
-| Método   | Rota       | Descrição                               |
-|----------|------------|-----------------------------------------|
-| POST     | /users     | Criação de um usuário.                  |
-| GET      | /users     | Lista as informações do usuário.        |
+| Método | Rota       | Descrição                                     |
+|--------|------------|-----------------------------------------------|
+| POST   | /users     | Criação de um usuário. 		 	      |
+| GET    | /users     | Lista as informações do usuário. 	      |
+| PATCH  | /users     | Edita as informações do usuário. 	      |
+| DELETE | /users     | Deleta o usuário.      			      |
+| POST   | /users/resetpassword | Envia um email para resetar a senha.|
+| PATCH  | /users/resetpassword/:token | Reseta a senha.              |
 
 
 [ Voltar para os Índices ](#7-índice)
@@ -191,7 +206,20 @@ Content-type: application/json
 ### Corpo da Requisição:
 ```json
 {
-	"name": "user"
+	"name": "user 1",
+	"email": "user_1@mail.com",
+	"cpf": "12345678910",
+	"phone": "5541987654321",
+	"birthDate": "2000-01-01",
+	"description": "Descrição teste",
+	"password": "12345678",
+	"type": "Cliente",
+	"street": "Rua sem saida",
+	"number": "000",
+	"complement": "",
+	"city": "cidade",
+	"state": "estado",
+	"cep": "00000000"
 }
 ```
 
@@ -202,20 +230,29 @@ Content-type: application/json
 
 ```json
 {
-  "id": 1,
-  "name": "user",
-  "lastInteractionDate": null,
-  "dailyInteractions": 0,
-  "createdAt": "2023-05-26",
+	"id": "1a0cd370-7b80-48ba-a5a4-eca313ffd60e",
+	"name": "user 1",
+	"email": "user_1@mail.com",
+	"cpf": "12345678910",
+	"phone": "5541987654321",
+	"birthDate": "2000-01-01",
+	"description": "Descrição teste",
+	"type": "Cliente",
+	"street": "Rua sem saida",
+	"number": "000",
+	"complement": "",
+	"city": "cidade",
+	"state": "estado",
+	"cep": "00000000",
+	"reset_token": null
 }
 ```
 
 ### Possíveis Erros:
 | Código do Erro          | Descrição                                           |
 |-------------------------|-----------------------------------------------------|
-| 409 Conflict            | Name already registered.                            |
-| 413 Payload too large   | Exceeds the maximum number of characters allowed.   |
-| 400 Bad request         | 'name' key required.                                |
+| 409 Conflict            | Email already registered.                            |
+| 400 Bad request         | 'name', 'email', 'cpf', 'phone', 'birthDate', 'password', 'type', 'street', 'number', 'complement', 'city', 'state', 'cep' key required.                                |
 
 
 [ Voltar para os Índices ](#7-índice)
@@ -230,15 +267,13 @@ Content-type: application/json
 ```
 GET /users
 Host: http://localhost:3000/users
-Authorization: None
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
 ```
 
 ### Corpo da Requisição:
 ```json
-{
-	"userId": 1
-}
+Vazio
 ```
 
 ### Exemplo de Response:
@@ -247,22 +282,29 @@ Content-type: application/json
 ```
 ```json
 {
-  "id": 1,
-  "name": "user",
-  "createdAt": "2023-05-24",
-  "lastInteractionDate": "2023-05-25",
-  "dailyInteractions": 1,
-    "posts": [],
-    "post_comments": [],
-    "reposts": [],
-    "repost_comments": []
+	"id": "1a0cd370-7b80-48ba-a5a4-eca313ffd60e",
+	"name": "user 1",
+	"email": "user_1@mail.com",
+	"cpf": "12345678910",
+	"phone": "5541987654321",
+	"birthDate": "2000-01-01",
+	"description": "Descrição teste",
+	"type": "Cliente",
+	"street": "Rua sem saida",
+	"number": "000",
+	"complement": "",
+	"city": "cidade",
+	"state": "estado",
+	"cep": "00000000",
+	"reset_token": null
 }
 ```
 
 ### Possíveis Erros:
 | Código do Erro  | Descrição       |
 |-----------------|-----------------|
-| 404 Not Found   | User not found. |
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
 
 
 [ Voltar para os Índices ](#7-índice)
