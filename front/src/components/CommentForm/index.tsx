@@ -27,6 +27,12 @@ const CommentsForm = ({advertsId}: CommentsFormProps) => {
     });
 
     const submit: SubmitHandler<TCommentFormProps> = (formData) => {
+        const commentText = formData.comment.trim();
+        
+        if(!commentText){
+            return;
+        }
+
         createComment(advertsId, formData);
         reset();
     };
