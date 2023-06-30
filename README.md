@@ -39,7 +39,7 @@ Seguindo o planejamento estabelecido pelo nosso P.O., enfrentamos desafios, supe
 | :---: | :---: | :---: | :---: | :---: |
 | [Linkedin](https://www.linkedin.com/in/diegodcramos/)  | [Linkedin](https://www.linkedin.com/in/franklin-marins/) |[Linkedin](https://www.linkedin.com/in/jessica-dayane-4885b7183/)|[Linkedin](https://www.linkedin.com/in/petrarcacavalcante/)|[Linkedin](https://www.linkedin.com/in/valdecir-teixeira/)|
 | [Github](https://github.com/Diegodelli) | [Github](https://github.com/Franklmarins)  |[Github](https://github.com/jessicadmonteiro)|[Github](https://github.com/Petrarca-Cavalcante)|[Github](https://github.com/vardeba)|
-|dellicolli89@gmail.com|franklmarins@gmail.com|jessica_02_06@outlook.com |pedropetrarcar@gmail.com|vardeba@hotmail.com|
+
 
 
 ---
