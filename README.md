@@ -393,15 +393,49 @@ Vazio
 ```
 204 No content
 ```
-```json
-
-```
 
 ### Possíveis Erros:
 | Código do Erro  | Descrição       |
 |-----------------|-----------------|
 | 401 Unauthorized   | Invalid token. |
 | 401 Unauthorized   | No token has been sent. |
+| 404 Not Found   | User not found. |
+
+
+[ Voltar para os Índices ](#7-índice)
+
+---
+
+### 1.5. **Enviando email para resetar a senha do usuário**
+
+### `/users/resetpassword`
+
+### Exemplo de Request:
+```
+PATCH /users/resetpassword
+Host: http://localhost:3000/users/resetpassword
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+ "email": "user_1@mail.com"
+}
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{ message: "Token sent to your email." }
+```
+
+### Possíveis Erros:
+| Código do Erro  | Descrição       |
+|-----------------|-----------------|
 | 404 Not Found   | User not found. |
 
 
