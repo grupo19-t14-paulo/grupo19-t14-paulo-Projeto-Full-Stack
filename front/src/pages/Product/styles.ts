@@ -107,6 +107,7 @@ const StyledAdvertCard = styled.div`
         line-height: 2.5rem;
         color: var(--color--grey-1);
         font-family: var(--font--lexend);
+        text-transform: capitalize;
     }
 
     > div {
