@@ -141,16 +141,18 @@ A autenticação é feita por Bearer token, ao fazer login.
     - [DELETE - /users](#14-deletando-usuário)
     - [POST - /users/resetpassword](#15-enviando-email-para-resetar-a-senha-do-usuário)
     - [PATCH - /users/resetpassword/:token](#16-resetando-a-senha-do-usuário)
-- [Posts](#2-posts)
-    - [POST - /posts](#21-criação-de-posts)
-    - [GET - /posts](#22-listar-todos-os-posts)
-    - [GET - /posts/:user_id](#23-listar-posts-por-user-id)
-- [CommentPost](#3-Comentário-de-post)
-    - [POST - /posts/comment](#31-criação-de-comentário-de-post)
-- [Reposts](#4-Repost)
-    - [POST - /reposts](#41-criação-de-repost)
-- [CommentReposts](#5-Comentário-de-repost)
-    - [POST - /reposts/comment](#51-Criação-de-comentário-de-repost)
+- [Login](#2-login)
+  - [POST - /login](#21-login)
+- [Posts](#3-posts)
+    - [POST - /posts](#31-criação-de-posts)
+    - [GET - /posts](#32-listar-todos-os-posts)
+    - [GET - /posts/:user_id](#33-listar-posts-por-user-id)
+- [CommentPost](#4-Comentário-de-post)
+    - [POST - /posts/comment](#41-criação-de-comentário-de-post)
+- [Reposts](#5-Repost)
+    - [POST - /reposts](#51-criação-de-repost)
+- [CommentReposts](#6-Comentário-de-repost)
+    - [POST - /reposts/comment](#61-Criação-de-comentário-de-repost)
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
@@ -486,102 +488,50 @@ Content-type: application/json
 
 ---
 
-## 2. **Posts**
+## 2. **Login**
 
-O objeto Post é definido como:
+O objeto Login é definido como:
 
-| Campo      | Tipo   | Descrição                                       |
-| -----------|--------|-------------------------------------------------|
-| id         | number | Identificador único do usuário.                 |
-| content    | string | Descrição do post.                              |
-| createdAt  | date   | Data de criação.                                |
-| user       | object | Informações do usuário que criou o post.        |
+| Campo    | Tipo   | Descrição                   |
+| ---------|--------|-----------------------------|
+| token    | string | Token de acesso do usuário. |
 
 ### Endpoints
 
-| Método   | Rota       | Descrição                               |
-|----------|------------|-----------------------------------------|
-| POST     | /posts     | Criação de um usuário.                  |
-| GET      | /posts     | Lista as informações do usuário.        |
+| Método   | Rota       | Descrição          |
+|----------|------------|--------------------|
+| POST     | /login     | Faz login no site. |
 
 
 [ Voltar para os Índices ](#7-índice)
 
 ---
 
-### 2.1. **Criação de posts**
+### 2.1. **Login no site**
 
 ### `/posts`
 
 ### Exemplo de Request:
 ```
-POST /posts
-Host: http://localhost:3000/posts
+POST /login
+Host: http://localhost:3000/login
 Authorization: None
 Content-type: application/json
 ```
 
 ### Parâmetros da Requisição:
-| Parâmetro   | Tipo        | Descrição                      |
-|-------------|-------------|--------------------------------|
-| content     | string      | Conteúdo do post               |
-| userId     | number      | Identificador único do usuário |
+| Parâmetro   | Tipo        | Descrição          |
+|-------------|-------------|--------------------|
+| email       | string      | E-mail do usuário. |
+| password    | string      | Senha do usuário.  |
 
 
 ### Corpo da Requisição:
 ```json
 {
-	"content": "post content",
-	"userId": 1
+	"email": "user_1@mail.com",
+	"password": "12345678"
 }
-```
-
-### Exemplo de Response:
-```
-201 Created
-```
-```json
-{
-    "id": 1,
-    "createdAt": "2023-05-26",
-    "content": "create post",
-    "user": {
-        "id": 1,
-        "name": "user",
-        "createdAt": "2023-05-24",
-        "lastInteractionDate": "2023-05-26",
-        "dailyInteractions": 1
-    }    
-}
-```
-
-### Possíveis Erros:
-| Código do Erro        | Descrição                                         |
-|-----------------------|---------------------------------------------------|
-| 400 Bad request       | 'userId' and 'content' keys required.             |
-| 413 Payload too large | Exceeds the maximum number of characters allowed. |
-| 404 Not Found         | User not found.                                   |
-
-
-[ Voltar para os Índices ](#7-índice)
-
----
-
-### 2.2. **Listar todos os posts**
-
-### `/posts`
-
-### Exemplo de Request:
-```
-GET /posts
-Host: http://localhost:3000/posts
-Authorization: None
-Content-type: application/json
-```
-
-### Corpo da Requisição:
-```json
-Vazio
 ```
 
 ### Exemplo de Response:
@@ -589,84 +539,25 @@ Vazio
 200 OK
 ```
 ```json
-[
-    {
-        "id": 1,
-        "content": "post",
-        "createdAt": "2023-05-24",
-        "comments": []
-    },
-    {
-        "id": 2,
-        "content": "post2",
-        "createdAt": "2023-05-24",
-        "comments": []
-    },
-]
+{
+	"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE2NjU5NCwiZXhwIjoxNjg4MjUyOTk0LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.Lq7zr1HbMSgXGTlUeQ1Iap-IQqB2nQXYQw3HAFaOOzE"
+}
 ```
 
 ### Possíveis Erros:
+| Código do Erro        | Descrição                  |
+|-----------------------|----------------------------|
+| 400 Bad request       | Invalid email.             |
+| 403 Forbidden         | Invalid email or password. |
 
-Nenhum, o máximo que pode acontecer é retornar uma lista vazia.
 
 [ Voltar para os Índices ](#7-índice)
 
 ---
 
-### 2.3. **Listar posts por user id**
+## 3. **Anúncio**
 
-### `/posts`
-
-### Exemplo de Request:
-```
-GET /posts/1
-Host: http://localhost:3000/posts/1
-Authorization: None
-Content-type: application/json
-```
-
-### Parâmetros da Requisição:
-| Parâmetro  | Tipo        | Descrição                      |
-|------------|-------------|--------------------------------|
-| userId     | number      | Identificador único do usuário |
-
-### Corpo da Requisição:
-```json
-Vazio
-```
-
-### Exemplo de Response:
-```
-200 OK
-```
-```json
-[
-    {
-        "id": 1,
-        "content": "post",
-        "createdAt": "2023-05-24"
-    },
-    {
-        "id": 2,
-        "content": "post2",
-        "createdAt": "2023-05-24"
-    }
-]
-```
-
-### Possíveis Erros:
-
-| Código do Erro  | Descrição       |
-|-----------------|-----------------|
-| 404 Not Found   | User not found. |
-
-[ Voltar para os Índices ](#7-índice)
-
----
-
-## 3. **Comentário de post**
-
-O objeto Comment Post é definido como:
+O objeto Anúncio é definido como:
 
 | Campo      | Tipo   | Descrição                                       |
 | -----------|--------|-------------------------------------------------|
