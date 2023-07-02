@@ -142,7 +142,7 @@ A autenticação é feita por Bearer token, ao fazer login.
     - [POST - /users/resetpassword](#15-enviando-email-para-resetar-a-senha-do-usuário)
     - [PATCH - /users/resetpassword/:token](#16-resetando-a-senha-do-usuário)
 - [Login](#2-login)
-  - [POST - /login](#21-login)
+  - [POST - /login](#21-login-no-site)
 - [Posts](#3-posts)
     - [POST - /posts](#31-criação-de-posts)
     - [GET - /posts](#32-listar-todos-os-posts)
