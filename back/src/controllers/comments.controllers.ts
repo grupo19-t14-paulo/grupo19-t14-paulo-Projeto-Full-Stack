@@ -3,6 +3,8 @@ import { createCommentService } from "../services/comments/createComment.service
 import { TCommentRequest } from "../interfaces/comments.interfaces";
 import { listAllCommentsForAnAdService } from "../services/comments/listAllCommentsForAnAd.service";
 import { deleteCommentService } from "../services/comments/deleteComment.service";
+import { retrieveComment } from "../services/comments/retrieveComment.service";
+import { updateComment } from "../services/comments/updateComment.service";
 
 const listAllCommentsForAnAdController = async (
     req: Request,
@@ -28,11 +30,21 @@ const createCommentController = async (req: Request, res: Response) => {
 };
 
 const retrieveCommentController = async (req: Request, res: Response) => {
-    return res.json("Recupera um comentário de um usuário!");
+    const commentId: string = req.params.id;
+
+    const comment = await retrieveComment(commentId);
+
+    return res.json(comment);
 };
 
 const updateCommentController = async (req: Request, res: Response) => {
-    return res.json("Edita um comentário!");
+    const commentId: string = req.params.id;
+
+    const commentData: TCommentRequest = req.body;
+
+    const comment = await updateComment(commentId, commentData);
+
+    return res.json(comment);
 };
 
 const deleteCommentController = async (req: Request, res: Response) => {

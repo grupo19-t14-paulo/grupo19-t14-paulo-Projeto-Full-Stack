@@ -15,7 +15,7 @@ const ensureCommentExistsMiddleware = async (
     });
 
     if (!comment) {
-        throw new AppError("User not found!", 404);
+        throw new AppError("Comment not found!", 404);
     }
 
     return next();

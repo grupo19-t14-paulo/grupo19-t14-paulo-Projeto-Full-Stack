@@ -26,14 +26,15 @@ commentsRoutes.post(
 
 commentsRoutes.get(
     "/users/:id",
-    // ensureCommentExistsMiddleware,
+    ensureCommentExistsMiddleware,
     ensureIsTheCommentOwnerMiddleware,
     retrieveCommentController
 );
 
 commentsRoutes.patch(
     "/:id",
-    // ensureCommentExistsMiddleware,
+    ensureDataIsValidMiddleware(commentSchemaRequest),
+    ensureCommentExistsMiddleware,
     ensureIsTheCommentOwnerMiddleware,
     updateCommentController
 );
