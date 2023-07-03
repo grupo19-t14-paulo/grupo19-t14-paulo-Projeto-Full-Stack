@@ -139,7 +139,13 @@ const AdvertiserPage = () => {
                       <h3>
                         {ads.brand} - {ads.model}
                       </h3>
-                      <p className="description">{ads.description}</p>
+                      {ads.description === "" ? (
+                        <p className="description">
+                          Anúncio não possui descrição!
+                        </p>
+                      ) : (
+                        <p className="description">{ads.description}</p>
+                      )}
                       <div className="divNameUserCard">
                         <span>
                           <h2 className="initials">
