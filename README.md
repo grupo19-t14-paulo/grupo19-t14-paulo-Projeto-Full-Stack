@@ -1064,14 +1064,89 @@ Vazio
 |-----------------------|---------------------------------------------------|
 | 404 Not Found   | User not found! |
 
-
----
-
 ---
 
 ### 3.6. **Editando anúncio**
 
 ### `/adverts/:id`
+
+### Exemplo de Request:
+```
+PATCH /adverts/:id
+Host: http://localhost:3000/adverts/9089dca2-dc69-405a-8dd1-9729dba80a77
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+  "mileage": 15000,
+  "color": "azul",
+  "value": 14000,
+  "price": 13000
+}
+```
+
+### Exemplo de Response:
+```
+200 OK
+```
+```json
+{
+	"id": "9089dca2-dc69-405a-8dd1-9729dba80a77",
+	"brand": "Chevrolet",
+	"model": "Corsinha",
+	"year": "2002",
+	"fuel": "Gasolina / Etanol",
+	"mileage": 15000,
+	"color": "azul",
+	"value": 14000,
+	"price": 13000,
+	"description": "Descrição do corsinha",
+	"active": true,
+	"images": [
+		{
+			"image": "1"
+		},
+		{
+			"image": "2"
+		},
+		{
+			"image": "3"
+		}
+	],
+	"user": {
+		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
+		"name": "user_1 da Silva",
+		"email": "user_2@mail.com",
+		"cpf": "10987654321",
+		"phone": "5541123456789",
+		"birthDate": "2000-12-01",
+		"description": "Descrição teste 2",
+		"type": "Vendedor",
+		"street": "Rua sem saida",
+		"number": "000",
+		"complement": "",
+		"city": "cidade",
+		"state": "estado",
+		"cep": "00000000",
+		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
+	}
+}
+```
+
+### Possíveis Erros:
+| Código do Erro  | Descrição       |
+|-----------------|-----------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 403 Forbidden   | You don't have permission! |
+| 404 Not Found   | User not found. |
+| 404 Not Found   | Ad does not exist. |
+
+
+[ Voltar para os Índices ](#7-índice)
 
 ---
 
