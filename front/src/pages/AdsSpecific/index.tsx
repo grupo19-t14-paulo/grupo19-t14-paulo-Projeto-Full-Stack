@@ -5,12 +5,15 @@ import { AnnouncementContext } from "../../contexts/AnnouncementContext/Announce
 import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
 import { HeaderProfile } from "../../components/HeaderProfile";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IAdvertiser } from "../../interfaces/AdvertsInterfaces";
 
 const AdsSpecificPage = () => {
   const { ad, setAd, userAdvertiser, setUserAdvertiser } =
     useContext(AnnouncementContext);
+
+  const navegate = useNavigate();
+
   const { setUser } = useContext(ContextLogin);
 
   const { userId } = useParams();
@@ -34,6 +37,11 @@ const AdsSpecificPage = () => {
   const userNameHeader2 = `${userNameHeader1 ? userNameHeader1[0] : ""} ${
     userNameHeader1 ? userNameHeader1[1] : ""
   }`;
+
+  const findPercentage = (price: number, fipePrice: number): number => {
+    const value = ((fipePrice - price) / price) * 100;
+    return Number(value.toFixed(2));
+  };
 
   return (
     <>
@@ -73,58 +81,83 @@ const AdsSpecificPage = () => {
         <ContainerAdverts>
           <div className="adsArea">
             <h2 className="advertiserName">Anúncios</h2>
-            <section className="sectionCards">
-              {ad?.map((ads) => (
-                <div className="card" key={ads.id}>
-                  <figure>
-                    {ads.images?.map((img, i) =>
-                      i === 0 ? (
-                        <img key={i} src={img.image} alt="Imagem do veículo" />
-                      ) : (
-                        <img key={i} src="" alt="Imagem do veículo" />
-                      )
-                    )}
-                  </figure>
-                  <div className="infoCard">
-                    <h3>
-                      {ads.brand} - {ads.model}
-                    </h3>
-                    <p className="description">{ads.description}</p>
-                    <div className="divNameUserCard">
-                      <span>
-                        <h2 className="initials">
-                          {userNameHeader1 && userNameHeader1.length > 0
-                            ? userNameHeader1[0][0]
-                            : ""}
-                          {userNameHeader1 && userNameHeader1.length > 1
-                            ? userNameHeader1[1]
-                              ? ` ${userNameHeader1[1][0]}`
-                              : ""
-                            : ""}
-                        </h2>
-                      </span>
-                      <h3>
-                        {userNameHeader2 &&
-                          userNameHeader2.replace("undefined", "").trim()}
-                      </h3>
-                    </div>
+            {ad?.length! > 0 ? (
+              <section className="sectionCards">
+                {ad?.map((ads) =>
+                  ads.active ? (
+                    <div
+                      className="card"
+                      key={ads.id}
+                      onClick={() => navegate(`/product/${ads.id}`)}
+                    >
+                      {findPercentage(Number(ads.price), Number(ads.value)) >
+                      5 ? (
+                        <span className="dollarSign">{"$"}</span>
+                      ) : null}
+                      <figure>
+                        {ads.images?.map((img, i) =>
+                          i === 0 ? (
+                            <img
+                              key={i}
+                              src={img.image}
+                              alt="Imagem do veículo"
+                            />
+                          ) : (
+                            <img key={i} src="" alt="Imagem do veículo" />
+                          )
+                        )}
+                      </figure>
+                      <div className="infoCard">
+                        <h3>
+                          {ads.brand} - {ads.model}
+                        </h3>
+                        {ads.description === "" ? (
+                          <p className="description">
+                            Anúncio não possui descrição!
+                          </p>
+                        ) : (
+                          <p className="description">{ads.description}</p>
+                        )}
 
-                    <div className="divKmPriceYear">
-                      <div className="divKmYear">
-                        <span className="tagInfo">{ads.mileage} KM</span>
-                        <span className="tagInfo">{ads.year}</span>
-                        <p className="price">
-                          {new Intl.NumberFormat("pt-BR", {
-                            style: "currency",
-                            currency: "BRL",
-                          }).format(Number(ads.price))}
-                        </p>
+                        <div className="divNameUserCard">
+                          <span>
+                            <h2 className="initials">
+                              {userNameHeader1 && userNameHeader1.length > 0
+                                ? userNameHeader1[0][0]
+                                : ""}
+                              {userNameHeader1 && userNameHeader1.length > 1
+                                ? userNameHeader1[1]
+                                  ? `${userNameHeader1[1][0]}`
+                                  : ""
+                                : ""}
+                            </h2>
+                          </span>
+                          <h3>
+                            {userNameHeader2 &&
+                              userNameHeader2.replace("undefined", "").trim()}
+                          </h3>
+                        </div>
+
+                        <div className="divKmPriceYear">
+                          <div className="divKmYear">
+                            <span className="tagInfo">{ads.mileage} KM</span>
+                            <span className="tagInfo">{ads.year}</span>
+                            <p className="price">
+                              {new Intl.NumberFormat("pt-BR", {
+                                style: "currency",
+                                currency: "BRL",
+                              }).format(Number(ads.price))}
+                            </p>
+                          </div>
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </div>
-              ))}
-            </section>
+                  ) : null
+                )}
+              </section>
+            ) : (
+              <h2 className="IHaveNoAds">Este vendedor não possuí anúncios!</h2>
+            )}
           </div>
         </ContainerAdverts>
         <FooterBase />

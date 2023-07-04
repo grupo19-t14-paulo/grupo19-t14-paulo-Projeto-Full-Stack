@@ -22,18 +22,23 @@ const CommentsForm = ({advertsId}: CommentsFormProps) => {
         setValue,
         reset
     } = useForm<IComment>({
-        resolver: zodResolver(CommentSchema)
+        resolver: zodResolver(CommentSchema),
+        defaultValues: { comment: "" }, 
     });
 
     const submit: SubmitHandler<TCommentFormProps> = (formData) => {
-        formData.comment = commentText;
+        const commentText = formData.comment.trim();
+        
+        if(!commentText){
+            return;
+        }
+
         createComment(advertsId, formData);
         reset();
     };
 
     const handleButtonClick = (buttonText: string) => {
-        setCommentText((prevCommentText) => prevCommentText + buttonText);
-        setValue("comment", commentText + buttonText);
+        setValue("comment", buttonText);
     };
 
     return (

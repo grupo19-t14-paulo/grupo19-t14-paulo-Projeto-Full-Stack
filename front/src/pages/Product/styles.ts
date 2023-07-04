@@ -107,6 +107,7 @@ const StyledAdvertCard = styled.div`
         line-height: 2.5rem;
         color: var(--color--grey-1);
         font-family: var(--font--lexend);
+        text-transform: capitalize;
     }
 
     > div {
@@ -237,20 +238,22 @@ const StyledGaleryCard = styled.div`
             background-color: var(--color--grey-7);
             border-radius: 0.4rem;
 
-            :hover {
-                transform: scale(1.1);
-                transition: transform 0.3s ease;
-            }
-
             figure {
                 width: 100%;
                 height: 100%;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                overflow: hidden;
 
                 img {
                     width: 100%;
+
+                    :hover {
+                        transform: scale(1.1);
+                        transition: transform 0.3s ease;
+                        cursor: pointer;
+                    }
                 }
             }
         }
@@ -532,12 +535,11 @@ const StyledUserCommentField = styled.div`
             color: var(--color--whiteFixed);
         }
 
-        @media(max-width: 37.563rem) {
+        @media (max-width: 37.563rem) {
             #postCommentButtonNotLogged {
                 left: 55%;
             }
         }
-
     }
 
     #autoCommentButtons {
@@ -564,14 +566,13 @@ const StyledUserCommentField = styled.div`
             }
         }
 
-        @media(min-width: 37.625rem){
+        @media (min-width: 37.625rem) {
             position: relative;
             top: -70px;
         }
     }
 
     @media (min-width: 37.6rem) {
-        
         height: fit-content;
         width: 75.1rem;
         padding: 6.6rem 4.4rem;

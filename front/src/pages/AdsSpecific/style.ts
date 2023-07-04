@@ -74,17 +74,19 @@ const ContainerDivBlue = styled.div`
 
       h1 {
         font-size: 2.25rem;
+
         color: var(--color--whiteFixed);
       }
 
       .paragraph {
         color: var(--color--grey-2);
+
         font-weight: 400;
       }
     }
 
     @media (min-width: 650px) {
-      width: 85%;
+      width: 83%;
     }
   }
 `;
@@ -94,15 +96,26 @@ const ContainerAdverts = styled.section`
   margin-bottom: 235px;
 
   width: 100%;
+  min-height: 60vh;
 
   display: flex;
   justify-content: center;
 
   .adsArea {
-    width: 95%;
+    width: 90%;
+
+    .IHaveNoAds {
+      text-align: center;
+
+      font-size: 2.75rem;
+      font-family: var(--font--lexend);
+
+      color: var(--color--grey-2);
+    }
 
     .advertiserName {
       margin-bottom: 60px;
+      margin-left: -2rem;
     }
 
     .sectionCards {
@@ -119,26 +132,55 @@ const ContainerAdverts = styled.section`
         gap: 16px;
 
         margin-bottom: 35px;
+        margin-right: 16px;
 
         border-radius: 4px;
         border: 1px solid var(--color--grey-8);
 
         background-color: var(--color--grey-10);
 
-        margin-right: 16px;
+        position: relative;
+
+        .dollarSign {
+          padding: 5px 5px;
+
+          width: 1.5rem;
+
+          background-color: var(--color--sucess1);
+
+          color: var(--color--grey-9);
+
+          border-radius: 4px;
+
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          position: absolute;
+          top: 3px;
+          right: 3px;
+        }
 
         figure {
           display: flex;
           align-items: center;
           justify-content: center;
+
           overflow: hidden;
+
+          border-top-left-radius: 4px;
+          border-top-right-radius: 4px;
 
           img {
             width: 100%;
+
             background-color: var(--color--grey-7);
+
             border-top-left-radius: 4px;
             border-top-right-radius: 4px;
+
             transition: 0.8s ease;
+
             object-fit: cover;
           }
 
@@ -158,6 +200,10 @@ const ContainerAdverts = styled.section`
           padding-left: 5px;
           padding-right: 5px;
           padding-bottom: 10px;
+
+          h3 {
+            text-transform: capitalize;
+          }
 
           .nameCar {
             font-size: 16px;
@@ -186,8 +232,8 @@ const ContainerAdverts = styled.section`
             .initials {
               width: 2.65rem;
               height: 2.65rem;
-
               border-radius: 50%;
+              padding: 15px;
 
               display: flex;
               align-items: center;
@@ -213,8 +259,10 @@ const ContainerAdverts = styled.section`
             .divKmYear {
               display: flex;
               gap: 5px;
+
               width: 100%;
 
+              position: relative;
               .tagInfo {
                 padding: 3px;
 
@@ -237,6 +285,9 @@ const ContainerAdverts = styled.section`
                 padding-left: 110px;
 
                 color: var(--color--grey-1);
+
+                position: absolute;
+                right: 5px;
               }
             }
           }
@@ -250,7 +301,7 @@ const ContainerAdverts = styled.section`
       }
     }
     @media (min-width: 650px) {
-      width: 85%;
+      width: 90%;
 
       .sectionCards {
         flex-wrap: wrap;
