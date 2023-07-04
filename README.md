@@ -559,42 +559,66 @@ Content-type: application/json
 
 O objeto Anúncio é definido como:
 
-| Campo      | Tipo   | Descrição                                       |
-| -----------|--------|-------------------------------------------------|
-| id         | number | Identificador único do usuário.                 |
-| content    | string | Descrição do post.                              |
-| createdAt  | date   | Data de criação.                                |
-| user       | object | Informações do usuário que criou o post.        |
-| post       | object | Informações do post que o usuário comentou.     |
+| Campo       | Tipo   | Descrição                                       |
+| ------------|--------|-------------------------------------------------|
+| id          | string | Identificador único do usuário.                 |
+| brand       | string | Marca do veículo.                               |
+| model       | string   | Modelo do veículo.                            |
+| year        | string | Ano de fabricação do veículo.    	         |
+| fuel        | string | Tipo de combustível.    			 |
+| mileage     | number | Quilometragem do veículo.   		         |
+| color       | string | Cor do veículo.    				 |
+| value       | number | Valor fipe do veículo.     			 |
+| price       | number | Valor de venda do veículo.     		 |
+| description | string | Descrição do veículo.     			 |
+| active      | boolean| Booleano para saber se o anúncio está ativo.    |
+| images      | array  | Um array de imagens do veículo.     		 |
 
 ### Endpoints
 
-| Método   | Rota           | Descrição                               |
-|----------|----------------|-----------------------------------------|
-| POST     | /posts/comment | Criação de comentário do post.          |
+| Método | Rota                 | Descrição                              |
+|--------|----------------------|----------------------------------------|
+| POST   | /adverts             | Criação de um anúncio.               	 |
+| GET    | /adverts             | Lista todos os anúncios.               |
+| GET    | /adverts/filters     | Lista os anúncios com filtro.       	 |
+| GET    | /adverts/:id         | Lista um anúncio específico.           |
+| GET    | /adverts/seller/:id  | Lista todos os anúncios de um vendedor.|
+| PATCH  | /adverts/:id         | Edita as informações do anúncio.     	 |
+| DELETE | /adverts/:id         | Deleta o anúncio.               	 |
+| GET    | /adverts/images/:id  | Lista as imagens do anúncio.   	 |
+| POST   | /adverts/images/:id  | Cria uma imagen no anúncio.  		 |
+| DELETE | /adverts/images/:id  | Deleta uma imagem do anúncio.  	 |
 
 [ Voltar para os Índices ](#7-índice)
 
 ---
 
-### 3.1. **Criação de comentário de post**
+### 3.1. **Criação do anúncio**
 
-### `/posts/comment`
+### `/adverts`
 
 ### Exemplo de Request:
 ```
-POST /posts/comment
-Host: http://localhost:3000/posts/comment
-Authorization: None
+POST /adverts
+Host: http://localhost:3000/adverts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
 ```
 
 ### Parâmetros da Requisição:
-| Parâmetro   | Tipo        | Descrição                      |
-|-------------|-------------|--------------------------------|
-| content     | string      | Conteúdo do post               |
-| userId      | number      | Identificador único do usuário |
-| PostId      | number      | Identificador único do post    |
+| Parâmetro   | Tipo   | Descrição                      		 |
+|-------------|--------|-------------------------------------------------|
+| brand       | string | Marca do veículo.                               |
+| model       | string | Modelo do veículo.                              |
+| year        | string | Ano de fabricação do veículo.    	         |
+| fuel        | string | Tipo de combustível.    			 |
+| mileage     | number | Quilometragem do veículo.   		         |
+| color       | string | Cor do veículo.    				 |
+| value       | number | Valor fipe do veículo.     			 |
+| price       | number | Valor de venda do veículo.     		 |
+| description | string | Descrição do veículo.     			 |
+| active      | boolean| Booleano para saber se o anúncio está ativo.    |
+| images      | array  | Um array de imagens do veículo.     		 |
 
 
 ### Corpo da Requisição:
