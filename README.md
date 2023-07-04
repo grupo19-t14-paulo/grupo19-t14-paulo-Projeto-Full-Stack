@@ -1190,11 +1190,101 @@ Vazio
 
 ### `/adverts/images/:id`
 
+### Exemplo de Request:
+```
+POST /adverts/images/:id
+Host: http://localhost:3000/adverts/images/9089dca2-dc69-405a-8dd1-9729dba80a77
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo   | Descrição                      		 |
+|-------------|--------|-------------------------------------------------|
+| image       | string | Link da imagem.                                 |
+
+
+
+### Corpo da Requisição:
+```json
+{
+	"image": "https://i.pinimg.com/736x/33/75/19/3375192ae9373032e9eec6ff5366a32f.jpg"
+}
+```
+
+### Exemplo de Response:
+```
+201 Created
+```
+```json
+{
+	"id": "a3e0a93b-7aeb-485a-a3b9-8024e1b39872",
+	"image": "https://i.pinimg.com/736x/33/75/19/3375192ae9373032e9eec6ff5366a32f.jpg"
+}
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                                         |
+|-----------------------|---------------------------------------------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 404 Not Found   | Ad does not exist. |
+| 409 Conflict   | Image already exists. |
+
+
+[ Voltar para os Índices ](#7-índice)
+
+
 ---
 
 ### 3.8.1 **Listando a imagen do anúncio**
 
 ### `/adverts/images/:id`
+
+### Exemplo de Request:
+```
+POST /adverts/images/:id
+Host: http://localhost:3000/adverts/images/9089dca2-dc69-405a-8dd1-9729dba80a77
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+200 Ok
+```
+```json
+[
+	{
+		"id": "978743c4-2286-484a-bfd5-6f4c8d72dc3b",
+		"image": "1"
+	},
+	{
+		"id": "49804554-45be-44a1-b033-af1c1eb9b27a",
+		"image": "3"
+	},
+	{
+		"id": "5db4a74a-b04b-4e28-8a45-24066fa1af1c",
+		"image": "2"
+	},
+	{
+		"id": "a3e0a93b-7aeb-485a-a3b9-8024e1b39872",
+		"image": "https://i.pinimg.com/736x/33/75/19/3375192ae9373032e9eec6ff5366a32f.jpg"
+	}
+]
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                                         |
+|-----------------------|---------------------------------------------------|
+| 404 Not Found   | Ad does not exist. |
+
+[ Voltar para os Índices ](#7-índice)
 
 ---
 
@@ -1202,8 +1292,35 @@ Vazio
 
 ### `/adverts/images/:id`
 
+### Exemplo de Request:
+```
+DELETE /adverts/images/:id
+Host: http://localhost:3000/adverts/images/a3e0a93b-7aeb-485a-a3b9-8024e1b39872
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+204 No content
+```
+
+### Possíveis Erros:
+| Código do Erro  | Descrição       |
+|-----------------|-----------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 404 Not Found   | User not found. |
+
 
 [ Voltar para os Índices ](#7-índice)
+
+---
 
 ## 4. **Repost**
 
