@@ -143,10 +143,17 @@ A autenticação é feita por Bearer token, ao fazer login.
     - [PATCH - /users/resetpassword/:token](#16-resetando-a-senha-do-usuário)
 - [Login](#2-login)
   - [POST - /login](#21-login-no-site)
-- [Posts](#3-posts)
-    - [POST - /posts](#31-criação-de-posts)
-    - [GET - /posts](#32-listar-todos-os-posts)
-    - [GET - /posts/:user_id](#33-listar-posts-por-user-id)
+- [Anúncio](#3-anúncio)
+    - [POST - /adverts](#31-criação-do-anúncio)
+    - [GET - /adverts](#32-listando-anúncios)
+    - [GET - /adverts/filters](#33-listando-anúncios-com-filtro)
+    - [GET - /adverts/:id](#34-listando-anúncio-pelo-id)
+    - [GET - /adverts/seller/:id](#35-listando-anúncios-do-vendedor)
+    - [PATCH - /adverts/:id](#36-editando-anúncio)
+    - [DELETE - /adverts/:id](#37-deletando-anúncio)
+    - [POST - /adverts/images/:id](#38-criando-a-imagem-do-anúncio)
+    - [GET - /adverts/images/:id](#381-listando-a-imagem-do-anúncio)
+    - [DELETE - /adverts/images/:id](#382-deletando-a-imagem-do-anúncio)
 - [CommentPost](#4-Comentário-de-post)
     - [POST - /posts/comment](#41-criação-de-comentário-de-post)
 - [Reposts](#5-Repost)
@@ -875,19 +882,25 @@ Vazio
 
 ---
 
-### 3.7. **Criando a imagem do anúncio**
+### 3.7. **Deletando anúncio**
+
+### `/adverts/:id`
+
+---
+
+### 3.8. **Criando a imagem do anúncio**
 
 ### `/adverts/images/:id`
 
 ---
 
-### 3.8. **Listando as imagens do anúncio**
+### 3.8.1 **Listando a imagen do anúncio**
 
 ### `/adverts/images/:id`
 
 ---
 
-### 3.9. **Deletando a imagem do anúncio**
+### 3.8.2 **Deletando a imagem do anúncio**
 
 ### `/adverts/images/:id`
 
