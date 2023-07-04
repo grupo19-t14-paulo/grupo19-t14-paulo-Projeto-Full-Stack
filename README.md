@@ -1322,50 +1322,55 @@ Vazio
 
 ---
 
-## 4. **Repost**
+## 4. **Comentário**
 
 O objeto Repost é definido como:
 
 | Campo      | Tipo   | Descrição                                       |
 | -----------|--------|-------------------------------------------------|
-| id         | number | Identificador único do usuário.                 |
-| createdAt  | date   | Data de criação.                                |
-| post       | object | Informações do post que o usuário comentou.     |
+| id         | number | Identificador único do comentário.              |
+| comment    | string | Comentário do anúncio.                          |
+| created_at | string | Data e hora do comentário.                      |
+| user       | object | Objeto com informações do usuário.              |
+| advert     | object | Objeto com informações do anúncio.              |
 
 ### Endpoints
 
 | Método   | Rota      | Descrição                           |
 |----------|-----------|-------------------------------------|
-| POST     | /reposts  | Criação de repost do post.          |
+| POST   | /comments/:id               | Cria um comentário em um anúncio.                               |
+| GET    | /comments/:id               | Lista todos os comentários do anúncio.                          |
+| GET    | /comments/users/:id         | Lista todos os comentários do anúncio de um usuário específico. |
+| PATCH  | /comments/:id               | Edita um comentário.  						 |
+| DELETE | /comments/:id               | deleta um comentário.  					 |
+
 
 [ Voltar para os Índices ](#7-índice)
 
 ---
 
-### 4.1. **Criação de repost**
+### 4.1. **Criação do comentário**
 
-### `/reposts`
+### `/comments/:id `
 
 ### Exemplo de Request:
 ```
-POST /reposts
-Host: http://localhost:3000/reposts
-Authorization: None
+POST /comments/:id 
+Host: http://localhost:3000/comments/9089dca2-dc69-405a-8dd1-9729dba80a77
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
 ```
 
 ### Parâmetros da Requisição:
 | Parâmetro   | Tipo        | Descrição                      |
 |-------------|-------------|--------------------------------|
-| userId      | number      | Identificador único do usuário |
-| PostId      | number      | Identificador único do post    |
+| comment     | string      | Comentário do anúncio. |
 
 
 ### Corpo da Requisição:
 ```json
 {
-	"userId": 1,
-	"postId": 1
+	"comment": "Era meu, foi furtado em Curitiba"
 }
 ```
 
@@ -1375,106 +1380,144 @@ Content-type: application/json
 ```
 ```json
 {
-    "id": 1,
-    "createdAt": "2023-05-26",
-    "post": {
-        "id": 1,
-        "content": "post",
-        "createdAt": "2023-05-24"
-    }
+	"id": "af92033d-c21d-426a-a9fd-37ee45d309be",
+	"comment": "Era meu, foi furtado em Curitiba",
+	"created_at": "2023-07-04T14:09:03.000Z",
+	"user": {
+		"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
+		"name": "user 1"
+	},
+	"advert": {
+		"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
+	}
 }
 ```
 
 ### Possíveis Erros:
 | Código do Erro        | Descrição                              |
 |-----------------------|----------------------------------------|
-| 400 Bad request       | "'userId' and 'postId' keys required   |
-| 404 Not Found         | User or post not found.                |
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 404 Not Found   | User not found. |
+| 404 Not Found   | Ad not found. |
 
 [ Voltar para os Índices ](#7-índice)
 
 ---
 
-## 5. **Comentário de repost**
+### 4.2. **Listando comentário**
 
-O objeto Comment Repost é definido como:
-
-| Campo      | Tipo   | Descrição                                       |
-| -----------|--------|-------------------------------------------------|
-| id         | number | Identificador único do usuário.                 |
-| createdAt  | date   | Data de criação.                                |
-| content    | string | Descrição do comentario.                        |
-| user       | object | Informações do usuário que criou o post.        |
-| repost     | object | Informações do repost que o usuário comentou.   |
-
-### Endpoints
-
-| Método   | Rota              | Descrição                           |
-|----------|-------------------|-------------------------------------|
-| POST     | /reposts/comment  | Criação de comentario do repost.    |
-
-[ Voltar para os Índices ](#7-índice)
-
----
-
-### 5.1. **Criação de comentário de repost**
-
-### `/reposts/comment`
+### `/comments/:id `
 
 ### Exemplo de Request:
 ```
-POST /reposts/comment
-Host: http://localhost:3000/reposts/comment
+POST /comments/:id 
+Host: http://localhost:3000/comments/9089dca2-dc69-405a-8dd1-9729dba80a77
 Authorization: None
 Content-type: application/json
 ```
 
-### Parâmetros da Requisição:
-| Parâmetro   | Tipo        | Descrição                      |
-|-------------|-------------|--------------------------------|
-| content     | string      | Descrição do comentario.       |
-| userId      | number      | Identificador único do usuário |
-| PostId      | number      | Identificador único do post    |
-
-
 ### Corpo da Requisição:
 ```json
-{
-	"content": "comment repost",
-	"userId": 1,
-	"repostId": 1
-}
+Vazio
 ```
 
 ### Exemplo de Response:
 ```
-201 Created
+200 Ok
 ```
 ```json
-{    
-    "id": 1,
-    "createdAt": "2023-05-26",
-    "content": "comment repost",
-    "user": {
-        "id": 1,
-        "name": "user",
-        "createdAt": "2023-05-24",
-        "lastInteractionDate": "2023-05-26",
-        "dailyInteractions": 2
-    },
-    "repost": {
-        "id": 1,
-        "createdAt": "2023-05-24"
-    }    
-}
+[
+	{
+		"id": "af92033d-c21d-426a-a9fd-37ee45d309be",
+		"comment": "Era meu, foi furtado em Curitiba",
+		"created_at": "2023-07-04T14:09:03.000Z",
+		"user": {
+			"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
+			"name": "user 1"
+		},
+		"advert": {
+			"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
+		}
+	},
+	{
+		"id": "09ec1a28-bff9-433a-9c05-5f09da300702",
+		"comment": "outro comentario",
+		"created_at": "2023-07-04T14:19:34.000Z",
+		"user": {
+			"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
+			"name": "user 1"
+		},
+		"advert": {
+			"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
+		}
+	}
+]
 ```
 
 ### Possíveis Erros:
-| Código do Erro        | Descrição                                         |
-|-----------------------|---------------------------------------------------|
-| 400 Bad request       | 'userId','repostId' and 'content' keys required   |
-| 413 Payload too large | Exceeds the maximum number of characters allowed. |
-| 404 Not Found         | User or repost not found.                         |
+| Código do Erro        | Descrição                              |
+|-----------------------|----------------------------------------|
+| 404 Not Found   | Ad not found. |
+
+[ Voltar para os Índices ](#7-índice)
+
+---
+
+### 4.3. **Listando comentário de um usuário**
+
+### `/comments/users/:id`
+
+### Exemplo de Request:
+```
+POST /comments/:id 
+Host: http://localhost:3000/comments/9089dca2-dc69-405a-8dd1-9729dba80a77
+Authorization: None
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+200 Ok
+```
+```json
+[
+	{
+		"id": "af92033d-c21d-426a-a9fd-37ee45d309be",
+		"comment": "Era meu, foi furtado em Curitiba",
+		"created_at": "2023-07-04T14:09:03.000Z",
+		"user": {
+			"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
+			"name": "user 1"
+		},
+		"advert": {
+			"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
+		}
+	},
+	{
+		"id": "09ec1a28-bff9-433a-9c05-5f09da300702",
+		"comment": "outro comentario",
+		"created_at": "2023-07-04T14:19:34.000Z",
+		"user": {
+			"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
+			"name": "user 1"
+		},
+		"advert": {
+			"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
+		}
+	}
+]
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                              |
+|-----------------------|----------------------------------------|
+| 404 Not Found   | Ad not found. |
 
 [ Voltar para os Índices ](#7-índice)
 
