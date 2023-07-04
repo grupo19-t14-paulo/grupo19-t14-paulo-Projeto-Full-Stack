@@ -632,7 +632,7 @@ Content-type: application/json
   "color": "verde",
   "value": 15000,
   "price": 14000,
-  "description": "Descrição do veículo",
+  "description": "Descrição do corsinha",
   "active": true,
   "images": [{"image":"1"}, {"image":"2"}, {"image":"3"}]
 }
@@ -653,7 +653,7 @@ Content-type: application/json
 	"color": "verde",
 	"value": 15000,
 	"price": 14000,
-	"description": "fjsnjvnfj  lgjsjgfsdngkrawj grelawgn",
+	"description": "Descrição do corsinha",
 	"active": true,
 	"images": [
 		{
@@ -700,61 +700,32 @@ Content-type: application/json
 
 ---
 
----
-
-### 3.1. **Listando anúncio**
+### 3.2. **Listando anúncios**
 
 ### `/adverts`
 
 ### Exemplo de Request:
 ```
-POST /adverts
+GET /adverts
 Host: http://localhost:3000/adverts
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Authorization: None
 Content-type: application/json
 ```
 
-### Parâmetros da Requisição:
-| Parâmetro   | Tipo   | Descrição                      		 |
-|-------------|--------|-------------------------------------------------|
-| brand       | string | Marca do veículo.                               |
-| model       | string | Modelo do veículo.                              |
-| year        | string | Ano de fabricação do veículo.    	         |
-| fuel        | string | Tipo de combustível.    			 |
-| mileage     | number | Quilometragem do veículo.   		         |
-| color       | string | Cor do veículo.    				 |
-| value       | number | Valor fipe do veículo.     			 |
-| price       | number | Valor de venda do veículo.     		 |
-| description | string | Descrição do veículo.     			 |
-| active      | boolean| Booleano para saber se o anúncio está ativo.    |
-| images      | array  | Um array de imagens do veículo.     		 |
-
-
 ### Corpo da Requisição:
 ```json
-{
-  "brand": "Chevrolet",
-  "model": "Corsinha",
-  "year": "2002",
-  "fuel": "Gasolina / Etanol",
-  "mileage": 10000,
-  "color": "verde",
-  "value": 15000,
-  "price": 14000,
-  "description": "Descrição do veículo",
-  "active": true,
-  "images": [{"image":"1"}, {"image":"2"}, {"image":"3"}]
-}
+Vazio
 ```
 
 ### Exemplo de Response:
 ```
-201 Created
+200 Ok
 ```
 ```json
+[
 {
-	"id": "a9cdab46-85a5-4c3d-844d-bd5253fb28dc",
-	"brand": "Chevroleet",
+	"id": "9089dca2-dc69-405a-8dd1-9729dba80a77",
+	"brand": "Chevrolet",
 	"model": "Corsinha",
 	"year": "2002",
 	"fuel": "Gasolina / Etanol",
@@ -762,7 +733,7 @@ Content-type: application/json
 	"color": "verde",
 	"value": 15000,
 	"price": 14000,
-	"description": "fjsnjvnfj  lgjsjgfsdngkrawj grelawgn",
+	"description": "Descrição do corsinha",
 	"active": true,
 	"images": [
 		{
@@ -777,7 +748,48 @@ Content-type: application/json
 	],
 	"user": {
 		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
-		"name": "user_2",
+		"name": "user_1 da Silva",
+		"email": "user_2@mail.com",
+		"cpf": "10987654321",
+		"phone": "5541123456789",
+		"birthDate": "2000-12-01",
+		"description": "Descrição teste 2",
+		"type": "Vendedor",
+		"street": "Rua sem saida",
+		"number": "000",
+		"complement": "",
+		"city": "cidade",
+		"state": "estado",
+		"cep": "00000000",
+		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
+	}
+},
+{
+	"id": "9089dca2-dc69-405a-8dd1-9729dba80a77",
+	"brand": "Chevrolet",
+	"model": "Camaro",
+	"year": "2003",
+	"fuel": "Gasolina / Etanol",
+	"mileage": 10000,
+	"color": "verde",
+	"value": 15000,
+	"price": 14000,
+	"description": "Descrição do camaro",
+	"active": true,
+	"images": [
+		{
+			"image": "1"
+		},
+		{
+			"image": "2"
+		},
+		{
+			"image": "3"
+		}
+	],
+	"user": {
+		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
+		"name": "user_1 da Silva",
 		"email": "user_2@mail.com",
 		"cpf": "10987654321",
 		"phone": "5541123456789",
@@ -793,6 +805,45 @@ Content-type: application/json
 		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
 	}
 }
+]
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                                         |
+|-----------------------|---------------------------------------------------|
+| 404 Not Found   | No products has been found. |
+
+---
+
+### 3.3. **Listando anúncios com filtro**
+
+### `/adverts/filters`
+
+### Exemplo de Request:
+```
+GET /adverts/filters
+Host: http://localhost:3000/adverts/filters
+Authorization: None
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo   | Descrição                      		 |
+|-------------|--------|-------------------------------------------------|
+
+
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+201 Created
+```
+```json
+
 ```
 
 ### Possíveis Erros:
@@ -803,6 +854,42 @@ Content-type: application/json
 | 401 Unauthorized   | Only a seller can create an advert! |
 | 404 Not Found   | User not found. |
 | 409 Conflict   | Ad already exists, check if it's active. |
+
+---
+
+### 3.4. **Listando anúncio pelo id**
+
+### `/adverts/:id`
+
+---
+
+### 3.5. **Listando anúncios do vendedor**
+
+### `/adverts/seller/:id`
+
+---
+
+### 3.6. **Editando anúncio**
+
+### `/adverts/:id`
+
+---
+
+### 3.7. **Criando a imagem do anúncio**
+
+### `/adverts/images/:id`
+
+---
+
+### 3.8. **Listando as imagens do anúncio**
+
+### `/adverts/images/:id`
+
+---
+
+### 3.9. **Deletando a imagem do anúncio**
+
+### `/adverts/images/:id`
 
 
 [ Voltar para os Índices ](#7-índice)
