@@ -23,24 +23,27 @@ const listAdvertsFiltersService = async () => {
     };
 
     adverts.forEach((advert) => {
-      if (!uniqueFilters.brand.includes(advert.brand)) {
-        uniqueFilters.brand.push(advert.brand);
-      }
 
-      if (!uniqueFilters.model.includes(advert.model)) {
-        uniqueFilters.model.push(advert.model);
-      }
+      if (advert.active) {
+        if (!uniqueFilters.brand.includes(advert.brand)) {
+          uniqueFilters.brand.push(advert.brand);
+        }
 
-      if (!uniqueFilters.fuel.includes(advert.fuel)) {
-        uniqueFilters.fuel.push(advert.fuel);
-      }
+        if (!uniqueFilters.model.includes(advert.model)) {
+          uniqueFilters.model.push(advert.model);
+        }
 
-      if (!uniqueFilters.color.includes(advert.color)) {
-        uniqueFilters.color.push(advert.color);
-      }
+        if (!uniqueFilters.fuel.includes(advert.fuel)) {
+          uniqueFilters.fuel.push(advert.fuel);
+        }
 
-      if (!uniqueFilters.year.includes(advert.year)) {
-        uniqueFilters.year.push(advert.year);
+        if (!uniqueFilters.color.includes(advert.color)) {
+          uniqueFilters.color.push(advert.color);
+        }
+
+        if (!uniqueFilters.year.includes(advert.year)) {
+          uniqueFilters.year.push(advert.year);
+        }
       }
     });
 
