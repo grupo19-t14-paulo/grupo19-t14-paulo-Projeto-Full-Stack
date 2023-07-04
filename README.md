@@ -151,15 +151,12 @@ A autenticação é feita por Bearer token, ao fazer login.
     - [GET - /adverts/seller/:id](#35-listando-anúncios-do-vendedor)
     - [PATCH - /adverts/:id](#36-editando-anúncio)
     - [DELETE - /adverts/:id](#37-deletando-anúncio)
-    - [POST - /adverts/images/:id](#38-criando-a-imagem-do-anúncio)
-    - [GET - /adverts/images/:id](#381-listando-a-imagem-do-anúncio)
-    - [DELETE - /adverts/images/:id](#382-deletando-a-imagem-do-anúncio)
+    - [POST - /adverts/images/:id](#381-criando-a-imagem-do-anúncio)
+    - [GET - /adverts/images/:id](#382-listando-a-imagem-do-anúncio)
+    - [DELETE - /adverts/images/:id](#383-deletando-a-imagem-do-anúncio)
 - [CommentPost](#4-Comentário-de-post)
     - [POST - /posts/comment](#41-criação-de-comentário-de-post)
-- [Reposts](#5-Repost)
-    - [POST - /reposts](#51-criação-de-repost)
-- [CommentReposts](#6-Comentário-de-repost)
-    - [POST - /reposts/comment](#61-Criação-de-comentário-de-repost)
+
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
 
@@ -215,6 +212,24 @@ Host: http://localhost:3000/users
 Authorization: None
 Content-type: application/json
 ```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição          |
+|-------------|-------------|--------------------|
+| name       | string      | Nome do usuário. |
+| email    | string      | Email do usuário.  |
+| cpf    | string      | cpf do usuário.  |
+| phone    | string      | Telefone do usuário.  |
+| birthDate    | string      | Data de aniversáio do usuário.  |
+| description    | string      | Descrição do usuário.  |
+| password    | string      | Senha do usuário.  |
+| type    | string      | Tipo de usuário.  |
+| street    | string      | Rua do usuário.  |
+| number    | string      | Número da casa do usuário.  |
+| complement    | string      | Complemento da casa do usuário.  |
+| city    | string      | Cidade onde fica a casa do usuário.  |
+| state    | string      | Estado onde fica a cidade do usuário.  |
+| cep    | string      | Cep da casa do usuário.  |
 
 ### Corpo da Requisição:
 ```json
@@ -337,6 +352,26 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZ
 Content-type: application/json
 ```
 
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição          |
+|-------------|-------------|--------------------|
+| name       | string      | Nome do usuário. |
+| email    | string      | Email do usuário.  |
+| cpf    | string      | cpf do usuário.  |
+| phone    | string      | Telefone do usuário.  |
+| birthDate    | string      | Data de aniversáio do usuário.  |
+| description    | string      | Descrição do usuário.  |
+| password    | string      | Senha do usuário.  |
+| type    | string      | Tipo de usuário.  |
+| street    | string      | Rua do usuário.  |
+| number    | string      | Número da casa do usuário.  |
+| complement    | string      | Complemento da casa do usuário.  |
+| city    | string      | Cidade onde fica a casa do usuário.  |
+| state    | string      | Estado onde fica a cidade do usuário.  |
+| cep    | string      | Cep da casa do usuário.  |
+
+### Todos os parâmetros são opcionais.
+
 ### Corpo da Requisição:
 ```json
 {
@@ -429,6 +464,11 @@ Authorization: None
 Content-type: application/json
 ```
 
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição          |
+|-------------|-------------|--------------------|
+| email       | string      | E-mail do usuário. |
+
 ### Corpo da Requisição:
 ```json
 {
@@ -449,6 +489,7 @@ Content-type: application/json
 ### Possíveis Erros:
 | Código do Erro  | Descrição       |
 |-----------------|-----------------|
+| 400 Bad request         | 'email' required. |
 | 404 Not Found   | User not found. |
 
 
@@ -467,6 +508,11 @@ Host: http://localhost:3000/users/resetpassword/:token
 Authorization: None
 Content-type: application/json
 ```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo        | Descrição          |
+|-------------|-------------|--------------------|
+| password    | string      | Senha do usuário.  |
 
 ### Corpo da Requisição:
 ```json
@@ -488,6 +534,7 @@ Content-type: application/json
 ### Possíveis Erros:
 | Código do Erro  | Descrição       |
 |-----------------|-----------------|
+| 400 Bad request         | 'password' required. |
 | 400 Bad Request | String must contain at least 4 character(s). |
 
 
@@ -555,6 +602,7 @@ Content-type: application/json
 | Código do Erro        | Descrição                  |
 |-----------------------|----------------------------|
 | 400 Bad request       | Invalid email.             |
+| 400 Bad request         | 'email', 'password' required. |
 | 403 Forbidden         | Invalid email or password. |
 
 
