@@ -1154,6 +1154,36 @@ Content-type: application/json
 
 ### `/adverts/:id`
 
+### Exemplo de Request:
+```
+DELETE /adverts/:id
+Host: http://localhost:3000/adverts/9089dca2-dc69-405a-8dd1-9729dba80a77
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+204 No content
+```
+
+### Possíveis Erros:
+| Código do Erro  | Descrição       |
+|-----------------|-----------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 403 Forbidden   | You don't have permission! |
+| 404 Not Found   | User not found. |
+| 404 Not Found   | Ad does not exist. |
+
+
+[ Voltar para os Índices ](#7-índice)
+
 ---
 
 ### 3.8. **Criando a imagem do anúncio**
