@@ -868,11 +868,204 @@ Vazio
 
 ### `/adverts/:id`
 
+### Exemplo de Request:
+```
+GET /adverts/:id
+Host: http://localhost:3000/adverts/9089dca2-dc69-405a-8dd1-9729dba80a77
+Authorization: None
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo   | Descrição                      		 |
+|-------------|--------|-------------------------------------------------|
+| id          | string | Id do anúncio.                                  |
+
+
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+200 Ok
+```
+```json
+{
+	"id": "9089dca2-dc69-405a-8dd1-9729dba80a77",
+	"brand": "Chevrole2et",
+	"model": "Corsinha",
+	"year": "2002",
+	"fuel": "Gasolina / Etanol",
+	"mileage": 10000,
+	"color": "verde",
+	"value": 15000,
+	"price": 14000,
+	"description": "Descrição do corsinha",
+	"active": true,
+	"images": [
+		{
+			"image": "1"
+		},
+		{
+			"image": "2"
+		},
+		{
+			"image": "3"
+		}
+	],
+	"user": {
+		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
+		"name": "user_1 da Silva",
+		"email": "user_2@mail.com",
+		"cpf": "10987654321",
+		"phone": "5541123456789",
+		"birthDate": "2000-12-01",
+		"description": "Descrição teste 2",
+		"type": "Vendedor",
+		"street": "Rua sem saida",
+		"number": "000",
+		"complement": "",
+		"city": "cidade",
+		"state": "estado",
+		"cep": "00000000",
+		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
+	}
+}
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                                         |
+|-----------------------|---------------------------------------------------|
+| 404 Not Found   | Ad does not exist. |
+
+
 ---
 
 ### 3.5. **Listando anúncios do vendedor**
 
 ### `/adverts/seller/:id`
+
+### Exemplo de Request:
+```
+GET /adverts/seller/:id
+Host: http://localhost:3000/adverts/seller/1e3130f2-a783-447e-8f31-d5bddb764223
+Authorization: None
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo   | Descrição                      		 |
+|-------------|--------|-------------------------------------------------|
+| id          | string | id do vendedor.                                 |
+
+
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+200 Ok
+```
+```json
+[
+{
+	"id": "9089dca2-dc69-405a-8dd1-9729dba80a77",
+	"brand": "Chevrolet",
+	"model": "Corsinha",
+	"year": "2002",
+	"fuel": "Gasolina / Etanol",
+	"mileage": 10000,
+	"color": "verde",
+	"value": 15000,
+	"price": 14000,
+	"description": "Descrição do corsinha",
+	"active": true,
+	"images": [
+		{
+			"image": "1"
+		},
+		{
+			"image": "2"
+		},
+		{
+			"image": "3"
+		}
+	],
+	"user": {
+		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
+		"name": "user_1 da Silva",
+		"email": "user_2@mail.com",
+		"cpf": "10987654321",
+		"phone": "5541123456789",
+		"birthDate": "2000-12-01",
+		"description": "Descrição teste 2",
+		"type": "Vendedor",
+		"street": "Rua sem saida",
+		"number": "000",
+		"complement": "",
+		"city": "cidade",
+		"state": "estado",
+		"cep": "00000000",
+		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
+	}
+},
+{
+	"id": "9089dca2-dc69-405a-8dd1-9729dba80a77",
+	"brand": "Chevrolet",
+	"model": "Camaro",
+	"year": "2003",
+	"fuel": "Gasolina / Etanol",
+	"mileage": 10000,
+	"color": "verde",
+	"value": 15000,
+	"price": 14000,
+	"description": "Descrição do camaro",
+	"active": true,
+	"images": [
+		{
+			"image": "1"
+		},
+		{
+			"image": "2"
+		},
+		{
+			"image": "3"
+		}
+	],
+	"user": {
+		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
+		"name": "user_1 da Silva",
+		"email": "user_2@mail.com",
+		"cpf": "10987654321",
+		"phone": "5541123456789",
+		"birthDate": "2000-12-01",
+		"description": "Descrição teste 2",
+		"type": "Vendedor",
+		"street": "Rua sem saida",
+		"number": "000",
+		"complement": "",
+		"city": "cidade",
+		"state": "estado",
+		"cep": "00000000",
+		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
+	}
+}
+]
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                                         |
+|-----------------------|---------------------------------------------------|
+| 404 Not Found   | User not found! |
+
+
+---
 
 ---
 
