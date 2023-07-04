@@ -421,10 +421,9 @@ const StyledComment = styled.li`
     width: 20px;
     position: relative;
     right: -95%;
-    top: -70%;
+    top: -60%;
   }
 
-<<<<<<< HEAD
   #userDataComment {
     width: 100%;
     display: flex;
@@ -435,13 +434,6 @@ const StyledComment = styled.li`
     h3 {
       font-size: 1.4rem;
       color: var(--color--grey-1);
-=======
-    img {
-        width: 20px;
-        position: relative;
-        right: -95%;
-        top: -60%;
->>>>>>> d81da7e26a0f75ccb405feb984332e96f6b0affe
     }
 
     > div {
