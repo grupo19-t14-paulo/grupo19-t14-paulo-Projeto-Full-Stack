@@ -21,9 +21,6 @@ A Kenzie Shop é o seu destino ideal para comprar e vender veículos. Com uma am
 Kenzie Shop é um marketplace onde as pessoas podem Comprar/Anunciar veículos
 
 
-----
-
-
 # Desenvolvedores
 
 ### Petrarca Cavalcante
