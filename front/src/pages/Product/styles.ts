@@ -394,7 +394,7 @@ const StyledComment = styled.li`
         width: 20px;
         position: relative;
         right: -95%;
-        top: -70%;
+        top: -60%;
     }
 
     #userDataComment {
