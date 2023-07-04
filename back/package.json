@@ -10,6 +10,12 @@
     "start": "node dist/server.js"
   },
   "dependencies": {
+    "@types/bcryptjs": "^2.4.2",
+    "@types/cors": "^2.8.13",
+    "@types/express": "^4.17.17",
+    "@types/jsonwebtoken": "^9.0.2",
+    "@types/nodemailer": "^6.4.8",
+    "@types/pg": "^8.10.1",
     "axios": "^1.4.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
@@ -23,20 +29,14 @@
     "nodemailer": "^6.9.3",
     "pg": "^8.11.0",
     "reflect-metadata": "^0.1.13",
-    "typeorm": "^0.3.16",
-    "zod": "^3.21.4",
-    "@types/bcryptjs": "^2.4.2",
-    "@types/cors": "^2.8.13",
-    "@types/express": "^4.17.17",
-    "@types/jsonwebtoken": "^9.0.2",
-    "@types/nodemailer": "^6.4.8",
-    "@types/pg": "^8.10.1",
     "ts-node-dev": "^2.0.0",
-    "typescript": "^5.0.4"
+    "tsup": "^7.1.0",
+    "typeorm": "^0.3.16",
+    "typescript": "^5.0.4",
+    "zod": "^3.21.4"
   },
-  "devDependencies": {
-    
-  },
-  "engines": {"node": ">=16 <17"}
-  
+  "devDependencies": {},
+  "engines": {
+    "node": "18.13.0"
+  }
 }
