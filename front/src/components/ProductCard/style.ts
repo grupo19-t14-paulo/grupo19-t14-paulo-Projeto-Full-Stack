@@ -24,7 +24,7 @@ export const StyledProductCard = styled.li`
         background-color: var(--color--grey-7);
 
         border: 2px solid var(--color--grey-7);
-        background-color: red;
+        
 
         img {
             max-width: 100%;
