@@ -1464,15 +1464,15 @@ Vazio
 
 ---
 
-### 4.3. **Listando comentário de um usuário**
+### 4.3. **Listando um comentário do usuário**
 
 ### `/comments/users/:id`
 
 ### Exemplo de Request:
 ```
-POST /comments/:id 
-Host: http://localhost:3000/comments/9089dca2-dc69-405a-8dd1-9729dba80a77
-Authorization: None
+POST /comments/users/:id
+Host: http://localhost:3000/comments/users/af92033d-c21d-426a-a9fd-37ee45d309be
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
 ```
 
@@ -1486,38 +1486,114 @@ Vazio
 200 Ok
 ```
 ```json
-[
-	{
-		"id": "af92033d-c21d-426a-a9fd-37ee45d309be",
-		"comment": "Era meu, foi furtado em Curitiba",
-		"created_at": "2023-07-04T14:09:03.000Z",
-		"user": {
-			"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
-			"name": "user 1"
-		},
-		"advert": {
-			"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
-		}
+{
+	"id": "af92033d-c21d-426a-a9fd-37ee45d309be",
+	"comment": "Era meu, foi furtado em Curitiba",
+	"created_at": "2023-07-04T14:09:03.000Z",
+	"user": {
+		"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
+		"name": "user 1"
 	},
-	{
-		"id": "09ec1a28-bff9-433a-9c05-5f09da300702",
-		"comment": "outro comentario",
-		"created_at": "2023-07-04T14:19:34.000Z",
-		"user": {
-			"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
-			"name": "user 1"
-		},
-		"advert": {
-			"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
-		}
+	"advert": {
+		"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
 	}
-]
+}
 ```
 
 ### Possíveis Erros:
 | Código do Erro        | Descrição                              |
 |-----------------------|----------------------------------------|
-| 404 Not Found   | Ad not found. |
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 403 Forbidden   | Only the owner can manage this comment! |
+| 404 Not Found   | Comment not found! |
+
+[ Voltar para os Índices ](#7-índice)
+
+---
+
+### 4.4. **Editando um comentário do usuário**
+
+### `/comments/:id`
+
+### Exemplo de Request:
+```
+POST /comments/:id
+Host: http://localhost:3000/comments/09ec1a28-bff9-433a-9c05-5f09da300702
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+{
+	"comment": "Por fora é lindo, por dentro só ferrugem! "
+}
+```
+
+### Exemplo de Response:
+```
+200 Ok
+```
+```json
+{
+	"id": "09ec1a28-bff9-433a-9c05-5f09da300702",
+	"comment": "Por fora é lindo, por dentro só ferrugem! ",
+	"created_at": "2023-07-04T14:19:34.000Z",
+	"user": {
+		"id": "a1788caf-893f-47c6-8ba8-1efef30ece37",
+		"name": "user 1"
+	},
+	"advert": {
+		"id": "9089dca2-dc69-405a-8dd1-9729dba80a77"
+	}
+}
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                              |
+|-----------------------|----------------------------------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 403 Forbidden   | Only the owner can manage this comment! |
+| 404 Not Found   | Comment not found! |
+
+[ Voltar para os Índices ](#7-índice)
+
+---
+
+### 4.5. **Deletando um comentário do usuário**
+
+### `/comments/:id`
+
+### Exemplo de Request:
+```
+POST /comments/:id
+Host: http://localhost:3000/comments/09ec1a28-bff9-433a-9c05-5f09da300702
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Corpo da Requisição:
+```json
+Vazio
+```
+
+### Exemplo de Response:
+```
+204 No content
+```
+```json
+
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                              |
+|-----------------------|----------------------------------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 403 Forbidden   | Only the owner can manage this comment! |
+| 404 Not Found   | Comment not found! |
 
 [ Voltar para os Índices ](#7-índice)
 
