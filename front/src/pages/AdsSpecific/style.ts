@@ -259,8 +259,10 @@ const ContainerAdverts = styled.section`
             .divKmYear {
               display: flex;
               gap: 5px;
+
               width: 100%;
 
+              position: relative;
               .tagInfo {
                 padding: 3px;
 
@@ -283,6 +285,9 @@ const ContainerAdverts = styled.section`
                 padding-left: 110px;
 
                 color: var(--color--grey-1);
+
+                position: absolute;
+                right: 5px;
               }
             }
           }
