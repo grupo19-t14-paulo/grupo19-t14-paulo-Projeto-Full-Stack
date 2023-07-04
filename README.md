@@ -602,7 +602,7 @@ Content-type: application/json
 | Código do Erro        | Descrição                  |
 |-----------------------|----------------------------|
 | 400 Bad request       | Invalid email.             |
-| 400 Bad request         | 'email', 'password' required. |
+| 400 Bad request       | 'email', 'password' required. |
 | 403 Forbidden         | Invalid email or password. |
 
 
@@ -744,6 +744,7 @@ Content-type: application/json
 ### Possíveis Erros:
 | Código do Erro        | Descrição                                         |
 |-----------------------|---------------------------------------------------|
+| 400 Bad request       | 'brand', 'model','year', 'fuel','mileage', 'color','value', 'price', 'description','active' required. |
 | 401 Unauthorized   | Invalid token. |
 | 401 Unauthorized   | No token has been sent. |
 | 401 Unauthorized   | Only a seller can create an advert! |
@@ -1234,7 +1235,7 @@ Vazio
 
 ---
 
-### 3.8. **Criando a imagem do anúncio**
+### 3.8.1 **Criando a imagem do anúncio**
 
 ### `/adverts/images/:id`
 
@@ -1274,6 +1275,7 @@ Content-type: application/json
 ### Possíveis Erros:
 | Código do Erro        | Descrição                                         |
 |-----------------------|---------------------------------------------------|
+| 400  Bad request  | 'image' required. |
 | 401 Unauthorized   | Invalid token. |
 | 401 Unauthorized   | No token has been sent. |
 | 404 Not Found   | Ad does not exist. |
@@ -1285,13 +1287,13 @@ Content-type: application/json
 
 ---
 
-### 3.8.1 **Listando a imagen do anúncio**
+### 3.8.2 **Listando a imagen do anúncio**
 
 ### `/adverts/images/:id`
 
 ### Exemplo de Request:
 ```
-POST /adverts/images/:id
+GET /adverts/images/:id
 Host: http://localhost:3000/adverts/images/9089dca2-dc69-405a-8dd1-9729dba80a77
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
@@ -1336,7 +1338,7 @@ Vazio
 
 ---
 
-### 3.8.2 **Deletando a imagem do anúncio**
+### 3.8.3 **Deletando a imagem do anúncio**
 
 ### `/adverts/images/:id`
 
@@ -1444,6 +1446,7 @@ Content-type: application/json
 ### Possíveis Erros:
 | Código do Erro        | Descrição                              |
 |-----------------------|----------------------------------------|
+| 400 Bad request   | 'comment' required. |
 | 401 Unauthorized   | Invalid token. |
 | 401 Unauthorized   | No token has been sent. |
 | 404 Not Found   | User not found. |
@@ -1459,7 +1462,7 @@ Content-type: application/json
 
 ### Exemplo de Request:
 ```
-POST /comments/:id 
+GET /comments/:id 
 Host: http://localhost:3000/comments/9089dca2-dc69-405a-8dd1-9729dba80a77
 Authorization: None
 Content-type: application/json
@@ -1518,7 +1521,7 @@ Vazio
 
 ### Exemplo de Request:
 ```
-POST /comments/users/:id
+GET /comments/users/:id
 Host: http://localhost:3000/comments/users/af92033d-c21d-426a-a9fd-37ee45d309be
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
@@ -1566,7 +1569,7 @@ Vazio
 
 ### Exemplo de Request:
 ```
-POST /comments/:id
+PATCH /comments/:id
 Host: http://localhost:3000/comments/09ec1a28-bff9-433a-9c05-5f09da300702
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
@@ -1616,7 +1619,7 @@ Content-type: application/json
 
 ### Exemplo de Request:
 ```
-POST /comments/:id
+DELETE /comments/:id
 Host: http://localhost:3000/comments/09ec1a28-bff9-433a-9c05-5f09da300702
 Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
 Content-type: application/json
