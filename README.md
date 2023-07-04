@@ -151,11 +151,16 @@ A autenticação é feita por Bearer token, ao fazer login.
     - [GET - /adverts/seller/:id](#35-listando-anúncios-do-vendedor)
     - [PATCH - /adverts/:id](#36-editando-anúncio)
     - [DELETE - /adverts/:id](#37-deletando-anúncio)
-    - [POST - /adverts/images/:id](#381-criando-a-imagem-do-anúncio)
-    - [GET - /adverts/images/:id](#382-listando-a-imagem-do-anúncio)
-    - [DELETE - /adverts/images/:id](#383-deletando-a-imagem-do-anúncio)
-- [CommentPost](#4-Comentário-de-post)
-    - [POST - /posts/comment](#41-criação-de-comentário-de-post)
+    - [POST - /adverts/images/:id](#38-criando-a-imagem-do-anúncio)
+    - [GET - /adverts/images/:id](#381-listando-a-imagem-do-anúncio)
+    - [DELETE - /adverts/images/:id](#382-deletando-a-imagem-do-anúncio)
+- [Comentário](#4-comentário)
+    - [POST - /comments/:id](#41-criação-do-comentário)
+    - [GET - /comments/:id](#42-listando-comentário)
+    - [GET - /comments/users/:id](#43-listando-um-comentário-do-usuário)
+    - [PATCH - /comments/:id](#44-editando-um-comentário-do-usuário)
+    - [DELETE - /comments/:id](#45-deletando-um-comentário-do-usuário)
+    
 
 
 [ Voltar para o topo ](#tabela-de-conteúdos)
@@ -1235,7 +1240,7 @@ Vazio
 
 ---
 
-### 3.8.1 **Criando a imagem do anúncio**
+### 3.8 **Criando a imagem do anúncio**
 
 ### `/adverts/images/:id`
 
@@ -1287,7 +1292,7 @@ Content-type: application/json
 
 ---
 
-### 3.8.2 **Listando a imagen do anúncio**
+### 3.8.1 **Listando a imagem do anúncio**
 
 ### `/adverts/images/:id`
 
@@ -1338,7 +1343,7 @@ Vazio
 
 ---
 
-### 3.8.3 **Deletando a imagem do anúncio**
+### 3.8.2 **Deletando a imagem do anúncio**
 
 ### `/adverts/images/:id`
 
@@ -1633,9 +1638,6 @@ Vazio
 ### Exemplo de Response:
 ```
 204 No content
-```
-```json
-
 ```
 
 ### Possíveis Erros:
