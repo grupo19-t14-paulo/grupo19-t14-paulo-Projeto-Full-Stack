@@ -14,7 +14,7 @@ import {
   StyledUserCommentField,
 } from "./styles";
 import FooterBase from "../../components/Footer";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate, useParams, Link } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { api } from "../../services/api";
 import { HeaderProfile } from "../../components/HeaderProfile";
@@ -130,10 +130,10 @@ const DinamicProductPage = () => {
   const toWhatsapp = (phone: string, text: string) => {
     const checkPrefix = phone.slice(0, 2);
     if (checkPrefix === "55") {
-      return (window.location.href = `https://api.whatsapp.com/send?phone=${phone}&text=Olá, estou interessado em obter mais informações sobre o anúncio do ${text}`);
+      return `https://api.whatsapp.com/send?phone=${phone}&text=Olá, estou interessado em obter mais informações sobre o anúncio do ${text}`;
     }
 
-    return (window.location.href = `https://api.whatsapp.com/send?phone=55${phone}&text=Olá, estou interessado em obter mais informações sobre o anúncio do ${text}`);
+    return `https://api.whatsapp.com/send?phone=55${phone}&text=Olá, estou interessado em obter mais informações sobre o anúncio do ${text}`;
   };
 
   return (
@@ -185,13 +185,14 @@ const DinamicProductPage = () => {
                     })}
                   </h3>
                 </div>
-                <Button
-                  buttonStyle="brand1-medium"
-                  onClick={() => toWhatsapp(advert.user.phone!, advert.model)}
-                  disable={!user}
+
+                <Link
+                  className="link"
+                  to={toWhatsapp(advert.user.phone!, advert.model)}
+                  target="_blank"
                 >
                   Comprar
-                </Button>
+                </Link>
               </StyledAdvertCard>
               <StuledDescriptionField>
                 <h2>Descrição</h2>
