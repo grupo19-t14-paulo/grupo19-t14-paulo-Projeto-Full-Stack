@@ -6,7 +6,7 @@ class Images {
   @PrimaryGeneratedColumn("uuid")
   id: string;
 
-  @Column({ type: "varchar", length: 1500 })
+  @Column({ length: 1500 })
   image: string;
 
   @ManyToOne(() => Adverts, (announcement) => announcement.images, {
