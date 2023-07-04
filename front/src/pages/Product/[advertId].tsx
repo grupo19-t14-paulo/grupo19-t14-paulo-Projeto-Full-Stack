@@ -62,7 +62,7 @@ interface IAdvertData {
 const DinamicProductPage = () => {
   const navigate = useNavigate();
 
-  const { listComments, listCommentsProduct } = useContext(ContextComment);
+  const { listComments, listCommentsProduct, steCommentId, retiveComment } = useContext(ContextComment);
   const { user } = useContext(ContextLogin);
   const { getUserColor, createInitials } = useContext(ContextRegister);
 
@@ -71,6 +71,7 @@ const DinamicProductPage = () => {
   const [modalOpenMenuComment, setModalOpenMenuComment] = useState(false);
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [showImagesModal, setShowImagesModal] = useState<boolean>(false);
+  const [menuModalStyle, setMenuModalStyle] = useState({ display: "block" });
   const toggleModal = () => setShowImagesModal(!showImagesModal);
 
   const { advertId } = useParams();
@@ -257,7 +258,13 @@ const DinamicProductPage = () => {
                     <p id="commentParagraph">{comment.comment}</p>
                     {user?.name === comment.user.name && (
                       <img
-                        onClick={() => handleMenuClick(comment.id)}
+                        onClick={() => 
+                          { handleMenuClick(comment.id);
+                            steCommentId(comment.id);
+                            retiveComment(comment.id);
+                            setMenuModalStyle({ display: "block" });
+                          }
+                        }
                         src={MenuImg}
                         alt="Menu"
                       />
@@ -268,6 +275,8 @@ const DinamicProductPage = () => {
                         setModalOpenMenuComment={setModalOpenMenuComment}
                         setSelectedCard={setSelectedCard}
                         selectedCard={selectedCard}
+                        menuModalStyle ={menuModalStyle}
+                        setMenuModalStyle={setMenuModalStyle}
                       />
                     )}
                   </StyledComment>
