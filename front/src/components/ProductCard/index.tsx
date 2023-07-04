@@ -34,6 +34,8 @@ const ProductCard = ({
     const navigate = useNavigate();
     const { getUserColor, createInitials } = useContext(ContextRegister)
 
+    const genericErrorImg = "https://cdn-icons-png.flaticon.com/512/4380/4380788.png"
+
     const findPercentage = (price: number, fipePrice: number): number => {
         const value = ((fipePrice - price) / price) * 100;
         return Number(value.toFixed(2));
@@ -64,7 +66,7 @@ const ProductCard = ({
                     <span>{"$"}</span>
                 ) : null}
 
-                <img src={img} alt={title}/>
+                <img src={img || genericErrorImg } alt={title} />
             </div>
             <div>
                 <h3>{title}</h3>

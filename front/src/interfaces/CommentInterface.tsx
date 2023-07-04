@@ -13,6 +13,11 @@ export interface IContextComment {
   listCommentsProduct: (advertsId: string) => Promise<void>;
   listComments: ICommentList[] | undefined;
   deleteComment: (commentId: string) => Promise<void>;
+  toEdit: (data: INewCommentData) => Promise<void>;
+  steCommentId: React.Dispatch<React.SetStateAction<string | undefined>>;
+  commentId: string | undefined;
+  retiveComment: (commentId: string) => Promise<void>;
+  retiveComments: INewCommentData | undefined
 }
 
 export interface IComment {
@@ -35,6 +40,19 @@ export interface ICommentList {
   };
   advert?: {
     id: string;
+  };
+}
+
+export interface INewCommentData {
+  id?: string;
+  comment?: string;
+  created_at?: string;
+  user?: {
+    id?: string;
+    name?: string;
+  };
+  advert?: {
+    id?: string;
   };
 }
 

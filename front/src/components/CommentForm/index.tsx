@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext } from "react";
 import { ContextComment } from "../../contexts/CommentContex/CommentContex";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { CommentSchema, TCommentFormProps } from "./commentFormSchema";
@@ -11,8 +11,6 @@ const CommentsForm = ({advertsId}: CommentsFormProps) => {
 
     const { createComment } = useContext(ContextComment);
     const { user } = useContext(ContextLogin);
-
-    const [commentText, setCommentText] = useState("");
 
     const navigate = useNavigate();
 
@@ -48,7 +46,6 @@ const CommentsForm = ({advertsId}: CommentsFormProps) => {
                     id="comment"
                     placeholder="Escreva um comentário..."
                     {...register("comment")}
-                    onChange={(e) => setCommentText(e.target.value)}
                     disabled={!user}
                 ></textarea>
                 {

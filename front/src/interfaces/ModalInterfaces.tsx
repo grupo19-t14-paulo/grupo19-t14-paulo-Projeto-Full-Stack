@@ -13,6 +13,8 @@ export interface IModalMenuComment {
   setModalOpenMenuComment: boolean | any;
   setSelectedCard: React.Dispatch<React.SetStateAction<string | null>>;
   selectedCard: string;
+  menuModalStyle: {display: string;};
+  setMenuModalStyle: React.Dispatch<React.SetStateAction<{display: string;}>>;
 }
 
 export interface IModalEdit {
@@ -29,4 +31,9 @@ export interface IModalEditAddress {
 export interface IModalDelete {
   modalOpenDelete: boolean;
   setModalOpenDelete: boolean | any;
+}
+
+export interface IModalEditComment {
+  modalOpenEditComment: boolean;
+  setModalOpenEditComment: boolean | any;
 }

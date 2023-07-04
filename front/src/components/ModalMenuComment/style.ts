@@ -1,11 +1,14 @@
 import styled from "styled-components";
 
-const ContainerMenuComment = styled.div`
+interface ContainerMenuProps {
+    styledCSS: string | any
+}
+
+const ContainerMenuComment = styled.div<ContainerMenuProps>`
     width: 120px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    padding: 10px 10px 20px 10px;
+    padding: 10px;
 
     position: absolute;
     top: 0;
@@ -16,20 +19,27 @@ const ContainerMenuComment = styled.div`
     border-radius: 4px;
     box-shadow: 2px 2px 2px 2px var(--color--grey-8);
 
+    ${props => props.styledCSS};
+
     button {
-        font-size: 16px;
-        font-weight: 500;
-        text-align: left;
+        font-size: 13px;
+        font-weight: 600;
+        align-items: center;
 
         border: transparent;
         background-color: transparent;
         color: var(--color--grey-2);
-        padding-left: 20px;
+        padding-left: 30px;
+        margin-bottom: 10px;
     }
 
     div {
         display: flex;
         justify-content: end;
+    }
+
+    @media (max-width: 601px){
+        left: 55%;
     }
 
 `;

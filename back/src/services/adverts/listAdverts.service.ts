@@ -48,7 +48,7 @@ const listAdvertsService = async ({
   }
 
   if (minMileage) {
-    queryBuilder.andWhere("item.mileage >= :minMileage", { minMileage });
+    queryBuilder.andWhere("advert.mileage >= :minMileage", { minMileage });
   }
 
   if (maxMileage) {
@@ -64,6 +64,7 @@ const listAdvertsService = async ({
       el.mileage = +`${el.mileage}`;
       el.price = +`${el.price}`;
       el.value = +`${el.value}`;
+      
       return el;
     });
 
