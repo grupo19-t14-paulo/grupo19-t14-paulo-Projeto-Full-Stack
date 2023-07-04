@@ -16,7 +16,7 @@ const listImagesSevice = async (idAd: string): Promise<IImageResponse> => {
 
   const images = await imagesRepository.find({
     where: {
-      announcement: announcement,
+      announcement: { id: announcement.id },
     },
   });
 
