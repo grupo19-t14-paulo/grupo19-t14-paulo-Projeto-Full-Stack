@@ -624,9 +624,17 @@ Content-type: application/json
 ### Corpo da Requisição:
 ```json
 {
-	"content": "comment post",
-	"userId": 1,
-	"postId": 1
+  "brand": "Chevrolet",
+  "model": "Corsinha",
+  "year": "2002",
+  "fuel": "Gasolina / Etanol",
+  "mileage": 10000,
+  "color": "verde",
+  "value": 15000,
+  "price": 14000,
+  "description": "Descrição do veículo",
+  "active": true,
+  "images": [{"image":"1"}, {"image":"2"}, {"image":"3"}]
 }
 ```
 
@@ -636,34 +644,168 @@ Content-type: application/json
 ```
 ```json
 {
-    "id": 1,
-    "createdAt": "2023-05-26",
-    "content": "comment post",
-    "user": {
-        "id": 1,
-        "name": "user",
-        "createdAt": "2023-05-24",
-        "lastInteractionDate": "2023-05-26",
-        "dailyInteractions": 1
-    },
-    "post": {
-        "id": 1,
-        "content": "post",
-        "createdAt": "2023-05-24"
-    }    
+	"id": "a9cdab46-85a5-4c3d-844d-bd5253fb28dc",
+	"brand": "Chevroleet",
+	"model": "Corsinha",
+	"year": "2002",
+	"fuel": "Gasolina / Etanol",
+	"mileage": 10000,
+	"color": "verde",
+	"value": 15000,
+	"price": 14000,
+	"description": "fjsnjvnfj  lgjsjgfsdngkrawj grelawgn",
+	"active": true,
+	"images": [
+		{
+			"image": "1"
+		},
+		{
+			"image": "2"
+		},
+		{
+			"image": "3"
+		}
+	],
+	"user": {
+		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
+		"name": "user_2",
+		"email": "user_2@mail.com",
+		"cpf": "10987654321",
+		"phone": "5541123456789",
+		"birthDate": "2000-12-01",
+		"description": "Descrição teste 2",
+		"type": "Vendedor",
+		"street": "Rua sem saida",
+		"number": "000",
+		"complement": "",
+		"city": "cidade",
+		"state": "estado",
+		"cep": "00000000",
+		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
+	}
 }
 ```
 
 ### Possíveis Erros:
 | Código do Erro        | Descrição                                         |
 |-----------------------|---------------------------------------------------|
-| 400 Bad request       | 'userId', 'content' and 'postId' keys required.   |
-| 413 Payload too large | Exceeds the maximum number of characters allowed. |
-| 404 Not Found         | User or post not found.                           |
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 401 Unauthorized   | Only a seller can create an advert! |
+| 404 Not Found   | User not found. |
+| 409 Conflict   | Ad already exists, check if it's active. |
+
 
 [ Voltar para os Índices ](#7-índice)
 
 ---
+
+---
+
+### 3.1. **Listando anúncio**
+
+### `/adverts`
+
+### Exemplo de Request:
+```
+POST /adverts
+Host: http://localhost:3000/adverts
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIgMSIsImlhdCI6MTY4ODE1MTA4NywiZXhwIjoxNjg4MjM3NDg3LCJzdWIiOiIxYTBjZDM3MC03YjgwLTQ4YmEtYTVhNC1lY2EzMTNmZmQ2MGUifQ.7Sj11yHXD6OFwE96YvSxdBLaz9W0gYV-KwTS5eCRlCM
+Content-type: application/json
+```
+
+### Parâmetros da Requisição:
+| Parâmetro   | Tipo   | Descrição                      		 |
+|-------------|--------|-------------------------------------------------|
+| brand       | string | Marca do veículo.                               |
+| model       | string | Modelo do veículo.                              |
+| year        | string | Ano de fabricação do veículo.    	         |
+| fuel        | string | Tipo de combustível.    			 |
+| mileage     | number | Quilometragem do veículo.   		         |
+| color       | string | Cor do veículo.    				 |
+| value       | number | Valor fipe do veículo.     			 |
+| price       | number | Valor de venda do veículo.     		 |
+| description | string | Descrição do veículo.     			 |
+| active      | boolean| Booleano para saber se o anúncio está ativo.    |
+| images      | array  | Um array de imagens do veículo.     		 |
+
+
+### Corpo da Requisição:
+```json
+{
+  "brand": "Chevrolet",
+  "model": "Corsinha",
+  "year": "2002",
+  "fuel": "Gasolina / Etanol",
+  "mileage": 10000,
+  "color": "verde",
+  "value": 15000,
+  "price": 14000,
+  "description": "Descrição do veículo",
+  "active": true,
+  "images": [{"image":"1"}, {"image":"2"}, {"image":"3"}]
+}
+```
+
+### Exemplo de Response:
+```
+201 Created
+```
+```json
+{
+	"id": "a9cdab46-85a5-4c3d-844d-bd5253fb28dc",
+	"brand": "Chevroleet",
+	"model": "Corsinha",
+	"year": "2002",
+	"fuel": "Gasolina / Etanol",
+	"mileage": 10000,
+	"color": "verde",
+	"value": 15000,
+	"price": 14000,
+	"description": "fjsnjvnfj  lgjsjgfsdngkrawj grelawgn",
+	"active": true,
+	"images": [
+		{
+			"image": "1"
+		},
+		{
+			"image": "2"
+		},
+		{
+			"image": "3"
+		}
+	],
+	"user": {
+		"id": "1e3130f2-a783-447e-8f31-d5bddb764223",
+		"name": "user_2",
+		"email": "user_2@mail.com",
+		"cpf": "10987654321",
+		"phone": "5541123456789",
+		"birthDate": "2000-12-01",
+		"description": "Descrição teste 2",
+		"type": "Vendedor",
+		"street": "Rua sem saida",
+		"number": "000",
+		"complement": "",
+		"city": "cidade",
+		"state": "estado",
+		"cep": "00000000",
+		"reset_token": "e62ad5ce-763c-416d-881c-77f5399e8e4d"
+	}
+}
+```
+
+### Possíveis Erros:
+| Código do Erro        | Descrição                                         |
+|-----------------------|---------------------------------------------------|
+| 401 Unauthorized   | Invalid token. |
+| 401 Unauthorized   | No token has been sent. |
+| 401 Unauthorized   | Only a seller can create an advert! |
+| 404 Not Found   | User not found. |
+| 409 Conflict   | Ad already exists, check if it's active. |
+
+
+[ Voltar para os Índices ](#7-índice)
 
 ## 4. **Repost**
 
