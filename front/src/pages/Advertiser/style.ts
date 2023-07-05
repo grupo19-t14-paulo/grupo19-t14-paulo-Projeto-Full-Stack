@@ -329,7 +329,7 @@ const ContainerAdverts = styled.section`
       .sectionCards {
         flex-wrap: wrap;
         justify-content: flex-start;
-        gap: calc(100% / 10);
+        gap: calc(100% / 10.39);
         overflow: hidden;
       }
     }
