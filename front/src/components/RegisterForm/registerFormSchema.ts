@@ -5,7 +5,7 @@ const registerFormSchema = z.object({
 
     email: z.string().email("Forneça um e-mail válido").max(127, "O nome precisa ter no máximo 127 caracteres."),
 
-    cpf: z.string().max(11, "Digite 11 números sem caracteres"),
+    cpf: z.string().max(14),
 
     phone: z.string().
     regex(/^(?:(?:\+|00)?(55)\s?)?(?:(?:\(?[1-9][0-9]\)?)?\s?)?(?:((?:9\d|[2-9])\d{3})-?(\d{4}))$/, "Adicione um número de telefone valido!"),
@@ -29,7 +29,7 @@ const registerFormSchema = z.object({
 
     state: z.string().max(127),
 
-    cep: z.string().max(8, "Digite 8 números sem caracteres"),
+    cep: z.string().max(9),
 
     password: z.string().min(4, "Obrigatório e precisa conter pelo menos 4 caracteres.").max(127),
 
