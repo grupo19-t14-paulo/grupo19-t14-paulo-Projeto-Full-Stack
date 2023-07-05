@@ -27,6 +27,7 @@ import MenuImg from "../../assets/Menu.png";
 import { ModalMenuComment } from "../../components/ModalMenuComment";
 import { ProductImagesModal } from "../../components/ModalBase";
 import { ContextRegister } from "../../contexts/RegisterContext/RegisterContext";
+/*eslint-disable react-hooks/exhaustive-deps*/
 
 interface IImage {
   image: string;
@@ -201,7 +202,7 @@ const DinamicProductPage = () => {
                 ) : (
                   <Link
                     className="link"
-                    to={toWhatsapp(advert.user.phone!, advert.model)}
+                    to={toWhatsapp(advert.user.phone, advert.model)}
                     target="_blank"
                   >
                     Comprar

@@ -16,6 +16,8 @@ import ModalEditAd from "../../components/ModalEditAd";
 import ModalDeleteAd from "../../components/ModalDeleteAd";
 import { useNavigate } from "react-router";
 import Loading from "../../components/Loading";
+/*eslint-disable react-hooks/exhaustive-deps*/
+
 
 const AdvertiserPage = () => {
   const {
@@ -119,7 +121,7 @@ const AdvertiserPage = () => {
         {!loadingAd && <Loading />}
         <ContainerAdverts>
           <div className="adsArea">
-            {ad?.length! > 0 ? (
+            { ad && ad.length > 0 ? (
               <section className="sectionCards">
                 {ad?.map((ads) => (
                   <div className="card" key={ads.id}>

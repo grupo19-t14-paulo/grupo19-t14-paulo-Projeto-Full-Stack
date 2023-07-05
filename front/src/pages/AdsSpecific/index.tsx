@@ -7,6 +7,7 @@ import { HeaderProfile } from "../../components/HeaderProfile";
 import { useNavigate, useParams } from "react-router-dom";
 import { IAdvertiser } from "../../interfaces/AdvertsInterfaces";
 import Loading from "../../components/Loading";
+/*eslint-disable react-hooks/exhaustive-deps*/
 
 const AdsSpecificPage = () => {
   const {
