@@ -55,13 +55,13 @@ const AdvertiserPage = () => {
   }
 
   useEffect(() => {
-    (async () => {
+    const initPage = async () => {
       const id = user?.id;
-
       const resAds = await api.get<IAdvertiser[]>(`/adverts/seller/${id}`);
       setAd(resAds.data);
       setloadingAd(true);
-    })();
+    }
+    initPage()
   }, []);
 
   const userNameHeader1 = user?.name.split(" ");
