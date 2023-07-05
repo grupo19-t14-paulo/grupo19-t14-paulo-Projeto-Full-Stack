@@ -35,6 +35,10 @@ const RegisterForm = () => {
 
   const submit: SubmitHandler<TFormProps> = (formData) => {
     formData.type = accountType;
+
+    formData.cpf = formData.cpf.replace(/\D/g, "");
+    formData.cep = formData.cep.replace(/\D/g, "");
+
     userRegister(formData);
 
   };
