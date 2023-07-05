@@ -17,6 +17,7 @@ const AnnouncementContext = createContext<IAnnouncementContext>(
 
 const AnnouncementProvider = ({ children }: IAdProviderProps) => {
   const [loadingAd, setloadingAd] = useState(false);
+  const [loadingAdivertiser, setloadingAdivertiser] = useState(false);
   const [modal, setModal] = useState(false);
   const [editModal, setEditModal] = useState(false);
   const [deleteModal, setDeleteModal] = useState(false);
@@ -116,6 +117,8 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
         removeAd,
         deleteModal,
         setDeleteModal,
+        loadingAdivertiser,
+        setloadingAdivertiser,
       }}
     >
       {children}

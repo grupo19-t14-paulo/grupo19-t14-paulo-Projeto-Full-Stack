@@ -22,61 +22,59 @@ const AuthLoginProvider = ({ children }: IUserProviderProps) => {
 
   useEffect(() => {
     const token = localStorage.getItem("@token");
-  
+
     if (!token) {
-      setLoading(false);
+      setLoading(true);
       return;
     }
-  
+
     api.defaults.headers.authorization = `Bearer ${token}`;
-    setLoading(true);
-  
+    setLoading(false);
+
     const fetchUser = async () => {
       try {
         const response = await api.get<IUser>("/users");
         const userData = response.data;
-        
+
         setUser(userData);
         setLoading(false);
-
       } catch (error) {
         console.error("Erro ao obter os dados do usuário:", error);
+      } finally {
         setLoading(false);
       }
     };
-  
+
     fetchUser();
   }, []);
 
   const userLogin = async (data: ILoginFormData) => {
     try {
       const res = await api.post<IUserLoginResponse>("/login", data);
-  
+
       api.defaults.headers.authorization = `Bearer ${res.data.token}`;
       localStorage.setItem("@token", res.data.token);
-  
+
       toast.success("Login realizado com sucesso!");
-  
+
       const fetchUser = async () => {
         try {
           const response = await api.get<IUser>("/users");
           const userData = response.data;
 
           setUser(userData);
-
         } catch (error) {
           console.error("Erro ao obter os dados do usuário:", error);
         }
       };
-  
-      fetchUser(); 
-  
+
+      fetchUser();
+
       navigate("/");
     } catch (error) {
       toast.error("Ops! Algo deu errado");
     }
   };
-  
 
   return (
     <ContextLogin.Provider

@@ -7,6 +7,7 @@ import { SendEmailResetPassword } from "../pages/ResetPassword";
 import { ResetPassword } from "../pages/ResetPassword/[token]";
 import AdsSpecificPage from "../pages/AdsSpecific";
 import { DinamicProductPage } from "../pages/Product";
+import ProtectedRoute from "./ProtectedRoutes";
 
 const RoutesMain = () => {
   return (
@@ -18,7 +19,9 @@ const RoutesMain = () => {
       <Route path="/resetPassword/:token" element={<ResetPassword />} />
       <Route path="/adsSpecific/:userId" element={<AdsSpecificPage />} />
       <Route path="/product/:advertId" element={<DinamicProductPage />} />
-      <Route path="/advertiser" element={<AdvertiserPage />} />
+      <Route element={<ProtectedRoute />}>
+        <Route path="/advertiser" element={<AdvertiserPage />} />
+      </Route>
     </Routes>
   );
 };

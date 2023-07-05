@@ -33,6 +33,8 @@ export interface IAnnouncementContext {
   setDeleteModal: React.Dispatch<React.SetStateAction<boolean>>;
   loadingAd: boolean;
   setloadingAd: React.Dispatch<React.SetStateAction<boolean>>;
+  loadingAdivertiser: boolean;
+  setloadingAdivertiser: React.Dispatch<React.SetStateAction<boolean>>;
   ad: IAdvertiser[] | undefined;
   setAd: React.Dispatch<React.SetStateAction<IAdvertiser[] | undefined>>;
   userAdvertiser: IUserAdvertiser | null;
