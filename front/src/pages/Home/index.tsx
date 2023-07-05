@@ -246,7 +246,7 @@ const HomePage = () => {
                       title={model}
                       advertiser={user.name}
                       description={description}
-                      img={images[0].image }
+                      img={images[images.length - 1].image }
                       km={mileage}
                       fipePrice={value}
                       price={price}

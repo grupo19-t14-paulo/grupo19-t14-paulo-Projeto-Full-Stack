@@ -73,6 +73,8 @@ const DinamicProductPage = () => {
   const [selectedCard, setSelectedCard] = useState<string | null>(null);
   const [showImagesModal, setShowImagesModal] = useState<boolean>(false);
   const [menuModalStyle, setMenuModalStyle] = useState({ display: "block" });
+  const [selectedImage, setSelectedImage] = useState<string | null>(null);
+
   const toggleModal = () => setShowImagesModal(!showImagesModal);
 
   const { advertId } = useParams();
@@ -138,6 +140,11 @@ const DinamicProductPage = () => {
     return `https://api.whatsapp.com/send?phone=55${phone}&text=Olá, estou interessado em obter mais informações sobre o anúncio do ${text}`;
   };
 
+  const handleImageClick = (image: string) => {
+    setSelectedImage(image);
+    toggleModal();
+  };
+
   return (
     <>
       {showImagesModal ? (
@@ -145,7 +152,7 @@ const DinamicProductPage = () => {
           <div>
             <li>
               <figure>
-                <img src={advert.images[0].image} alt={advert.model} />
+                <img src={selectedImage || undefined} alt={advert.model} />
               </figure>
             </li>
           </div>
@@ -212,7 +219,7 @@ const DinamicProductPage = () => {
                 <ul>
                   {advert.images.map((img) => {
                     return (
-                      <li onClick={toggleModal}>
+                      <li onClick={() => handleImageClick(img.image)}>
                         <figure>
                           <img src={img.image} alt={advert.model} />
                         </figure>

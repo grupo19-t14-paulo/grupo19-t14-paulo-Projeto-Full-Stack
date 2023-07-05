@@ -21,17 +21,17 @@ const AuthLoginProvider = ({ children }: IUserProviderProps) => {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const token = localStorage.getItem("@token");
-
-    if (!token) {
-      setLoading(true);
-      return;
-    }
-
-    api.defaults.headers.authorization = `Bearer ${token}`;
-    setLoading(false);
-
     const fetchUser = async () => {
+      const token = localStorage.getItem("@token");
+
+      if (!token) {
+        setLoading(true);
+        setUser(null);
+        return;
+      }
+
+      api.defaults.headers.authorization = `Bearer ${token}`;
+      setLoading(false);
       try {
         const response = await api.get<IUser>("/users");
         const userData = response.data;
