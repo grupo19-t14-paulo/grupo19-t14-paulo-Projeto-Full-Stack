@@ -62,7 +62,7 @@ const AdvertiserPage = () => {
       setloadingAd(true);
     }
     initPage()
-  }, []);
+  }, [ad]);
 
   const userNameHeader1 = user?.name.split(" ");
 

@@ -27,6 +27,7 @@ import MenuImg from "../../assets/Menu.png";
 import { ModalMenuComment } from "../../components/ModalMenuComment";
 import { ProductImagesModal } from "../../components/ModalBase";
 import { ContextRegister } from "../../contexts/RegisterContext/RegisterContext";
+import { AnnouncementContext } from "../../contexts/AnnouncementContext/AnnouncementContext";
 /*eslint-disable react-hooks/exhaustive-deps*/
 
 interface IImage {
@@ -67,6 +68,8 @@ const DinamicProductPage = () => {
     useContext(ContextComment);
   const { user } = useContext(ContextLogin);
   const { getUserColor, createInitials } = useContext(ContextRegister);
+  const { ad } = useContext(AnnouncementContext)
+
 
   const [advert, setAdvert] = useState<IAdvertData>({} as IAdvertData);
   const [loading, setLoading] = useState<boolean>(true);
@@ -91,7 +94,7 @@ const DinamicProductPage = () => {
         setLoading(false);
       })();
     }
-  }, []);
+  }, [ad]);
 
   const userId = advert.user?.id;
 

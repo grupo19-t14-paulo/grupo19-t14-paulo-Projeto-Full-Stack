@@ -33,7 +33,7 @@ const AdsSpecificPage = () => {
       setAd(resAds.data);
       setloadingAdivertiser(true);
     })();
-  }, []);
+  }, [ad]);
 
   const userNameHeader1 = userAdvertiser?.name.split(" ");
 
