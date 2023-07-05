@@ -15,11 +15,21 @@ import { IAdvertiser } from "../../interfaces/AdvertsInterfaces";
 import ModalEditAd from "../../components/ModalEditAd";
 import ModalDeleteAd from "../../components/ModalDeleteAd";
 import { useNavigate } from "react-router";
+import Loading from "../../components/Loading";
 
 const AdvertiserPage = () => {
-  const { modal, setModal, ad, setAd, editModal, setEditModal, deleteModal } =
-    useContext(AnnouncementContext);
-  const { user, setUser } = useContext(ContextLogin);
+  const {
+    modal,
+    setModal,
+    ad,
+    setAd,
+    editModal,
+    setEditModal,
+    deleteModal,
+    loadingAd,
+    setloadingAd,
+  } = useContext(AnnouncementContext);
+  const { user, setUser, loading, setLoading } = useContext(ContextLogin);
   const [idAd, setIdAd] = useState<string | undefined>("");
 
   const navegate = useNavigate();
@@ -44,13 +54,21 @@ const AdvertiserPage = () => {
 
   useEffect(() => {
     (async () => {
-      const resUser = await api.get("/users");
-      setUser(resUser.data);
+      const response = await api.get("/users");
+      const userData = response.data;
 
-      const id = resUser.data.id;
+      setUser(userData);
+      setLoading(false);
+    })();
+  }, []);
+
+  useEffect(() => {
+    (async () => {
+      const id = user?.id;
 
       const resAds = await api.get<IAdvertiser[]>(`/adverts/seller/${id}`);
       setAd(resAds.data);
+      setloadingAd(true);
     })();
   }, []);
 
@@ -72,9 +90,11 @@ const AdvertiserPage = () => {
           page1="/login"
           page2="/register"
         />
+
         <ContainerDivBlue>
           <section>
             <span className="initialsName">
+              {loading && <Loading />}
               <h1>
                 {userNameHeader1 && userNameHeader1.length > 0
                   ? userNameHeader1[0][0]
@@ -106,6 +126,7 @@ const AdvertiserPage = () => {
             </button>
           </section>
         </ContainerDivBlue>
+        {!loadingAd && <Loading />}
         <ContainerAdverts>
           <div className="adsArea">
             {ad?.length! > 0 ? (
