@@ -212,9 +212,19 @@ const ModalEditAd = ({ idAdvertiser }: ModalEditAndDeleteProps) => {
         ads.id === idAdvertiser ? (ads = res.data) : ads
       );
 
+      toast.success("Anúncio editado com sucesso!", {
+        position: "top-right",
+        autoClose: 2000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+
       setAd(upAds);
       setEditModal(false);
-      setloadingAd(false);
+      setloadingAd(true);
     } catch (err) {
       toast.error("Ops algo de errado, revise os campo!", {
         position: "top-right",
@@ -227,7 +237,7 @@ const ModalEditAd = ({ idAdvertiser }: ModalEditAndDeleteProps) => {
       });
       console.log(err);
     } finally {
-      setloadingAd(false);
+      setloadingAd(true);
     }
   };
 
