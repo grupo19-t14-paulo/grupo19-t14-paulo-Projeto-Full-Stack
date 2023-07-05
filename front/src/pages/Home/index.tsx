@@ -99,6 +99,7 @@ const HomePage = () => {
       </ContainerTitle>
       <HomeMain>
         <ProductFilters>
+          
           {Object.keys(availableFilters).map((key) => (
             <FilterSession key={key}>
               <FilterName>{translation(key)}</FilterName>
