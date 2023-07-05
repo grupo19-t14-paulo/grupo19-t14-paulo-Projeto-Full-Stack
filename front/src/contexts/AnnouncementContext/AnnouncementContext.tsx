@@ -28,8 +28,6 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
 
   const submitAddAnnouncement = async (data: IAdvertiser): Promise<void> => {
     try {
-      setloadingAd(true);
-
       const announcement = {
         ...data,
         mileage: data.mileage.replace(/[^\d]+/g, ""),
@@ -52,7 +50,7 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
       const newAd = [...(ad || []), res.data];
       setAd(newAd);
       setModal(false);
-      setloadingAd(false);
+      setloadingAd(true);
     } catch (err) {
       toast.error("Ops algo de errado, revise os campo!", {
         position: "top-right",
@@ -65,7 +63,7 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
       });
       console.log(err);
     } finally {
-      setloadingAd(false);
+      setloadingAd(true);
     }
   };
 
@@ -96,7 +94,7 @@ const AnnouncementProvider = ({ children }: IAdProviderProps) => {
       });
       console.log(err);
     } finally {
-      setloadingAd(false);
+      setloadingAd(true);
     }
   };
 

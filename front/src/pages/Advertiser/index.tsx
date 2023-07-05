@@ -29,7 +29,7 @@ const AdvertiserPage = () => {
     loadingAd,
     setloadingAd,
   } = useContext(AnnouncementContext);
-  const { user, setUser, loading, setLoading } = useContext(ContextLogin);
+  const { user, loading } = useContext(ContextLogin);
   const [idAd, setIdAd] = useState<string | undefined>("");
 
   const navegate = useNavigate();
@@ -51,16 +51,6 @@ const AdvertiserPage = () => {
   if (deleteModal) {
     setEditModal(false);
   }
-
-  useEffect(() => {
-    (async () => {
-      const response = await api.get("/users");
-      const userData = response.data;
-
-      setUser(userData);
-      setLoading(false);
-    })();
-  }, []);
 
   useEffect(() => {
     (async () => {
