@@ -34,7 +34,7 @@ const ModalSuccessRegister = ({ modalOpen, setModalOpen}: IModal) => {
               </div>
 
               <h3>Sua conta foi criada com sucesso!</h3>
-              <p>Agora você poderá ver seus negócios crescendo em grande escala</p>
+              <h4>Agora você poderá ver seus negócios crescendo em grande escala</h4>
               <LinkModalSuccess to="/login" onClick={closeModalAndRedirect}>Ir para o login</LinkModalSuccess>
           </ContainerModal>
       </BackgroundModal>

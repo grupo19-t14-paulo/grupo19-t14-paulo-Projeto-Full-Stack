@@ -61,7 +61,7 @@ const ContainerModal = styled.div`
         margin-bottom: 20px;
     }
 
-    p {
+    h4 {
         font-size: 13px;
         color: var(--color--grey-2);
 
