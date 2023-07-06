@@ -37,7 +37,7 @@ const resetPasswordTemplateUtils = (
         theme: "default",
         product: {
             name: "Motors Shop",
-            link: "http://localhost:3000",
+            link: "https://motorshop-psi.vercel.app",
         },
     });
     const email = {
@@ -49,7 +49,7 @@ const resetPasswordTemplateUtils = (
                 button: {
                     color: "#4529E6",
                     text: "Reset your password",
-                    link: `http://localhost:5173/resetPassword/${resetToken}`,
+                    link: `https://motorshop-psi.vercel.app/resetPassword/${resetToken}`,
                 },
             },
             outro: "If you did not request a password reset, no further action is required on your part.",
