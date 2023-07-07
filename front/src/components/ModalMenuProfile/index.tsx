@@ -9,7 +9,7 @@ import { ContextLogin } from "../../contexts/LoginContext/LoginContex";
 import { api } from "../../services/api";
 import { AxiosRequestHeaders } from "axios";
 
-const ModalMenuProfile = ({modalOpenMenuProfile }: IModalMenuProfile)=> {
+const ModalMenuProfile = ({modalOpenMenuProfile, setModalOpenMenuProfile }: IModalMenuProfile)=> {
 
     const { user, setUser } = useContext(ContextLogin);
     const [modalOpenEdit, setModalOpenEdit] = useState(false);
@@ -20,7 +20,8 @@ const ModalMenuProfile = ({modalOpenMenuProfile }: IModalMenuProfile)=> {
 
     const logoutUser = () => {
       localStorage.removeItem("@token");
-  
+      
+      setModalOpenMenuProfile(false);
       setUser(null);
       api.defaults.headers.authorization = undefined as AxiosRequestHeaders["authorization"];
     
