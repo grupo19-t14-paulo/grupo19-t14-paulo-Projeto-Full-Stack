@@ -42,8 +42,8 @@ const ModalDeleteAd = ({ idAdvertiser }: ModalEditAndDeleteProps) => {
         </ContainerTitleButtonModalDelete>
         <p className="question">Tem certeza que deseja remover este anúncio?</p>
         <p>
-          Essa ação não pode ser desfeita. Isso excluirá permanentemente sua
-          conta e removerá seus dados de nossos servidores.
+          Essa ação não pode ser desfeita. Isso excluirá permanentemente seu
+          anúncio e removerá seus dados de nossos servidores.
         </p>
         <ContainerButtonModalDelete>
           <ButtonColorGrey6
